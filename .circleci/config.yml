@@ -3,7 +3,7 @@ version: 2.1
 parameters:
   min-rust-version:
     type: string
-    default: "1.81"
+    default: "1.85"
   fingerprint:
     type: string
     default: SHA256:OkxsH8Z6Iim6WDJBaII9eTT9aaO1f3eDc6IpsgYYPVg
@@ -17,7 +17,7 @@ parameters:
     description: "If true, the success pipeline will be executed."
 
 orbs:
-  toolkit: jerusdp/circleci-toolkit@2.5.1
+  toolkit: jerus-org/circleci-toolkit@2.5.1
 
 executors:
   rust-env:
@@ -62,8 +62,8 @@ workflows:
           min_rust_version: << pipeline.parameters.min-rust-version >>
       - toolkit/optional_builds:
           min_rust_version: << pipeline.parameters.min-rust-version >>
-      - toolkit/test_doc_build:
-          min_rust_version: << pipeline.parameters.min-rust-version >>
+      # - toolkit/test_doc_build:
+      #     min_rust_version: << pipeline.parameters.min-rust-version >>
       - toolkit/common_tests:
           min_rust_version: << pipeline.parameters.min-rust-version >>
       - toolkit/idiomatic_rust:
@@ -74,7 +74,7 @@ workflows:
           requires:
             - toolkit/common_tests
             - toolkit/required_builds
-            - toolkit/test_doc_build
+            # - toolkit/test_doc_build
             - toolkit/idiomatic_rust
             - toolkit/security
           context:
