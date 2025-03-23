@@ -64,7 +64,7 @@ impl LettersBoxed {
         ];
 
         tracing::info!("Generated {} invalid pairs", invalid_pairs.len());
-        tracing::debug!("Invalid pairs: {:#?}", invalid_pairs);
+        tracing::trace!("Invalid pairs: {:#?}", invalid_pairs);
         self.invalid_pairs = invalid_pairs;
 
         self
