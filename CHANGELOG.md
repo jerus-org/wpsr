@@ -10,5 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - 👷 ci(circleci)-update toolkit orb source(pr [#6])
+- Add-words-struct-for-word-list-preparation(pr [#7])
 
 [#6]: https://github.com/jerus-org/slb/pull/6
+[#7]: https://github.com/jerus-org/slb/pull/7
