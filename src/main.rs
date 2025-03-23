@@ -1,4 +1,4 @@
-use slb::PrepareWords;
+use slb::{LettersBoxed, PrepareWords};
 use tracing::info;
 use tracing_subscriber::EnvFilter;
 
@@ -31,6 +31,11 @@ fn main() {
         .filter_no_repeated_letters();
 
     tracing::info!("Filtered words includes {} words", words.len());
+
+    let letters = vec![];
+    let puzzle = LettersBoxed::new(letters, words);
+
+    println!("{:?}", puzzle);
 }
 
 pub fn get_logging(verbosity: log::LevelFilter) {
