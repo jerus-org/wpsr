@@ -2,5 +2,9 @@
 name = "slb"
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
 
 [dependencies]
+log = "0.4.26"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter", "std"] }
