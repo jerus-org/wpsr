@@ -33,9 +33,9 @@ fn main() {
     tracing::info!("Filtered words includes {} words", words.len());
 
     let letters = vec![];
-    let puzzle = LettersBoxed::new(letters, words);
+    let mut puzzle = LettersBoxed::new(letters, words);
+    puzzle.filter_words_with_letters_only();
 
-    println!("{:?}", puzzle);
 }
 
 pub fn get_logging(verbosity: log::LevelFilter) {
