@@ -34,8 +34,7 @@ fn main() {
 
     let letters = vec![];
     let mut puzzle = LettersBoxed::new(letters, words);
-    puzzle.filter_words_with_letters_only();
-
+    puzzle.filter_words_with_letters_only().filter_words_with_invalid_pairs();
 }
 
 pub fn get_logging(verbosity: log::LevelFilter) {
