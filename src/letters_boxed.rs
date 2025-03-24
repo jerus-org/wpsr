@@ -115,7 +115,7 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
-    pub fn solution_string(&self)-> String{
+    pub fn solution_string(&self) -> String {
         self.word_chain.join(" -> ").to_string()
     }
 }
@@ -176,7 +176,7 @@ pub fn get_word(
                 return Err(Error::NoWordFound);
             }
             next_word_chain.push(word);
-            match  get_word(
+            match get_word(
                 next_all_words,
                 words_list,
                 next_word_chain,
