@@ -34,7 +34,20 @@ fn main() {
 
     let letters = vec![];
     let mut puzzle = LettersBoxed::new(letters, words);
-    puzzle.filter_words_with_letters_only().filter_words_with_invalid_pairs();
+    match puzzle
+        .filter_words_with_letters_only()
+        .filter_words_with_invalid_pairs()
+        .build_word_chain()
+    {
+        Ok(_) => {
+            tracing::info!("Word chain built successfully");
+        }
+        Err(e) => {
+            tracing::error!("Failed to build word chain: {}", e);
+        }
+    };
+
+    println!("Word chain: {}", puzzle.solution_string());
 }
 
 pub fn get_logging(verbosity: log::LevelFilter) {

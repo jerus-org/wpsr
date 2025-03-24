@@ -1,8 +1,11 @@
+use std::{collections::VecDeque, fmt::Display};
+
 #[derive(Debug)]
 pub struct LettersBoxed {
     letters: Vec<char>,
     words: Vec<String>,
     invalid_pairs: Vec<(char, char)>,
+    word_chain: Vec<String>,
 }
 
 impl Default for LettersBoxed {
@@ -12,6 +15,7 @@ impl Default for LettersBoxed {
             letters,
             words: Vec::new(),
             invalid_pairs: Vec::new(),
+            word_chain: Vec::new(),
         }
     }
 }
@@ -49,15 +53,12 @@ impl LettersBoxed {
             (self.letters[0], self.letters[1]),
             (self.letters[1], self.letters[2]),
             (self.letters[0], self.letters[2]),
-            
             (self.letters[3], self.letters[4]),
             (self.letters[4], self.letters[5]),
             (self.letters[3], self.letters[5]),
-
             (self.letters[6], self.letters[7]),
             (self.letters[7], self.letters[8]),
             (self.letters[6], self.letters[8]),
-
             (self.letters[9], self.letters[10]),
             (self.letters[10], self.letters[11]),
             (self.letters[9], self.letters[11]),
@@ -81,7 +82,9 @@ impl LettersBoxed {
                 let chars = word.chars().collect::<Vec<char>>();
                 let mut a = chars[0];
                 for b in chars.iter().skip(1) {
-                    if self.invalid_pairs.contains(&(a, *b)) || self.invalid_pairs.contains(&(*b, a)) {
+                    if self.invalid_pairs.contains(&(a, *b))
+                        || self.invalid_pairs.contains(&(*b, a))
+                    {
                         return false;
                     }
                     a = *b;
@@ -94,6 +97,117 @@ impl LettersBoxed {
         tracing::info!("Filtered to {} words", filtered.len());
         self.words = filtered;
         self
+    }
+
+    #[tracing::instrument(skip(self))]
+    pub fn build_word_chain(&mut self) -> Result<(), Error> {
+        tracing::info!("Building word chain");
+        // Get the first word from the list of words
+        let words = self.words.clone();
+        let word_list = words.clone();
+        let word_chain = Vec::new();
+        let used_letters = String::new();
+
+        let word_chain = get_word(words, word_list, word_chain, used_letters)?;
+
+        self.word_chain = word_chain;
+        Ok(())
+    }
+
+    #[tracing::instrument(skip(self))]
+    pub fn solution_string(&self)-> String{
+        self.word_chain.join(" -> ").to_string()
+    }
+}
+
+#[tracing::instrument(skip(all_words, words_list))]
+pub fn get_word(
+    all_words: Vec<String>,
+    mut words_list: Vec<String>,
+    mut word_chain: Vec<String>,
+    mut used_letters: String,
+) -> Result<Vec<String>, Error> {
+    words_list.sort_by_key(|word| word.len());
+    let words_list = words_list
+        .iter()
+        .rev()
+        .map(|w| w.to_string())
+        .collect::<Vec<String>>();
+    let mut words = VecDeque::from(words_list);
+    // find a word that increases the letters used
+
+    loop {
+        tracing::debug!(
+            "List of {} words starting with: {:?}",
+            words.len(),
+            words.front()
+        );
+        let Some(word) = words.pop_front() else {
+            return Err(Error::NoWordFound);
+        };
+
+        let letter_count = &used_letters.len();
+        tracing::debug!("Letters used before check: {}", used_letters);
+        for letter in word.chars() {
+            if !used_letters.contains(letter) {
+                used_letters.push(letter);
+            }
+        }
+        tracing::debug!("Letters used after check: {}", used_letters);
+
+        // if all of the letters are used then we have the final word chain
+        if used_letters.len() == 12 {
+            word_chain.push(word);
+            break;
+        }
+
+        // if the word extends the chain add it to the chain and start again
+        if used_letters.len() > *letter_count {
+            let mut next_word_chain = word_chain.clone();
+            let next_used_letters = used_letters.clone();
+            let next_all_words = all_words.clone();
+            let last_letter = word.chars().last().unwrap();
+            let words_list = all_words
+                .iter()
+                .filter(|w| w.chars().next().unwrap() == last_letter)
+                .map(|w| w.to_string())
+                .collect::<Vec<String>>();
+            if words.is_empty() {
+                return Err(Error::NoWordFound);
+            }
+            next_word_chain.push(word);
+            match  get_word(
+                next_all_words,
+                words_list,
+                next_word_chain,
+                next_used_letters,
+            ) {
+                Ok(chain) => {
+                    word_chain = chain;
+                    break;
+                }
+                Err(_) => {
+                    continue;
+                }
+            };
+        }
+    }
+
+    tracing::debug!("Current word chain: {}", word_chain.join("-"));
+
+    Ok(word_chain)
+}
+
+#[derive(Debug)]
+pub enum Error {
+    NoWordFound,
+}
+
+impl Display for Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Error::NoWordFound => write!(f, "No word found"),
+        }
     }
 }
 
