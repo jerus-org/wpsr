@@ -147,13 +147,13 @@ pub fn get_word(
         };
 
         let letter_count = &used_letters.len();
-        tracing::debug!("Letters used before check: {}", used_letters);
+        tracing::trace!("Letters used before check: {}", used_letters);
         for letter in word.chars() {
             if !used_letters.contains(letter) {
                 used_letters.push(letter);
             }
         }
-        tracing::debug!("Letters used after check: {}", used_letters);
+        tracing::trace!("Letters used after check: {}", used_letters);
 
         // if all of the letters are used then we have the final word chain
         if used_letters.len() == 12 {
