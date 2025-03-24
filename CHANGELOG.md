@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add-words-struct-for-word-list-preparation(pr [#7])
 - Add-LettersBoxed-struct(pr [#8])
 
+### Fixed
+
+- deps: update rust crate log to v0.4.27(pr [#9])
+
 [#6]: https://github.com/jerus-org/slb/pull/6
 [#7]: https://github.com/jerus-org/slb/pull/7
 [#8]: https://github.com/jerus-org/slb/pull/8
+[#9]: https://github.com/jerus-org/slb/pull/9
