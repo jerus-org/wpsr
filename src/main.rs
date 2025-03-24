@@ -1,4 +1,4 @@
-use slb::PrepareWords;
+use slb::{LettersBoxed, PrepareWords};
 use tracing::info;
 use tracing_subscriber::EnvFilter;
 
@@ -31,6 +31,23 @@ fn main() {
         .filter_no_repeated_letters();
 
     tracing::info!("Filtered words includes {} words", words.len());
+
+    let letters = vec![];
+    let mut puzzle = LettersBoxed::new(letters, words);
+    match puzzle
+        .filter_words_with_letters_only()
+        .filter_words_with_invalid_pairs()
+        .build_word_chain()
+    {
+        Ok(_) => {
+            tracing::info!("Word chain built successfully");
+        }
+        Err(e) => {
+            tracing::error!("Failed to build word chain: {}", e);
+        }
+    };
+
+    println!("Word chain: {}", puzzle.solution_string());
 }
 
 pub fn get_logging(verbosity: log::LevelFilter) {
