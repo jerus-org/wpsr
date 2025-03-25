@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 👷 ci(circleci)-update toolkit orb source(pr [#6])
 - Add-words-struct-for-word-list-preparation(pr [#7])
 - Add-LettersBoxed-struct(pr [#8])
+- Add-new-command-line-options-for-word-list(pr [#11])
 
 ### Fixed
 
@@ -26,3 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#8]: https://github.com/jerus-org/slb/pull/8
 [#9]: https://github.com/jerus-org/slb/pull/9
 [#10]: https://github.com/jerus-org/slb/pull/10
+[#11]: https://github.com/jerus-org/slb/pull/11
