@@ -1,0 +1,56 @@
+```console
+$ ghdash --help
+Dashboard for Github account
+
+Usage: ghdash [OPTIONS]
+
+Options:
+  -v, --verbose...
+          Increase logging verbosity
+
+  -q, --quiet...
+          Decrease logging verbosity
+
+  -c, --config <CONFIG>
+          Force the calculation of the version number alternate configuration file
+
+  -u, --user <USER>
+          github user name
+
+  -t, --token <TOKEN>
+          github personal access token
+
+  -r, --repositories <REPOSITORIES>
+          scope for the repositories shown in the dashboard
+
+          Possible values:
+          - authored: Public repositories that are original written by the user
+          - forked:   Public repositories that are forked from other authors
+          - public:   All public repositories
+          - private:  All private repositories
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+  -V, --version
+          Print version
+
+```
+
+```console
+$ ghdash -h
+Dashboard for Github account
+
+Usage: ghdash [OPTIONS]
+
+Options:
+  -v, --verbose...                   Increase logging verbosity
+  -q, --quiet...                     Decrease logging verbosity
+  -c, --config <CONFIG>              Force the calculation of the version number alternate configuration file
+  -u, --user <USER>                  github user name
+  -t, --token <TOKEN>                github personal access token
+  -r, --repositories <REPOSITORIES>  scope for the repositories shown in the dashboard [possible values: authored, forked, public, private]
+  -h, --help                         Print help (see more with '--help')
+  -V, --version                      Print version
+
+```
