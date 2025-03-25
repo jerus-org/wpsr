@@ -7,4 +7,13 @@ pub struct Cli {
     /// logging level
     #[clap(flatten)]
     pub logging: Verbosity,
+    /// word list source directory
+    #[arg(short, long)]
+    pub dir: Option<String>,
+    /// word list source file
+    #[arg(short, long)]
+    pub file: Option<String>,
+    /// minimum word length
+    #[arg(short, long)]
+    pub minimum: Option<String>,
 }
