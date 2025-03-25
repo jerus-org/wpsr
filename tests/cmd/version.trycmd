@@ -1,11 +1,25 @@
 ```console
-$ ghdash -V 
-ghdash 0.1.7
+$ slb -V 
+? 2
+error: unexpected argument '-V' found
+
+  tip: to pass '-V' as a value, use '-- -V'
+
+Usage: slb [OPTIONS] [LETTERS]...
+
+For more information, try '--help'.
 
 ```
 
 ```console
-$ ghdash --version 
-ghdash 0.1.7
+$ slb --version 
+? 2
+error: unexpected argument '--version' found
+
+  tip: a similar argument exists: '--verbose'
+
+Usage: slb <--verbose...|--quiet...> [LETTERS]...
+
+For more information, try '--help'.
 
 ```
