@@ -30,9 +30,9 @@ fn main() {
     }
 
     // Setup settings
-    let src_directory = DEFAULT_SOURCE_DIR;
-    let src_file = DEFAULT_SOURCE_FILE;
-    let minimum_word_length = DEFAULT_MINIMUM_WORD_LENGTH;
+    let src_directory = args.dir.unwrap_or(DEFAULT_SOURCE_DIR.to_string());
+    let src_file = args.file.unwrap_or(DEFAULT_SOURCE_FILE.to_string());
+    let minimum_word_length = args.minimum.unwrap_or(DEFAULT_MINIMUM_WORD_LENGTH);
 
     let src = format!("{src_directory}/{src_file}");
 
