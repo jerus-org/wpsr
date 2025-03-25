@@ -47,5 +47,9 @@
         "traveler",
         "traveling",
         "tumor"
-    ]
+    ],
+    "editor.formatOnSave": true,
+    "notebook.defaultFormatter": null,
+    "evenBetterToml.formatter.allowedBlankLines": 1,
+    "evenBetterToml.formatter.columnWidth": 70
 }

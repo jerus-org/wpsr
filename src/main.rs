@@ -23,10 +23,9 @@ fn main() {
             args.letters.len()
         );
         exit(1);
-    } 
+    }
 
     if !args.letters.is_empty() {
-
         letters = args.letters;
     }
 
