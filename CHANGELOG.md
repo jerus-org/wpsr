@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add-words-struct-for-word-list-preparation(pr [#7])
 - Add-LettersBoxed-struct(pr [#8])
 - Add-new-command-line-options-for-word-list(pr [#11])
+- ✅ test(cli)-add CLI tests using trycmd(pr [#12])
 
 ### Fixed
 
@@ -28,3 +29,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#9]: https://github.com/jerus-org/slb/pull/9
 [#10]: https://github.com/jerus-org/slb/pull/10
 [#11]: https://github.com/jerus-org/slb/pull/11
+[#12]: https://github.com/jerus-org/slb/pull/12
