@@ -1,4 +1,7 @@
-use slb::{LettersBoxed, PrepareWords};
+use std::process::exit;
+
+use clap::Parser as _;
+use slb::{Cli, LettersBoxed, PrepareWords};
 use tracing::info;
 use tracing_subscriber::EnvFilter;
 
@@ -7,10 +10,25 @@ const DEFAULT_SOURCE_FILE: &str = "mit_words.txt";
 const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
 
 fn main() {
-    println!("Hello, world!");
-    // Setup logging/tracing
+    let args = Cli::parse();
+    get_logging(args.logging.log_level_filter());
 
-    get_logging(log::LevelFilter::Debug);
+    tracing::debug!("Args: {args:#?}");
+
+    let mut letters = Vec::new();
+
+    if !args.letters.len() == 12 {
+        tracing::error!(
+            "Must supply exactly 12 letters, {} letters provided.",
+            args.letters.len()
+        );
+        exit(1);
+    } 
+
+    if !args.letters.is_empty() {
+
+        letters = args.letters;
+    }
 
     // Setup settings
     let src_directory = DEFAULT_SOURCE_DIR;
@@ -32,7 +50,6 @@ fn main() {
 
     tracing::info!("Filtered words includes {} words", words.len());
 
-    let letters = vec![];
     let mut puzzle = LettersBoxed::new(letters, words);
     match puzzle
         .filter_words_with_letters_only()
