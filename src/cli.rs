@@ -15,5 +15,5 @@ pub struct Cli {
     pub file: Option<String>,
     /// minimum word length
     #[arg(short, long)]
-    pub minimum: Option<String>,
+    pub minimum: Option<usize>,
 }
