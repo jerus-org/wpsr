@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ add command-line interface with logging support(pr [#10])
+
 ### Changed
 
 - 👷 ci(circleci)-update toolkit orb source(pr [#6])
@@ -21,3 +25,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#7]: https://github.com/jerus-org/slb/pull/7
 [#8]: https://github.com/jerus-org/slb/pull/8
 [#9]: https://github.com/jerus-org/slb/pull/9
+[#10]: https://github.com/jerus-org/slb/pull/10
