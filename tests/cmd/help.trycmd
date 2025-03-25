@@ -1,0 +1,33 @@
+```console
+$ slb --help
+Usage: slb [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -v, --verbose...         Increase logging verbosity
+  -q, --quiet...           Decrease logging verbosity
+  -d, --dir <DIR>          word list source directory
+  -f, --file <FILE>        word list source file
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
+
+```
+
+```console
+$ slb -h
+Usage: slb [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -v, --verbose...         Increase logging verbosity
+  -q, --quiet...           Decrease logging verbosity
+  -d, --dir <DIR>          word list source directory
+  -f, --file <FILE>        word list source file
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
+
+```

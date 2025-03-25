@@ -10,3 +10,4 @@ clap-verbosity-flag = "3.0.2"
 log = "0.4.26"
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter", "std"] }
+trycmd = "0.15.9"

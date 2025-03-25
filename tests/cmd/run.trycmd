@@ -1,0 +1,17 @@
+```console
+$ slb 
+Word chain: paragraph -> harmful -> logo -> oil
+
+```
+
+```console
+$ slb -v c x n p m i l r u e o f
+Word chain: explorer -> reunion -> numeric -> confirm
+
+```
+
+```console
+$ slb -v c x n p m i l r u e o f
+Word chain: explorer -> reunion -> numeric -> confirm
+
+```
