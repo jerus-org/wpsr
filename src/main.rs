@@ -26,7 +26,11 @@ fn main() {
     }
 
     if !args.letters.is_empty() {
-        letters = args.letters;
+        letters = args
+            .letters
+            .iter()
+            .map(|l| l.to_ascii_lowercase())
+            .collect::<Vec<char>>();
     }
 
     // Setup settings

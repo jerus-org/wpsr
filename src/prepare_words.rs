@@ -11,7 +11,7 @@ impl PrepareWords for Vec<String> {
         let filtered = self
             .iter()
             .filter(|word| word.len() >= length)
-            .map(|word| word.to_string())
+            .map(|word| word.to_string().to_lowercase())
             .collect::<Vec<String>>();
 
         tracing::info!("Filtered to {} words", filtered.len());

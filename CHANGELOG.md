@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ✨ add WeightedWord struct(pr [#17])
+- ✨ convert words and letters to lowercase(pr [#18])
 
 ### Changed
 
@@ -48,5 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#15]: https://github.com/jerus-org/slb/pull/15
 [#16]: https://github.com/jerus-org/slb/pull/16
 [#17]: https://github.com/jerus-org/slb/pull/17
+[#18]: https://github.com/jerus-org/slb/pull/18
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/jerus-org/slb/releases/tag/v0.1.0
