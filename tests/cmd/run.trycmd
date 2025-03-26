@@ -1,17 +1,17 @@
 ```console
 $ slb 
-Word chain: paragraph -> harmful -> logo -> oil
+Word chain: harmful -> logo -> oil -> lip -> pray
 
 ```
 
 ```console
 $ slb -v c x n p m i l r u e o f
-Word chain: explorer -> reunion -> numeric -> confirm
+Word chain: numeric -> couple -> explorer -> rfc
 
 ```
 
 ```console
 $ slb -v c x n p m i l r u e o f
-Word chain: explorer -> reunion -> numeric -> confirm
+Word chain: numeric -> couple -> explorer -> rfc
 
 ```
