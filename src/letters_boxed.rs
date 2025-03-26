@@ -1,5 +1,8 @@
 use std::{collections::VecDeque, fmt::Display};
 
+mod weighted_word;
+use weighted_word::WeightedWord;
+
 #[derive(Debug)]
 pub struct LettersBoxed {
     letters: Vec<char>,
@@ -106,9 +109,9 @@ impl LettersBoxed {
         let words = self.words.clone();
         let word_list = words.clone();
         let word_chain = Vec::new();
-        let used_letters = String::new();
+        let unused_letters = String::from_iter(self.letters.clone());
 
-        let word_chain = get_word(words, word_list, word_chain, used_letters)?;
+        let word_chain = get_word(words, word_list, word_chain, unused_letters)?;
 
         self.word_chain = word_chain;
         Ok(())
@@ -123,21 +126,32 @@ impl LettersBoxed {
 #[tracing::instrument(skip(all_words, words_list))]
 pub fn get_word(
     all_words: Vec<String>,
-    mut words_list: Vec<String>,
+    words_list: Vec<String>,
     mut word_chain: Vec<String>,
-    mut used_letters: String,
+    mut unused_letters: String,
 ) -> Result<Vec<String>, Error> {
-    words_list.sort_by_key(|word| word.len());
+    let initial_unused_letters = unused_letters.clone();
+
+    let mut words_list = words_list
+        .iter()
+        .map(|word| WeightedWord::new(word.clone(), unused_letters.clone()))
+        .collect::<Vec<WeightedWord>>();
+    words_list.sort_by_key(|ww| ww.weight);
+    tracing::trace!("First word in the word list: {:#?}", &words_list[0]);
+    tracing::trace!("Last word in the word list: {:#?}", &words_list.last());
     let words_list = words_list
         .iter()
         .rev()
-        .map(|w| w.to_string())
+        .map(|ww| ww.word.to_string())
         .collect::<Vec<String>>();
+    tracing::trace!("First word in the word list: {:#?}", &words_list[0]);
+    tracing::trace!("Last word in the word list: {:#?}", &words_list.last());
+
     let mut words = VecDeque::from(words_list);
     // find a word that increases the letters used
 
     loop {
-        tracing::debug!(
+        tracing::trace!(
             "List of {} words starting with: {:?}",
             words.len(),
             words.front()
@@ -146,25 +160,30 @@ pub fn get_word(
             return Err(Error::NoWordFound);
         };
 
-        let letter_count = &used_letters.len();
-        tracing::trace!("Letters used before check: {}", used_letters);
+        let letter_count = &unused_letters.len();
+        tracing::trace!("Letters unused before check: {}", unused_letters);
         for letter in word.chars() {
-            if !used_letters.contains(letter) {
-                used_letters.push(letter);
+            if let Some(idx) = unused_letters.find(letter) {
+                unused_letters.remove(idx);
             }
         }
-        tracing::trace!("Letters used after check: {}", used_letters);
+        tracing::trace!("Letters unused after check: {}", unused_letters);
 
         // if all of the letters are used then we have the final word chain
-        if used_letters.len() == 12 {
+        if unused_letters.is_empty() {
             word_chain.push(word);
             break;
         }
+        tracing::trace!(
+            "Still {} letters unused: {}",
+            unused_letters.len(),
+            unused_letters
+        );
 
         // if the word extends the chain add it to the chain and start again
-        if used_letters.len() > *letter_count {
+        if unused_letters.len() < *letter_count {
             let mut next_word_chain = word_chain.clone();
-            let next_used_letters = used_letters.clone();
+            let next_unused_letters = unused_letters.clone();
             let next_all_words = all_words.clone();
             let last_letter = word.chars().last().unwrap();
             let words_list = all_words
@@ -180,13 +199,14 @@ pub fn get_word(
                 next_all_words,
                 words_list,
                 next_word_chain,
-                next_used_letters,
+                next_unused_letters,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
                     break;
                 }
                 Err(_) => {
+                    unused_letters = initial_unused_letters.clone();
                     continue;
                 }
             };

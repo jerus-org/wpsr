@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ add WeightedWord struct(pr [#17])
+
 ### Changed
 
 - Enable-changelog-replacements(pr [#16])
@@ -43,5 +47,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#14]: https://github.com/jerus-org/slb/pull/14
 [#15]: https://github.com/jerus-org/slb/pull/15
 [#16]: https://github.com/jerus-org/slb/pull/16
+[#17]: https://github.com/jerus-org/slb/pull/17
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/jerus-org/slb/releases/tag/v0.1.0
