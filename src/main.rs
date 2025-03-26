@@ -36,11 +36,19 @@ fn main() {
 
     let src = format!("{src_directory}/{src_file}");
 
-    let words: Vec<String> = std::fs::read_to_string(src)
+    let mut words = Vec::new();
+
+    for line in std::fs::read_to_string(src)
         .expect("Failed to read words file")
         .lines()
-        .map(|line| line.trim().to_string())
-        .collect();
+    {
+        if !line.is_empty() {
+            let ws = line.split_whitespace();
+            for w in ws {
+                words.push(w.to_string());
+            }
+        }
+    }
 
     tracing::info!("Loaded {} words", words.len());
     let words = words
