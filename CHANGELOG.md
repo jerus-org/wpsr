@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ✅ test(cli)-add CLI tests using trycmd(pr [#12])
 - ♻️ refactor(main)-enhance words loading mechanism(pr [#13])
 - Add-release-flag-parameter-to-CI-configuration(pr [#14])
+- 🔧 chore(release)-comment out unused replacements(pr [#15])
 
 ### Fixed
 
@@ -34,3 +35,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#12]: https://github.com/jerus-org/slb/pull/12
 [#13]: https://github.com/jerus-org/slb/pull/13
 [#14]: https://github.com/jerus-org/slb/pull/14
+[#15]: https://github.com/jerus-org/slb/pull/15
