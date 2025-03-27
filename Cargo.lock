@@ -565,7 +565,7 @@ checksum = "bbbb5d9659141646ae647b42fe094daf6c6192d1620870b449d9557f748b2daa"
 
 [[package]]
 name = "slb"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "clap",
  "clap-verbosity-flag",
