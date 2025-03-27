@@ -1,6 +1,8 @@
 ```console
 $ slb 
 ? 2
+Solve the NYT Letters Boxed puzzle
+
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:

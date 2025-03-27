@@ -1,5 +1,7 @@
 ```console
 $ slb --help
+Solve the NYT Letters Boxed puzzle
+
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
@@ -17,6 +19,8 @@ Options:
 
 ```console
 $ slb -h
+Solve the NYT Letters Boxed puzzle
+
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
