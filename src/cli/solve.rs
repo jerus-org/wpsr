@@ -1,4 +1,4 @@
-use std::process::exit;
+use std::{collections::HashMap, process::exit};
 
 use clap::Parser;
 
@@ -19,7 +19,7 @@ pub struct CmdSolve {
 }
 
 impl CmdSolve {
-    pub fn run(self) {
+    pub fn run(self, settings: HashMap<String, String>) {
         tracing::debug!("Args: {self:#?}");
 
         let mut letters = Vec::new();
@@ -40,8 +40,22 @@ impl CmdSolve {
                 .collect::<Vec<char>>();
         }
         // Setup settings
-        let src_directory = self.dir.unwrap_or(DEFAULT_SOURCE_DIR.to_string());
-        let src_file = self.file.unwrap_or(DEFAULT_SOURCE_FILE.to_string());
+        let mut src_directory = settings
+            .get("source_dir")
+            .map_or(DEFAULT_SOURCE_DIR, |v| v)
+            .to_string();
+        let mut src_file = settings
+            .get("source_file")
+            .map_or(DEFAULT_SOURCE_FILE, |v| v)
+            .to_string();
+
+        if let Some(sd) = self.dir {
+            src_directory = sd;
+        };
+        if let Some(sf) = self.file {
+            src_file = sf;
+        };
+
         let src = format!("{}/{}", src_directory.clone(), src_file.clone());
 
         let mut words = Vec::new();
