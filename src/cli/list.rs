@@ -1,7 +1,6 @@
-use std::fs::read_dir;
+use std::{collections::HashMap, fs::read_dir};
 
 use clap::Parser;
-
 const DEFAULT_SOURCE_DIR: &str = "words";
 
 #[derive(Parser, Debug, Clone)]
@@ -12,9 +11,16 @@ pub struct CmdList {
 }
 
 impl CmdList {
-    pub fn run(self) {
+    pub fn run(self, settings: HashMap<String, String>) {
         // Setup settings
-        let src_directory = self.dir.unwrap_or(DEFAULT_SOURCE_DIR.to_string());
+        let mut src_directory = settings
+            .get("source_dir")
+            .map_or(DEFAULT_SOURCE_DIR, |v| v)
+            .to_string();
+
+        if let Some(sd) = self.dir {
+            src_directory = sd;
+        };
 
         for entry in read_dir(src_directory).unwrap().flatten() {
             let path = entry.path();
