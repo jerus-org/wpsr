@@ -10,6 +10,7 @@ fn main() {
     match args.cmd {
         Commands::Prepare(prepare) => prepare.run(),
         Commands::Solve(solve) => solve.run(),
+        Commands::List(list) => list.run(),
     }
 }
 
