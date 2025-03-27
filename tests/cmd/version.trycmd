@@ -1,25 +1,11 @@
 ```console
 $ slb -V 
-? 2
-error: unexpected argument '-V' found
-
-  tip: to pass '-V' as a value, use '-- -V'
-
-Usage: slb [OPTIONS] [LETTERS]...
-
-For more information, try '--help'.
+slb 0.1.0
 
 ```
 
 ```console
 $ slb --version 
-? 2
-error: unexpected argument '--version' found
-
-  tip: a similar argument exists: '--verbose'
-
-Usage: slb <--verbose...|--quiet...> [LETTERS]...
-
-For more information, try '--help'.
+slb 0.1.0
 
 ```
