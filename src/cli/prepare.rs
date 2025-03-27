@@ -6,7 +6,7 @@ use crate::PrepareWords;
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.txt";
-const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
+const DEFAULT_MINIMUM_WORD_LENGTH: &str = "3";
 const LINE_LENGTH: usize = 3010;
 
 #[derive(Parser, Debug, Clone)]
@@ -23,11 +23,32 @@ pub struct CmdPrepare {
 }
 
 impl CmdPrepare {
-    pub fn run(self) {
+    pub fn run(self, settings: std::collections::HashMap<String, String>) {
         // Setup settings
-        let src_directory = self.dir.unwrap_or(DEFAULT_SOURCE_DIR.to_string());
-        let src_file = self.file.unwrap_or(DEFAULT_SOURCE_FILE.to_string());
-        let minimum_word_length = self.minimum.unwrap_or(DEFAULT_MINIMUM_WORD_LENGTH);
+        let mut src_directory = settings
+            .get("source_dir")
+            .map_or(DEFAULT_SOURCE_DIR, |v| v)
+            .to_string();
+        let mut src_file = settings
+            .get("source_file")
+            .map_or(DEFAULT_SOURCE_FILE, |v| v)
+            .to_string();
+        let mut minimum_word_length = settings
+            .get("minimum_word_list")
+            .map_or(DEFAULT_MINIMUM_WORD_LENGTH, |v| v)
+            .to_string()
+            .parse::<usize>()
+            .unwrap();
+
+        if let Some(sd) = self.dir {
+            src_directory = sd;
+        };
+        if let Some(sf) = self.file {
+            src_file = sf;
+        };
+        if let Some(mwl) = self.minimum {
+            minimum_word_length = mwl;
+        };
 
         let src = format!("{}/{}", src_directory.clone(), src_file.clone());
 
