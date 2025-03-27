@@ -1,10 +1,15 @@
-mod prepare;
-mod solve;
-
 use std::fmt::Display;
 
 use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
+
+mod list;
+mod prepare;
+mod solve;
+
+use list::CmdList;
+use prepare::CmdPrepare;
+use solve::CmdSolve;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -20,9 +25,11 @@ pub struct Cli {
 #[derive(Debug, Subcommand, Clone)]
 pub enum Commands {
     /// Prepare word list
-    Prepare(prepare::CmdPrepare),
+    Prepare(CmdPrepare),
     /// Solve word puzzle
-    Solve(solve::CmdSolve),
+    Solve(CmdSolve),
+    /// List available word lists
+    List(CmdList),
 }
 
 impl Display for Commands {
@@ -30,6 +37,7 @@ impl Display for Commands {
         match self {
             Commands::Prepare(_) => write!(f, "prepare"),
             Commands::Solve(_) => write!(f, "solve"),
+            Commands::List(_) => write!(f, "list"),
         }
     }
 }
