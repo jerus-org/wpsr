@@ -9,5 +9,5 @@ pre-release-replacements = [
     { file = "CHANGELOG.md", search = "## \\[Unreleased\\]", replace = "## [{{version}}] - {{date}}", exactly = 1 },
     { file = "CHANGELOG.md", search = "\\[Unreleased\\]:", replace = "[{{version}}]:", exactly = 1 },
     { file = "CHANGELOG.md", search = "\\.\\.\\.HEAD", replace = "...{{tag_name}}", exactly = 1 },
-    { file = "version.trycmd", search = "slb \\d+.\\d+.\\d+", replace = "slb {{version}}", exactly = 2 },
+    { file = "tests/cmd/version.trycmd", search = "slb \\d+.\\d+.\\d+", replace = "slb {{version}}", exactly = 2 },
 ]

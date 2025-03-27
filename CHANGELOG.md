@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✅ test(version)-update version in test cases(pr [#21])
 - 🔧 chore(config)-update release.toml for version updates(pr [#22])
+- 🔧 chore(config)-update version.trycmd file path(pr [#23])
 
 ## [0.1.1] - 2025-03-27
 
@@ -66,6 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#20]: https://github.com/jerus-org/slb/pull/20
 [#21]: https://github.com/jerus-org/slb/pull/21
 [#22]: https://github.com/jerus-org/slb/pull/22
+[#23]: https://github.com/jerus-org/slb/pull/23
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.1...HEAD
 [0.1.1]: https://github.com/jerus-org/slb/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/jerus-org/slb/releases/tag/v0.1.0
