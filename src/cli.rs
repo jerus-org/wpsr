@@ -1,19 +1,35 @@
-use clap::Parser;
+mod prepare;
+mod solve;
+
+use std::fmt::Display;
+
+use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
 
 #[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = None)]
 pub struct Cli {
-    pub letters: Vec<char>,
     /// logging level
     #[clap(flatten)]
     pub logging: Verbosity,
-    /// word list source directory
-    #[arg(short, long)]
-    pub dir: Option<String>,
-    /// word list source file
-    #[arg(short, long)]
-    pub file: Option<String>,
-    /// minimum word length
-    #[arg(short, long)]
-    pub minimum: Option<usize>,
+    /// Commands to run
+    #[command(subcommand)]
+    pub cmd: Commands,
+}
+
+#[derive(Debug, Subcommand, Clone)]
+pub enum Commands {
+    /// Prepare word list
+    Prepare(prepare::CmdPrepare),
+    /// Solve word puzzle
+    Solve(solve::CmdSolve),
+}
+
+impl Display for Commands {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Commands::Prepare(_) => write!(f, "prepare"),
+            Commands::Solve(_) => write!(f, "solve"),
+        }
+    }
 }

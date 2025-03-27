@@ -1,33 +1,104 @@
 ```console
 $ slb --help
-Usage: slb [OPTIONS] [LETTERS]...
+Solve the NYT Letters Boxed puzzle
 
-Arguments:
-  [LETTERS]...  
+Usage: slb [OPTIONS] <COMMAND>
+
+Commands:
+  prepare  Prepare word list
+  solve    Solve word puzzle
+  help     Print this message or the help of the given subcommand(s)
 
 Options:
-  -v, --verbose...         Increase logging verbosity
-  -q, --quiet...           Decrease logging verbosity
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+
+```console
+$ slb -h
+Solve the NYT Letters Boxed puzzle
+
+Usage: slb [OPTIONS] <COMMAND>
+
+Commands:
+  prepare  Prepare word list
+  solve    Solve word puzzle
+  help     Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+```console
+$ slb prepare --help
+Prepare word list
+
+Usage: slb prepare [OPTIONS]
+
+Options:
   -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
   -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
   -m, --minimum <MINIMUM>  minimum word length
   -h, --help               Print help
 
 ```
 
 ```console
-$ slb -h
-Usage: slb [OPTIONS] [LETTERS]...
+$ slb prepare -h
+Prepare word list
+
+Usage: slb prepare [OPTIONS]
+
+Options:
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
+
+```
+
+```console
+$ slb solve --help
+Solve word puzzle
+
+Usage: slb solve [OPTIONS] [LETTERS]...
 
 Arguments:
   [LETTERS]...  
 
 Options:
-  -v, --verbose...         Increase logging verbosity
-  -q, --quiet...           Decrease logging verbosity
-  -d, --dir <DIR>          word list source directory
-  -f, --file <FILE>        word list source file
-  -m, --minimum <MINIMUM>  minimum word length
-  -h, --help               Print help
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -h, --help         Print help
+
+```
+
+```console
+$ slb solve -h
+Solve word puzzle
+
+Usage: slb solve [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -h, --help         Print help
 
 ```
