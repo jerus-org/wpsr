@@ -105,7 +105,7 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
-    pub fn build_word_chain(&mut self) -> Result<(), Error> {
+    pub fn build_word_chain(&mut self, shuffle: bool) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
         let mut rng = ChaCha20Rng::from_os_rng();
@@ -114,7 +114,14 @@ impl LettersBoxed {
         let word_chain = Vec::new();
         let unused_letters = String::from_iter(self.letters.clone());
 
-        let word_chain = get_word(words, word_list, word_chain, unused_letters, &mut rng)?;
+        let word_chain = get_word(
+            words,
+            word_list,
+            word_chain,
+            unused_letters,
+            &mut rng,
+            shuffle,
+        )?;
 
         self.word_chain = word_chain;
         Ok(())
@@ -133,13 +140,16 @@ pub fn get_word(
     mut word_chain: Vec<String>,
     mut unused_letters: String,
     rng: &mut ChaCha20Rng,
+    shuffle: bool,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
 
     // Shuffle the starting words list to get a random starting word
     tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
-    words_list.shuffle(rng);
-    tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
+    if shuffle {
+        words_list.shuffle(rng);
+        tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
+    }
     let mut words_list = words_list
         .iter()
         .map(|word| WeightedWord::new(word.clone(), unused_letters.clone()))
@@ -179,13 +189,17 @@ pub fn get_word(
         "First words in the word list (reversed): {:#?}",
         &words_list[0..5]
     );
-    let words_list = shuffle_top_half(words_list, rng);
-    tracing::info!(
-        "First words in the word list (top shuffled)): {:#?}",
-        &words_list[0..5]
-    );
+    let mut words = if shuffle {
+        let words_list = shuffle_top_half(words_list, rng);
+        tracing::info!(
+            "First words in the word list (top shuffled)): {:#?}",
+            &words_list[0..5]
+        );
+        VecDeque::from(words_list)
+    } else {
+        VecDeque::from(words_list)
+    };
 
-    let mut words = VecDeque::from(words_list);
     // find a word that increases the letters used
 
     loop {
@@ -239,6 +253,7 @@ pub fn get_word(
                 next_word_chain,
                 next_unused_letters,
                 rng,
+                shuffle,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
