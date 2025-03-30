@@ -174,6 +174,16 @@ pub fn get_word(
         "Last word in the word list (reversed): {:#?}",
         &words_list.last()
     );
+    // shuffle the top of to the words list to randomize the first word while keeping a good weight
+    tracing::info!(
+        "First words in the word list (reversed): {:#?}",
+        &words_list[0..5]
+    );
+    let words_list = shuffle_top_half(words_list, rng);
+    tracing::info!(
+        "First words in the word list (top shuffled)): {:#?}",
+        &words_list[0..5]
+    );
 
     let mut words = VecDeque::from(words_list);
     // find a word that increases the letters used
@@ -247,6 +257,15 @@ pub fn get_word(
     Ok(word_chain)
 }
 
+fn shuffle_top_half(mut words: Vec<String>, rng: &mut ChaCha20Rng) -> Vec<String> {
+    let half_len = words.len() / 2;
+    let mut top_half = words.drain(..half_len).collect::<Vec<String>>();
+    let bottom_half = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+    top_half.shuffle(rng);
+    top_half.extend(bottom_half);
+    top_half
+}
+
 #[derive(Debug)]
 pub enum Error {
     NoWordFound,
@@ -313,5 +332,26 @@ mod tests {
         assert_eq!(letters_boxed.words[0], "world".to_string());
         assert_eq!(letters_boxed.words[1], "game".to_string());
         assert_eq!(letters_boxed.words[2], "waldo".to_string());
+    }
+
+    #[test]
+    fn test_shuffle_top_half() {
+        let words = vec![
+            "hello".to_string(),
+            "world".to_string(),
+            "foo".to_string(),
+            "bar".to_string(),
+            "baz".to_string(),
+        ];
+        println!("before: {:?}", words);
+        let mut rng = ChaCha20Rng::seed_from_u64(1);
+        let shuffled = shuffle_top_half(words, &mut rng);
+        println!("after: {:?}", shuffled);
+        assert_eq!(shuffled.len(), 5);
+        assert_eq!(shuffled[0], "world".to_string());
+        assert_eq!(shuffled[1], "hello".to_string());
+        assert_eq!(shuffled[2], "foo".to_string());
+        assert_eq!(shuffled[3], "bar".to_string());
+        assert_eq!(shuffled[4], "baz".to_string());
     }
 }
