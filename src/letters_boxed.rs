@@ -185,13 +185,13 @@ pub fn get_word(
         &words_list.last()
     );
     // shuffle the top of to the words list to randomize the first word while keeping a good weight
-    tracing::info!(
+    tracing::trace!(
         "First words in the word list (reversed): {:#?}",
         &words_list[0..5]
     );
     let mut words = if shuffle {
         let words_list = shuffle_top_half(words_list, rng);
-        tracing::info!(
+        tracing::trace!(
             "First words in the word list (top shuffled)): {:#?}",
             &words_list[0..5]
         );
