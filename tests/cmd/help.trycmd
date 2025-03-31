@@ -79,12 +79,13 @@ Arguments:
   [LETTERS]...  
 
 Options:
-  -d, --dir <DIR>    word list source directory
-  -v, --verbose...   Increase logging verbosity
-  -f, --file <FILE>  word list source file
-  -q, --quiet...     Decrease logging verbosity
-  -n, --no-shuffle   do not shuffle the words
-  -h, --help         Print help
+  -d, --dir <DIR>            word list source directory
+  -v, --verbose...           Increase logging verbosity
+  -f, --file <FILE>          word list source file
+  -q, --quiet...             Decrease logging verbosity
+  -n, --no-shuffle           do not shuffle the words
+  -s, --shuffles <SHUFFLES>  number of iterations to shuffle
+  -h, --help                 Print help
 
 ```
 
@@ -98,12 +99,13 @@ Arguments:
   [LETTERS]...  
 
 Options:
-  -d, --dir <DIR>    word list source directory
-  -v, --verbose...   Increase logging verbosity
-  -f, --file <FILE>  word list source file
-  -q, --quiet...     Decrease logging verbosity
-  -n, --no-shuffle   do not shuffle the words
-  -h, --help         Print help
+  -d, --dir <DIR>            word list source directory
+  -v, --verbose...           Increase logging verbosity
+  -f, --file <FILE>          word list source file
+  -q, --quiet...             Decrease logging verbosity
+  -n, --no-shuffle           do not shuffle the words
+  -s, --shuffles <SHUFFLES>  number of iterations to shuffle
+  -h, --help                 Print help
 
 ```
 
