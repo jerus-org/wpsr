@@ -105,7 +105,11 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
-    pub fn build_word_chain(&mut self, shuffle: bool) -> Result<(), Error> {
+    pub fn build_word_chain(
+        &mut self,
+        shuffle: bool,
+        shuffles: Option<usize>,
+    ) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
         let mut rng = ChaCha20Rng::from_os_rng();
@@ -121,6 +125,7 @@ impl LettersBoxed {
             unused_letters,
             &mut rng,
             shuffle,
+            shuffles,
         )?;
 
         self.word_chain = word_chain;
@@ -141,12 +146,17 @@ pub fn get_word(
     mut unused_letters: String,
     rng: &mut ChaCha20Rng,
     shuffle: bool,
+    mut shuffles: Option<usize>,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
 
+    let shuffle_count = shuffles.unwrap_or(1);
+    tracing::info!("Shuffle count: {}", shuffle_count);
+
     // Shuffle the starting words list to get a random starting word
     tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
-    if shuffle {
+    if shuffle && shuffle_count > 0 {
+        tracing::info!("Shuffling words list.");
         words_list.shuffle(rng);
         tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
     }
@@ -189,7 +199,8 @@ pub fn get_word(
         "First words in the word list (reversed): {:#?}",
         &words_list[0..5]
     );
-    let mut words = if shuffle {
+    let mut words = if shuffle && shuffle_count > 0 {
+        tracing::info!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         tracing::trace!(
             "First words in the word list (top shuffled)): {:#?}",
@@ -199,6 +210,11 @@ pub fn get_word(
     } else {
         VecDeque::from(words_list)
     };
+
+    if shuffles.is_some() && shuffle_count > 0 {
+        shuffles = Some(shuffle_count - 1);
+        tracing::info!("Decrementing shuffle count.",);
+    }
 
     // find a word that increases the letters used
 
@@ -254,6 +270,7 @@ pub fn get_word(
                 next_unused_letters,
                 rng,
                 shuffle,
+                shuffles,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
