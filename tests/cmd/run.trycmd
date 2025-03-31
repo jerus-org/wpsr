@@ -20,13 +20,13 @@ Options:
 ```
 
 ```console
-$ slb -v solve -n c x n p m i l r u e o f
+$ slb -v solve -f mit_words.slb -n c x n p m i l r u e o f
 Word chain: numeric -> couple -> explorer -> rfc
 
 ```
 
 ```console
-$ slb -v solve -n c x n p m i l r u e o f
+$ slb -v solve -f mit_words.slb -n c x n p m i l r u e o f
 Word chain: numeric -> couple -> explorer -> rfc
 
 ```
