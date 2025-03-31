@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- 🔧 chore(dependencies)-format dependencies and add metadata(pr [#31])
+
 ## [0.1.7] - 2025-03-31
 
 ### Added
@@ -107,6 +113,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#28]: https://github.com/jerus-org/slb/pull/28
 [#29]: https://github.com/jerus-org/slb/pull/29
 [#30]: https://github.com/jerus-org/slb/pull/30
+[#31]: https://github.com/jerus-org/slb/pull/31
+[Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.7...HEAD
 [0.1.7]: https://github.com/jerus-org/slb/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/jerus-org/slb/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/jerus-org/slb/compare/v0.1.4...v0.1.5
