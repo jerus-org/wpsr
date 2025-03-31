@@ -76,16 +76,34 @@ Solve word puzzle
 Usage: slb solve [OPTIONS] [LETTERS]...
 
 Arguments:
-  [LETTERS]...  
+  [LETTERS]...
+          
 
 Options:
-  -d, --dir <DIR>            word list source directory
-  -v, --verbose...           Increase logging verbosity
-  -f, --file <FILE>          word list source file
-  -q, --quiet...             Decrease logging verbosity
-  -n, --no-shuffle           do not shuffle the words
-  -s, --shuffles <SHUFFLES>  number of iterations to shuffle
-  -h, --help                 Print help
+  -d, --dir <DIR>
+          word list source directory
+
+  -v, --verbose...
+          Increase logging verbosity
+
+  -f, --file <FILE>
+          word list source file
+
+  -q, --quiet...
+          Decrease logging verbosity
+
+  -n, --no-shuffle
+          do not shuffle the words
+
+  -s, --shuffles <SHUFFLES>
+          number of iterations to shuffle
+
+  -t, --twice
+          Shuffle the whole word list before calculating weightings
+          then shuffle the top half of the weighted word list.
+
+  -h, --help
+          Print help (see a summary with '-h')
 
 ```
 
@@ -105,7 +123,8 @@ Options:
   -q, --quiet...             Decrease logging verbosity
   -n, --no-shuffle           do not shuffle the words
   -s, --shuffles <SHUFFLES>  number of iterations to shuffle
-  -h, --help                 Print help
+  -t, --twice                shuffle the whole word list and weighted list
+  -h, --help                 Print help (see more with '--help')
 
 ```
 

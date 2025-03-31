@@ -23,7 +23,7 @@ fn main() {
             let settings = settings
                 .try_deserialize::<HashMap<String, String>>()
                 .unwrap();
-            tracing::info!("Loaded settings: {:?}", settings);
+            tracing::debug!("Loaded settings: {:?}", settings);
             match args.cmd {
                 Commands::Prepare(prepare) => prepare.run(settings),
                 Commands::Solve(solve) => solve.run(settings),
@@ -48,7 +48,8 @@ pub fn get_logging(verbosity: log::LevelFilter) {
     ));
 
     let log_subscriber = tracing_subscriber::FmtSubscriber::builder()
-        .pretty()
+        // .pretty()
+        .compact()
         .with_env_filter(filter)
         .finish();
 

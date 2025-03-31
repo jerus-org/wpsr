@@ -104,11 +104,12 @@ impl LettersBoxed {
         self
     }
 
-    #[tracing::instrument(skip(self))]
+    #[tracing::instrument(skip(self, shuffle, shuffles, twice))]
     pub fn build_word_chain(
         &mut self,
         shuffle: bool,
         shuffles: Option<usize>,
+        twice: bool,
     ) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
@@ -126,6 +127,7 @@ impl LettersBoxed {
             &mut rng,
             shuffle,
             shuffles,
+            twice,
         )?;
 
         self.word_chain = word_chain;
@@ -138,7 +140,17 @@ impl LettersBoxed {
     }
 }
 
-#[tracing::instrument(skip(all_words, words_list))]
+#[allow(clippy::too_many_arguments)]
+#[tracing::instrument(skip(
+    all_words,
+    words_list,
+    word_chain,
+    unused_letters,
+    rng,
+    shuffle,
+    shuffles,
+    twice
+))]
 pub fn get_word(
     all_words: Vec<String>,
     mut words_list: Vec<String>,
@@ -147,6 +159,7 @@ pub fn get_word(
     rng: &mut ChaCha20Rng,
     shuffle: bool,
     mut shuffles: Option<usize>,
+    twice: bool,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
 
@@ -155,7 +168,7 @@ pub fn get_word(
 
     // Shuffle the starting words list to get a random starting word
     tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
-    if shuffle && shuffle_count > 0 {
+    if shuffle && shuffle_count > 0 && twice {
         tracing::info!("Shuffling words list.");
         words_list.shuffle(rng);
         tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
@@ -271,6 +284,7 @@ pub fn get_word(
                 rng,
                 shuffle,
                 shuffles,
+                twice,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
