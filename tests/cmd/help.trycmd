@@ -83,6 +83,7 @@ Options:
   -v, --verbose...   Increase logging verbosity
   -f, --file <FILE>  word list source file
   -q, --quiet...     Decrease logging verbosity
+  -n, --no-shuffle   do not shuffle the words
   -h, --help         Print help
 
 ```
@@ -101,6 +102,7 @@ Options:
   -v, --verbose...   Increase logging verbosity
   -f, --file <FILE>  word list source file
   -q, --quiet...     Decrease logging verbosity
+  -n, --no-shuffle   do not shuffle the words
   -h, --help         Print help
 
 ```
