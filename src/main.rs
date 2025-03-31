@@ -6,7 +6,7 @@ use slb::{Cli, Commands};
 use tracing::info;
 use tracing_subscriber::EnvFilter;
 
-const DEFAULT_SOURCE_DIR: &str = "words";
+const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
 const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
 const DEFAULT_LINE_LENGTH: usize = 3010;
