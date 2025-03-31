@@ -22,6 +22,13 @@ pub struct CmdSolve {
     /// number of iterations to shuffle
     #[arg(short, long)]
     pub shuffles: Option<usize>,
+    /// shuffle the whole word list and weighted list
+    #[arg(
+        short,
+        long,
+        long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
+    )]
+    pub twice: bool,
 }
 
 impl CmdSolve {
@@ -82,7 +89,7 @@ impl CmdSolve {
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
-            .build_word_chain(!self.no_shuffle, self.shuffles)
+            .build_word_chain(!self.no_shuffle, self.shuffles, self.twice)
         {
             Ok(_) => {
                 tracing::info!("Word chain built successfully");
