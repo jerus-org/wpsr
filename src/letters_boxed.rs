@@ -1,6 +1,8 @@
 use std::{collections::VecDeque, fmt::Display};
 
 mod weighted_word;
+use rand::{SeedableRng, seq::SliceRandom};
+use rand_chacha::ChaCha20Rng;
 use weighted_word::WeightedWord;
 
 #[derive(Debug)]
@@ -103,15 +105,23 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
-    pub fn build_word_chain(&mut self) -> Result<(), Error> {
+    pub fn build_word_chain(&mut self, shuffle: bool) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
+        let mut rng = ChaCha20Rng::from_os_rng();
         let words = self.words.clone();
         let word_list = words.clone();
         let word_chain = Vec::new();
         let unused_letters = String::from_iter(self.letters.clone());
 
-        let word_chain = get_word(words, word_list, word_chain, unused_letters)?;
+        let word_chain = get_word(
+            words,
+            word_list,
+            word_chain,
+            unused_letters,
+            &mut rng,
+            shuffle,
+        )?;
 
         self.word_chain = word_chain;
         Ok(())
@@ -126,28 +136,70 @@ impl LettersBoxed {
 #[tracing::instrument(skip(all_words, words_list))]
 pub fn get_word(
     all_words: Vec<String>,
-    words_list: Vec<String>,
+    mut words_list: Vec<String>,
     mut word_chain: Vec<String>,
     mut unused_letters: String,
+    rng: &mut ChaCha20Rng,
+    shuffle: bool,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
 
+    // Shuffle the starting words list to get a random starting word
+    tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
+    if shuffle {
+        words_list.shuffle(rng);
+        tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
+    }
     let mut words_list = words_list
         .iter()
         .map(|word| WeightedWord::new(word.clone(), unused_letters.clone()))
         .collect::<Vec<WeightedWord>>();
+    tracing::trace!(
+        "First words in the word list (not sorted): {:#?}",
+        &words_list[0..5]
+    );
+    tracing::trace!(
+        "Last word in the word list (not sorted): {:#?}",
+        &words_list.last()
+    );
     words_list.sort_by_key(|ww| ww.weight);
-    tracing::trace!("First word in the word list: {:#?}", &words_list[0]);
-    tracing::trace!("Last word in the word list: {:#?}", &words_list.last());
+    tracing::trace!(
+        "First words in the word list (sorted): {:#?}",
+        &words_list[0..5]
+    );
+    tracing::trace!(
+        "Last word in the word list (sorted): {:#?}",
+        &words_list.last()
+    );
     let words_list = words_list
         .iter()
         .rev()
         .map(|ww| ww.word.to_string())
         .collect::<Vec<String>>();
-    tracing::trace!("First word in the word list: {:#?}", &words_list[0]);
-    tracing::trace!("Last word in the word list: {:#?}", &words_list.last());
+    tracing::trace!(
+        "First word in the word list (reversed): {:#?}",
+        &words_list[0]
+    );
+    tracing::trace!(
+        "Last word in the word list (reversed): {:#?}",
+        &words_list.last()
+    );
+    // shuffle the top of to the words list to randomize the first word while keeping a good weight
+    tracing::trace!(
+        "First words in the word list (reversed): {:#?}",
+        &words_list[0..5]
+    );
+    let mut words = if shuffle {
+        let words_list = shuffle_top_half(words_list, rng);
+        tracing::trace!(
+            "First words in the word list (top shuffled)): {:#?}",
+            &words_list[0..5]
+        );
+        VecDeque::from(words_list)
+    } else {
+        VecDeque::from(words_list)
+    };
 
-    let mut words = VecDeque::from(words_list);
     // find a word that increases the letters used
 
     loop {
@@ -200,6 +252,8 @@ pub fn get_word(
                 words_list,
                 next_word_chain,
                 next_unused_letters,
+                rng,
+                shuffle,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
@@ -216,6 +270,15 @@ pub fn get_word(
     tracing::debug!("Current word chain: {}", word_chain.join("-"));
 
     Ok(word_chain)
+}
+
+fn shuffle_top_half(mut words: Vec<String>, rng: &mut ChaCha20Rng) -> Vec<String> {
+    let half_len = words.len() / 2;
+    let mut top_half = words.drain(..half_len).collect::<Vec<String>>();
+    let bottom_half = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+    top_half.shuffle(rng);
+    top_half.extend(bottom_half);
+    top_half
 }
 
 #[derive(Debug)]
@@ -284,5 +347,26 @@ mod tests {
         assert_eq!(letters_boxed.words[0], "world".to_string());
         assert_eq!(letters_boxed.words[1], "game".to_string());
         assert_eq!(letters_boxed.words[2], "waldo".to_string());
+    }
+
+    #[test]
+    fn test_shuffle_top_half() {
+        let words = vec![
+            "hello".to_string(),
+            "world".to_string(),
+            "foo".to_string(),
+            "bar".to_string(),
+            "baz".to_string(),
+        ];
+        println!("before: {:?}", words);
+        let mut rng = ChaCha20Rng::seed_from_u64(1);
+        let shuffled = shuffle_top_half(words, &mut rng);
+        println!("after: {:?}", shuffled);
+        assert_eq!(shuffled.len(), 5);
+        assert_eq!(shuffled[0], "world".to_string());
+        assert_eq!(shuffled[1], "hello".to_string());
+        assert_eq!(shuffled[2], "foo".to_string());
+        assert_eq!(shuffled[3], "bar".to_string());
+        assert_eq!(shuffled[4], "baz".to_string());
     }
 }

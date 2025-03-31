@@ -16,6 +16,9 @@ pub struct CmdSolve {
     /// word list source file
     #[arg(short, long)]
     pub file: Option<String>,
+    /// do not shuffle the words
+    #[arg(short, long)]
+    pub no_shuffle: bool,
 }
 
 impl CmdSolve {
@@ -76,7 +79,7 @@ impl CmdSolve {
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
-            .build_word_chain()
+            .build_word_chain(!self.no_shuffle)
         {
             Ok(_) => {
                 tracing::info!("Word chain built successfully");
