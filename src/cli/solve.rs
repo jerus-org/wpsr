@@ -2,7 +2,7 @@ use std::{collections::HashMap, process::exit};
 
 use clap::Parser;
 
-use crate::LettersBoxed;
+use crate::{LettersBoxed, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
@@ -85,11 +85,12 @@ impl CmdSolve {
             }
         }
 
+        let mut shuffle = Shuffle::new(self.no_shuffle, self.shuffles, self.twice);
         let mut puzzle = LettersBoxed::new(letters, words);
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
-            .build_word_chain(!self.no_shuffle, self.shuffles, self.twice)
+            .build_word_chain(&mut shuffle)
         {
             Ok(_) => {
                 tracing::info!("Word chain built successfully");
