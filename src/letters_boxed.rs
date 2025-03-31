@@ -135,7 +135,6 @@ impl LettersBoxed {
     }
 }
 
-#[allow(clippy::too_many_arguments)]
 #[tracing::instrument(skip(all_words, words_list, word_chain, unused_letters, rng, shuffle,))]
 pub fn get_word(
     all_words: Vec<String>,
