@@ -1,8 +1,10 @@
 use std::{collections::VecDeque, fmt::Display};
 
+mod shuffle;
 mod weighted_word;
 use rand::{SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
+pub use shuffle::Shuffle;
 use weighted_word::WeightedWord;
 
 #[derive(Debug)]
@@ -104,13 +106,8 @@ impl LettersBoxed {
         self
     }
 
-    #[tracing::instrument(skip(self, shuffle, shuffles, twice))]
-    pub fn build_word_chain(
-        &mut self,
-        shuffle: bool,
-        shuffles: Option<usize>,
-        twice: bool,
-    ) -> Result<(), Error> {
+    #[tracing::instrument(skip(self, shuffle))]
+    pub fn build_word_chain(&mut self, shuffle: &mut Shuffle) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
         let mut rng = ChaCha20Rng::from_os_rng();
@@ -126,8 +123,6 @@ impl LettersBoxed {
             unused_letters,
             &mut rng,
             shuffle,
-            shuffles,
-            twice,
         )?;
 
         self.word_chain = word_chain;
@@ -141,34 +136,23 @@ impl LettersBoxed {
 }
 
 #[allow(clippy::too_many_arguments)]
-#[tracing::instrument(skip(
-    all_words,
-    words_list,
-    word_chain,
-    unused_letters,
-    rng,
-    shuffle,
-    shuffles,
-    twice
-))]
+#[tracing::instrument(skip(all_words, words_list, word_chain, unused_letters, rng, shuffle,))]
 pub fn get_word(
     all_words: Vec<String>,
     mut words_list: Vec<String>,
     mut word_chain: Vec<String>,
     mut unused_letters: String,
     rng: &mut ChaCha20Rng,
-    shuffle: bool,
-    mut shuffles: Option<usize>,
-    twice: bool,
+    shuffle: &mut Shuffle,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
 
-    let shuffle_count = shuffles.unwrap_or(1);
+    let shuffle_count = shuffle.shuffles_value();
     tracing::info!("Shuffle count: {}", shuffle_count);
 
     // Shuffle the starting words list to get a random starting word
     tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
-    if shuffle && shuffle_count > 0 && twice {
+    if shuffle.shuffle_words() {
         tracing::info!("Shuffling words list.");
         words_list.shuffle(rng);
         tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
@@ -212,7 +196,7 @@ pub fn get_word(
         "First words in the word list (reversed): {:#?}",
         &words_list[0..5]
     );
-    let mut words = if shuffle && shuffle_count > 0 {
+    let mut words = if shuffle.shuffle_weighted() {
         tracing::info!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         tracing::trace!(
@@ -224,10 +208,7 @@ pub fn get_word(
         VecDeque::from(words_list)
     };
 
-    if shuffles.is_some() && shuffle_count > 0 {
-        shuffles = Some(shuffle_count - 1);
-        tracing::info!("Decrementing shuffle count.",);
-    }
+    shuffle.decrement_shuffles();
 
     // find a word that increases the letters used
 
@@ -283,8 +264,6 @@ pub fn get_word(
                 next_unused_letters,
                 rng,
                 shuffle,
-                shuffles,
-                twice,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
