@@ -606,12 +606,22 @@ checksum = "bbbb5d9659141646ae647b42fe094daf6c6192d1620870b449d9557f748b2daa"
 name = "slb"
 version = "0.1.8"
 dependencies = [
+ "log",
+ "rand",
+ "rand_chacha",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
+name = "slb-cli"
+version = "0.1.8"
+dependencies = [
  "clap",
  "clap-verbosity-flag",
  "config",
  "log",
- "rand",
- "rand_chacha",
+ "slb",
  "tracing",
  "tracing-subscriber",
  "trycmd",

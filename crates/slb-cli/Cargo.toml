@@ -1,0 +1,39 @@
+[package]
+name = "slb-cli"
+version = "0.1.8"
+edition = "2024"
+authors = ["jerusdp <jrussell@jerus.ie>"]
+description = "Solve the NYT Letters Boxed puzzle"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/jerus-org/slb"
+keywords = ["letters", "boxed", "nyt", "solver"]
+categories = ["puzzle-solver"]
+documentation = "https://github.com/jerus-org/slb"
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+]
+
+rust-version = "1.85"
+
+[dependencies]
+slb = { path = "../slb" }
+clap.workspace = true
+clap-verbosity-flag.workspace = true
+config.workspace = true
+log.workspace = true
+# rand = "0.9.0"
+# rand_chacha = { version = "0.9.0", features = ["os_rng"] }
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+trycmd.workspace = true
+
+[package.metadata.bundle]
+identifier = "ie.jerus.slb"
+resources = ["words/*.slb"]
