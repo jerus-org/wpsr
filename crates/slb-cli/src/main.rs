@@ -2,7 +2,7 @@ use std::{collections::HashMap, path::PathBuf, str::FromStr};
 
 use clap::Parser;
 use config::{Config, File};
-use slb::{Cli, Commands};
+use slb_cli::{Cli, Commands};
 use tracing::info;
 use tracing_subscriber::EnvFilter;
 

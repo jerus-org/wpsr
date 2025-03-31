@@ -1,26 +1,16 @@
-[package]
-name = "slb"
-version = "0.1.8"
+[workspace]
+members = ["crates/slb", "crates/slb-cli"]
+resolver = "2"
+
+[workspace.package]
 edition = "2024"
 authors = ["jerusdp <jrussell@jerus.ie>"]
-description = "Solve the NYT Letters Boxed puzzle"
-license = "MIT"
-readme = "README.md"
+rust-version = "1.85"
 repository = "https://github.com/jerus-org/slb"
 keywords = ["letters", "boxed", "nyt", "solver"]
 categories = ["puzzle-solver"]
-documentation = "https://github.com/jerus-org/slb"
-include = [
-    "**/*.rs",
-    "Cargo.toml",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-]
 
-rust-version = "1.85"
-
-[dependencies]
+[workspace.dependencies]
 clap = { version = "4.5.32", features = ["derive"] }
 clap-verbosity-flag = "3.0.2"
 config = { version = "0.15.11", default-features = false, features = [
@@ -35,7 +25,3 @@ tracing-subscriber = { version = "0.3.19", features = [
     "std",
 ] }
 trycmd = "0.15.9"
-
-[package.metadata.bundle]
-identifier = "ie.jerus.slb"
-resources = ["words/*.slb"]

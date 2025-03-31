@@ -2,7 +2,7 @@ use std::{collections::HashMap, process::exit};
 
 use clap::Parser;
 
-use crate::{LettersBoxed, Shuffle};
+use slb::{LettersBoxed, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
