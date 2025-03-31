@@ -19,6 +19,9 @@ pub struct CmdSolve {
     /// do not shuffle the words
     #[arg(short, long)]
     pub no_shuffle: bool,
+    /// number of iterations to shuffle
+    #[arg(short, long)]
+    pub shuffles: Option<usize>,
 }
 
 impl CmdSolve {
