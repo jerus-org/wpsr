@@ -1,6 +1,6 @@
 [package]
 name = "slb"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2024"
 authors = ["jerusdp <jrussell@jerus.ie>"]
 description = "Solve the NYT Letters Boxed puzzle"
