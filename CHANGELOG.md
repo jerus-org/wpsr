@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✨ add randomness to word chain building(pr [#26])
 - ✨ add shuffle iterations option(pr [#27])
+- ✨ add shuffle count option for word chain building(pr [#28])
 
 ## [0.1.4] - 2025-03-27
 
@@ -91,6 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#25]: https://github.com/jerus-org/slb/pull/25
 [#26]: https://github.com/jerus-org/slb/pull/26
 [#27]: https://github.com/jerus-org/slb/pull/27
+[#28]: https://github.com/jerus-org/slb/pull/28
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.4...HEAD
 [0.1.4]: https://github.com/jerus-org/slb/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/jerus-org/slb/compare/v0.1.2...v0.1.3

@@ -82,7 +82,7 @@ impl CmdSolve {
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
-            .build_word_chain(!self.no_shuffle)
+            .build_word_chain(!self.no_shuffle, self.shuffles)
         {
             Ok(_) => {
                 tracing::info!("Word chain built successfully");
