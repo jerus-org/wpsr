@@ -1,5 +1,5 @@
 [workspace]
-members = [ "crates/app","crates/slb", "crates/slb-cli"]
+members = ["crates/slb", "crates/slb-cli"]
 resolver = "2"
 
 [workspace.package]
