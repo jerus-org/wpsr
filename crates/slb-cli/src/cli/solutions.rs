@@ -18,6 +18,9 @@ pub struct CmdSolutions {
     /// number of random solutions to generate
     #[arg(short, long, default_value_t = 50)]
     pub random_solutions: usize,
+    /// maximum length of the word chain
+    #[arg(short, long, default_value_t = 6)]
+    pub max_chain: usize,
     // /// do not shuffle the words
     // #[arg(short, long)]
     // pub no_shuffle: bool,
@@ -34,6 +37,7 @@ pub struct CmdSolutions {
 }
 
 impl CmdSolutions {
+    #[tracing::instrument(skip(self))]
     pub fn run(self, settings: HashMap<String, String>) {
         tracing::debug!("Args: {self:#?}");
 
@@ -110,6 +114,9 @@ impl CmdSolutions {
         let mut max_solutions = self.random_solutions;
 
         while max_solutions > 0 && max_clashes > 0 {
+            tracing::info!(
+                "Generating random solutions max_solutions={max_solutions} and max_clashes={max_clashes}"
+            );
             let mut puzzle = LettersBoxed::new(&letters, &words);
             match puzzle
                 .filter_words_with_letters_only()
@@ -124,7 +131,9 @@ impl CmdSolutions {
                 }
             };
 
-            if !solutions.contains(&puzzle.solution_string()) {
+            if !solutions.contains(&puzzle.solution_string())
+                && puzzle.chain_length() <= self.max_chain
+            {
                 solutions.push(puzzle.solution_string());
                 max_solutions -= 1;
                 tracing::debug!(

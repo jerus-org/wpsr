@@ -5,10 +5,11 @@ Solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  prepare  Prepare word list
-  solve    Solve word puzzle
-  list     List available word lists
-  help     Print this message or the help of the given subcommand(s)
+  prepare    Prepare word list
+  solve      Solve word puzzle
+  list       List available word lists
+  solutions  Report multiple solutions for the puzzle
+  help       Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -25,10 +26,11 @@ Solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  prepare  Prepare word list
-  solve    Solve word puzzle
-  list     List available word lists
-  help     Print this message or the help of the given subcommand(s)
+  prepare    Prepare word list
+  solve      Solve word puzzle
+  list       List available word lists
+  solutions  Report multiple solutions for the puzzle
+  help       Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -158,22 +160,40 @@ Options:
 
 ```console
 $ slb solutions --help
-? 2
-error: unrecognized subcommand 'solutions'
+Report multiple solutions for the puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb solutions [OPTIONS] [LETTERS]...
 
-For more information, try '--help'.
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -h, --help                                 Print help
 
 ```
 
 ```console
 $ slb solutions -h
-? 2
-error: unrecognized subcommand 'solutions'
+Report multiple solutions for the puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb solutions [OPTIONS] [LETTERS]...
 
-For more information, try '--help'.
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -h, --help                                 Print help
 
 ```
