@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - restructure project into a workspace(pr [#33])
 - Add-max-chain-length-option-for-solutions(pr [#37])
 - 🔧 chore(workspace)-update Cargo.toml for workspace configuration(pr [#38])
+- ♻️ refactor(workspace)-consolidate workspace structure(pr [#39])
 
 ### Security
 
@@ -137,6 +138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#36]: https://github.com/jerus-org/slb/pull/36
 [#37]: https://github.com/jerus-org/slb/pull/37
 [#38]: https://github.com/jerus-org/slb/pull/38
+[#39]: https://github.com/jerus-org/slb/pull/39
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.8...HEAD
 [0.1.8]: https://github.com/jerus-org/slb/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/jerus-org/slb/compare/v0.1.6...v0.1.7

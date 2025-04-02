@@ -1,0 +1,199 @@
+```console
+$ slb --help
+Command line program to solve the NYT Letters Boxed puzzle
+
+Usage: slb [OPTIONS] <COMMAND>
+
+Commands:
+  prepare    Prepare word list
+  solve      Solve word puzzle
+  list       List available word lists
+  solutions  Report multiple solutions for the puzzle
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+
+```console
+$ slb -h
+Command line program to solve the NYT Letters Boxed puzzle
+
+Usage: slb [OPTIONS] <COMMAND>
+
+Commands:
+  prepare    Prepare word list
+  solve      Solve word puzzle
+  list       List available word lists
+  solutions  Report multiple solutions for the puzzle
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+```console
+$ slb prepare --help
+Prepare word list
+
+Usage: slb prepare [OPTIONS]
+
+Options:
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
+
+```
+
+```console
+$ slb prepare -h
+Prepare word list
+
+Usage: slb prepare [OPTIONS]
+
+Options:
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
+
+```
+
+```console
+$ slb solve --help
+Solve word puzzle
+
+Usage: slb solve [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...
+          
+
+Options:
+  -d, --dir <DIR>
+          word list source directory
+
+  -v, --verbose...
+          Increase logging verbosity
+
+  -f, --file <FILE>
+          word list source file
+
+  -q, --quiet...
+          Decrease logging verbosity
+
+  -n, --no-shuffle
+          do not shuffle the words
+
+  -s, --shuffles <SHUFFLES>
+          number of iterations to shuffle
+
+  -t, --twice
+          Shuffle the whole word list before calculating weightings
+          then shuffle the top half of the weighted word list.
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+```
+
+```console
+$ slb solve -h
+Solve word puzzle
+
+Usage: slb solve [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>            word list source directory
+  -v, --verbose...           Increase logging verbosity
+  -f, --file <FILE>          word list source file
+  -q, --quiet...             Decrease logging verbosity
+  -n, --no-shuffle           do not shuffle the words
+  -s, --shuffles <SHUFFLES>  number of iterations to shuffle
+  -t, --twice                shuffle the whole word list and weighted list
+  -h, --help                 Print help (see more with '--help')
+
+```
+
+```console
+$ slb list --help
+List available word lists
+
+Usage: slb list [OPTIONS]
+
+Options:
+  -d, --dir <DIR>   word list source directory
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+
+```
+
+```console
+$ slb list -h
+List available word lists
+
+Usage: slb list [OPTIONS]
+
+Options:
+  -d, --dir <DIR>   word list source directory
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+
+```
+
+```console
+$ slb solutions --help
+Report multiple solutions for the puzzle
+
+Usage: slb solutions [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -h, --help                                 Print help
+
+```
+
+```console
+$ slb solutions -h
+Report multiple solutions for the puzzle
+
+Usage: slb solutions [OPTIONS] [LETTERS]...
+
+Arguments:
+  [LETTERS]...  
+
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -h, --help                                 Print help
+
+```
