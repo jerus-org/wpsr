@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✨ add generate command(pr [#43])
 - ✨ add bare option for letter output(pr [#44])
+- ✨ enhance letter validation and output formatting(pr [#45])
 
 ## [0.1.11] - 2025-04-02
 
@@ -164,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#42]: https://github.com/jerus-org/slb/pull/42
 [#43]: https://github.com/jerus-org/slb/pull/43
 [#44]: https://github.com/jerus-org/slb/pull/44
+[#45]: https://github.com/jerus-org/slb/pull/45
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.11...HEAD
 [0.1.11]: https://github.com/jerus-org/slb/compare/v0.1.10...v0.1.11
 [0.1.10]: https://github.com/jerus-org/slb/compare/v0.1.9...v0.1.10
