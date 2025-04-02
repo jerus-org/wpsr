@@ -28,13 +28,13 @@ impl Default for LettersBoxed {
 }
 
 impl LettersBoxed {
-    pub fn new(letters: Vec<char>, words: Vec<String>) -> Self {
+    pub fn new(letters: &[char], words: &[String]) -> Self {
         let mut s = Self::default();
         if !letters.is_empty() {
-            s.letters = letters;
+            s.letters = Vec::from(letters)
         }
         if !words.is_empty() {
-            s.words = words;
+            s.words = Vec::from(words);
         }
 
         s
@@ -319,7 +319,7 @@ mod tests {
             "baz".to_string(),
         ];
 
-        let mut letters_boxed = LettersBoxed::new(letters, words);
+        let mut letters_boxed = LettersBoxed::new(&letters, &words);
         letters_boxed.filter_words_with_letters_only();
         assert_eq!(letters_boxed.words.len(), 2);
         assert_eq!(letters_boxed.words[0], "hello".to_string());
@@ -344,7 +344,7 @@ mod tests {
             "fred".to_string(),
         ];
 
-        let mut letters_boxed = LettersBoxed::new(letters, words);
+        let mut letters_boxed = LettersBoxed::new(&letters, &words);
 
         letters_boxed.filter_words_with_letters_only();
         println!("{:#?}", letters_boxed.words);

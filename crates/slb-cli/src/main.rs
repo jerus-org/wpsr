@@ -26,6 +26,7 @@ fn main() {
             tracing::debug!("Loaded settings: {:?}", settings);
             match args.cmd {
                 Commands::Prepare(prepare) => prepare.run(settings),
+                Commands::Solutions(solutions) => solutions.run(settings),
                 Commands::Solve(solve) => solve.run(settings),
                 Commands::List(list) => list.run(settings),
             }

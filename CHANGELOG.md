@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ add solutions command for word chain generation(pr [#35])
+
 ### Changed
 
 - restructure project into a workspace(pr [#33])
@@ -123,6 +127,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#31]: https://github.com/jerus-org/slb/pull/31
 [#32]: https://github.com/jerus-org/slb/pull/32
 [#33]: https://github.com/jerus-org/slb/pull/33
+[#35]: https://github.com/jerus-org/slb/pull/35
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.8...HEAD
 [0.1.8]: https://github.com/jerus-org/slb/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/jerus-org/slb/compare/v0.1.6...v0.1.7

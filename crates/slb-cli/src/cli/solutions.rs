@@ -1,14 +1,13 @@
 use std::{collections::HashMap, process::exit};
 
 use clap::Parser;
-
 use slb::{LettersBoxed, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
 
 #[derive(Parser, Debug, Clone)]
-pub struct CmdSolve {
+pub struct CmdSolutions {
     pub letters: Vec<char>,
     /// word list source directory
     #[arg(short, long)]
@@ -16,22 +15,25 @@ pub struct CmdSolve {
     /// word list source file
     #[arg(short, long)]
     pub file: Option<String>,
-    /// do not shuffle the words
-    #[arg(short, long)]
-    pub no_shuffle: bool,
-    /// number of iterations to shuffle
-    #[arg(short, long)]
-    pub shuffles: Option<usize>,
-    /// shuffle the whole word list and weighted list
-    #[arg(
-        short,
-        long,
-        long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
-    )]
-    pub twice: bool,
+    /// number of random solutions to generate
+    #[arg(short, long, default_value_t = 50)]
+    pub random_solutions: usize,
+    // /// do not shuffle the words
+    // #[arg(short, long)]
+    // pub no_shuffle: bool,
+    // /// number of iterations to shuffle
+    // #[arg(short, long)]
+    // pub shuffles: Option<usize>,
+    // /// shuffle the whole word list and weighted list
+    // #[arg(
+    //     short,
+    //     long,
+    //     long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
+    // )]
+    // pub twice: bool,
 }
 
-impl CmdSolve {
+impl CmdSolutions {
     pub fn run(self, settings: HashMap<String, String>) {
         tracing::debug!("Args: {self:#?}");
 
@@ -85,7 +87,8 @@ impl CmdSolve {
             }
         }
 
-        let mut shuffle = Shuffle::new(self.no_shuffle, self.shuffles, self.twice);
+        // Get un-shuffled word list
+        let mut shuffle = Shuffle::new(true, None, false);
         let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
@@ -100,6 +103,48 @@ impl CmdSolve {
             }
         };
 
-        println!("Word chain: {}", puzzle.solution_string());
+        let mut solutions = vec![puzzle.solution_string()];
+
+        let mut shuffle = Shuffle::new(false, None, false);
+        let mut max_clashes = 10;
+        let mut max_solutions = self.random_solutions;
+
+        while max_solutions > 0 && max_clashes > 0 {
+            let mut puzzle = LettersBoxed::new(&letters, &words);
+            match puzzle
+                .filter_words_with_letters_only()
+                .filter_words_with_invalid_pairs()
+                .build_word_chain(&mut shuffle)
+            {
+                Ok(_) => {
+                    tracing::info!("Word chain built successfully");
+                }
+                Err(e) => {
+                    tracing::error!("Failed to build word chain: {}", e);
+                }
+            };
+
+            if !solutions.contains(&puzzle.solution_string()) {
+                solutions.push(puzzle.solution_string());
+                max_solutions -= 1;
+                tracing::debug!(
+                    "New solution found: {}, total solutions {}",
+                    puzzle.solution_string(),
+                    solutions.len()
+                );
+            } else {
+                max_clashes -= 1;
+                tracing::debug!(
+                    "Clash found: {}, clashes left {}",
+                    puzzle.solution_string(),
+                    max_clashes
+                );
+            }
+        }
+
+        println!("Solutions:");
+        for solution in solutions {
+            println!("\t{}", solution);
+        }
     }
 }
