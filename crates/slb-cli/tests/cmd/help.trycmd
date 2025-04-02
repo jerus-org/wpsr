@@ -155,3 +155,25 @@ Options:
   -h, --help        Print help
 
 ```
+
+```console
+$ slb solutions --help
+? 2
+error: unrecognized subcommand 'solutions'
+
+Usage: slb [OPTIONS] <COMMAND>
+
+For more information, try '--help'.
+
+```
+
+```console
+$ slb solutions -h
+? 2
+error: unrecognized subcommand 'solutions'
+
+Usage: slb [OPTIONS] <COMMAND>
+
+For more information, try '--help'.
+
+```
