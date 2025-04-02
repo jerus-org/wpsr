@@ -75,10 +75,10 @@ Options:
 $ slb solve --help
 Solve word puzzle
 
-Usage: slb solve [OPTIONS] [LETTERS]...
+Usage: slb solve [OPTIONS] <LETTERS>
 
 Arguments:
-  [LETTERS]...
+  <LETTERS>
           
 
 Options:
@@ -113,10 +113,10 @@ Options:
 $ slb solve -h
 Solve word puzzle
 
-Usage: slb solve [OPTIONS] [LETTERS]...
+Usage: slb solve [OPTIONS] <LETTERS>
 
 Arguments:
-  [LETTERS]...  
+  <LETTERS>  
 
 Options:
   -d, --dir <DIR>            word list source directory
@@ -162,10 +162,10 @@ Options:
 $ slb solutions --help
 Report multiple solutions for the puzzle
 
-Usage: slb solutions [OPTIONS] [LETTERS]...
+Usage: slb solutions [OPTIONS] <LETTERS>
 
 Arguments:
-  [LETTERS]...  
+  <LETTERS>  
 
 Options:
   -d, --dir <DIR>                            word list source directory
@@ -182,10 +182,10 @@ Options:
 $ slb solutions -h
 Report multiple solutions for the puzzle
 
-Usage: slb solutions [OPTIONS] [LETTERS]...
+Usage: slb solutions [OPTIONS] <LETTERS>
 
 Arguments:
-  [LETTERS]...  
+  <LETTERS>  
 
 Options:
   -d, --dir <DIR>                            word list source directory

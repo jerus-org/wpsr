@@ -9,7 +9,7 @@ const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
 
 #[derive(Parser, Debug, Clone)]
 pub struct CmdSolve {
-    pub letters: Vec<char>,
+    pub letters: String,
     /// word list source directory
     #[arg(short, long)]
     pub dir: Option<String>,
@@ -35,23 +35,20 @@ impl CmdSolve {
     pub fn run(self, settings: HashMap<String, String>) {
         tracing::debug!("Args: {self:#?}");
 
-        let mut letters = Vec::new();
-
         if !self.letters.len() == 12 {
             tracing::error!(
-                "Must supply exactly 12 letters, {} letters provided.",
+                "String must be exactly 12 letters, {} letters provided.",
                 self.letters.len()
             );
             exit(1);
         }
 
-        if !self.letters.is_empty() {
-            letters = self
-                .letters
-                .iter()
-                .map(|l| l.to_ascii_lowercase())
-                .collect::<Vec<char>>();
-        }
+        let letters = self
+            .letters
+            .chars()
+            .map(|l| l.to_ascii_lowercase())
+            .collect::<Vec<char>>();
+
         // Setup settings
         let mut src_directory = settings
             .get("source_dir")
