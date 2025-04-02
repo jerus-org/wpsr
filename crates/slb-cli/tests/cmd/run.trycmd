@@ -1,7 +1,7 @@
 ```console
 $ slb 
 ? 2
-Solve the NYT Letters Boxed puzzle
+Command line program to solve the NYT Letters Boxed puzzle
 
 Usage: slb [OPTIONS] <COMMAND>
 
