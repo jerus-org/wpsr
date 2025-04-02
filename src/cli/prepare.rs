@@ -2,7 +2,7 @@ use std::{collections::VecDeque, io::Write, path::PathBuf, str::FromStr};
 
 use clap::Parser;
 
-use crate::PrepareWords;
+use crate::{Error, PrepareWords};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.txt";
@@ -23,7 +23,7 @@ pub struct CmdPrepare {
 }
 
 impl CmdPrepare {
-    pub fn run(self, settings: std::collections::HashMap<String, String>) {
+    pub fn run(self, settings: std::collections::HashMap<String, String>) -> Result<(), Error> {
         // Setup settings
         let mut src_directory = settings
             .get("source_dir")
@@ -74,6 +74,8 @@ impl CmdPrepare {
         tracing::info!("Filtered words includes {} words", words.len());
 
         write_words(words, &src);
+
+        Ok(())
     }
 }
 

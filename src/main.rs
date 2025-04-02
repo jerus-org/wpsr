@@ -3,7 +3,6 @@ use std::{collections::HashMap, path::PathBuf, str::FromStr};
 use clap::Parser;
 use config::{Config, File};
 use lib_slb::{Cli, Commands};
-use tracing::info;
 use tracing_subscriber::EnvFilter;
 
 const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
@@ -24,11 +23,20 @@ fn main() {
                 .try_deserialize::<HashMap<String, String>>()
                 .unwrap();
             tracing::debug!("Loaded settings: {:?}", settings);
-            match args.cmd {
+            let res = match args.cmd {
                 Commands::Prepare(prepare) => prepare.run(settings),
                 Commands::Solutions(solutions) => solutions.run(settings),
                 Commands::Solve(solve) => solve.run(settings),
                 Commands::List(list) => list.run(settings),
+            };
+            match res {
+                Ok(_) => {
+                    tracing::info!("Done");
+                }
+                Err(e) => {
+                    tracing::error!("Failed: {}", e);
+                    std::process::exit(1);
+                }
             }
         }
         Err(e) => {
@@ -57,7 +65,7 @@ pub fn get_logging(verbosity: log::LevelFilter) {
     let _ = tracing::subscriber::set_global_default(log_subscriber)
         .map_err(|_| eprintln!("Unable to set global default subscriber!"));
 
-    info!("Initialised logging to console at {verbosity}");
+    tracing::info!("Initialised logging to console at {verbosity}");
 }
 
 pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {

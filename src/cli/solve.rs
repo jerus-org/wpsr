@@ -1,8 +1,8 @@
-use std::{collections::HashMap, process::exit};
+use std::collections::HashMap;
 
 use clap::Parser;
 
-use crate::{LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
@@ -32,15 +32,11 @@ pub struct CmdSolve {
 }
 
 impl CmdSolve {
-    pub fn run(self, settings: HashMap<String, String>) {
+    pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
         if !self.letters.len() == 12 {
-            tracing::error!(
-                "String must be exactly 12 letters, {} letters provided.",
-                self.letters.len()
-            );
-            exit(1);
+            return Err(Error::MustBe12Letters(self.letters.len()));
         }
 
         let letters = self
@@ -98,5 +94,6 @@ impl CmdSolve {
         };
 
         println!("Word chain: {}", puzzle.solution_string());
+        Ok(())
     }
 }
