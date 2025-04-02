@@ -173,7 +173,7 @@ Options:
   -f, --file <FILE>                          word list source file
   -q, --quiet...                             Decrease logging verbosity
   -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 5]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
   -h, --help                                 Print help
 
 ```
@@ -193,7 +193,7 @@ Options:
   -f, --file <FILE>                          word list source file
   -q, --quiet...                             Decrease logging verbosity
   -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 5]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
   -h, --help                                 Print help
 
 ```
