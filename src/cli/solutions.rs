@@ -1,6 +1,6 @@
-use std::{collections::HashMap, process::exit};
+use std::collections::HashMap;
 
-use crate::{LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shuffle};
 use clap::Parser;
 
 const DEFAULT_SOURCE_DIR: &str = "words";
@@ -21,32 +21,15 @@ pub struct CmdSolutions {
     /// maximum length of the word chain
     #[arg(short, long, default_value_t = 6)]
     pub max_chain: usize,
-    // /// do not shuffle the words
-    // #[arg(short, long)]
-    // pub no_shuffle: bool,
-    // /// number of iterations to shuffle
-    // #[arg(short, long)]
-    // pub shuffles: Option<usize>,
-    // /// shuffle the whole word list and weighted list
-    // #[arg(
-    //     short,
-    //     long,
-    //     long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
-    // )]
-    // pub twice: bool,
 }
 
 impl CmdSolutions {
     #[tracing::instrument(skip(self))]
-    pub fn run(self, settings: HashMap<String, String>) {
+    pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
         if !self.letters.len() == 12 {
-            tracing::error!(
-                "String must be exactly 12 letters, {} letters provided.",
-                self.letters.len()
-            );
-            exit(1);
+            return Err(Error::MustBe12Letters(self.letters.len()));
         }
 
         let letters = self
@@ -152,5 +135,7 @@ impl CmdSolutions {
         for solution in solutions {
             println!("\t{}", solution);
         }
+
+        Ok(())
     }
 }

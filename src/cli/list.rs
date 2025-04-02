@@ -1,6 +1,8 @@
 use std::{collections::HashMap, fs::read_dir};
 
 use clap::Parser;
+
+use crate::Error;
 const DEFAULT_SOURCE_DIR: &str = "words";
 
 #[derive(Parser, Debug, Clone)]
@@ -11,7 +13,7 @@ pub struct CmdList {
 }
 
 impl CmdList {
-    pub fn run(self, settings: HashMap<String, String>) {
+    pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         // Setup settings
         let mut src_directory = settings
             .get("source_dir")
@@ -29,5 +31,7 @@ impl CmdList {
                 println!("{}", file_name);
             }
         }
+
+        Ok(())
     }
 }
