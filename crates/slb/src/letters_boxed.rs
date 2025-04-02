@@ -133,6 +133,11 @@ impl LettersBoxed {
     pub fn solution_string(&self) -> String {
         self.word_chain.join(" -> ").to_string()
     }
+
+    #[tracing::instrument(skip(self))]
+    pub fn chain_length(&self) -> usize {
+        self.word_chain.len()
+    }
 }
 
 #[tracing::instrument(skip(all_words, words_list, word_chain, unused_letters, rng, shuffle,))]
