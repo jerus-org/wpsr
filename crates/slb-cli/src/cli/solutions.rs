@@ -15,6 +15,9 @@ pub struct CmdSolutions {
     /// word list source file
     #[arg(short, long)]
     pub file: Option<String>,
+    /// number of random solutions to generate
+    #[arg(short, long, default_value_t = 50)]
+    pub random_solutions: usize,
     // /// do not shuffle the words
     // #[arg(short, long)]
     // pub no_shuffle: bool,
@@ -84,8 +87,9 @@ impl CmdSolutions {
             }
         }
 
-        let mut shuffle = Shuffle::new(false, None, false);
-        let mut puzzle = LettersBoxed::new(letters, words);
+        // Get un-shuffled word list
+        let mut shuffle = Shuffle::new(true, None, false);
+        let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
@@ -99,6 +103,48 @@ impl CmdSolutions {
             }
         };
 
-        println!("Word chain: {}", puzzle.solution_string());
+        let mut solutions = vec![puzzle.solution_string()];
+
+        let mut shuffle = Shuffle::new(false, None, false);
+        let mut max_clashes = 10;
+        let mut max_solutions = self.random_solutions;
+
+        while max_solutions > 0 && max_clashes > 0 {
+            let mut puzzle = LettersBoxed::new(&letters, &words);
+            match puzzle
+                .filter_words_with_letters_only()
+                .filter_words_with_invalid_pairs()
+                .build_word_chain(&mut shuffle)
+            {
+                Ok(_) => {
+                    tracing::info!("Word chain built successfully");
+                }
+                Err(e) => {
+                    tracing::error!("Failed to build word chain: {}", e);
+                }
+            };
+
+            if !solutions.contains(&puzzle.solution_string()) {
+                solutions.push(puzzle.solution_string());
+                max_solutions -= 1;
+                tracing::debug!(
+                    "New solution found: {}, total solutions {}",
+                    puzzle.solution_string(),
+                    solutions.len()
+                );
+            } else {
+                max_clashes -= 1;
+                tracing::debug!(
+                    "Clash found: {}, clashes left {}",
+                    puzzle.solution_string(),
+                    max_clashes
+                );
+            }
+        }
+
+        println!("Solutions:");
+        for solution in solutions {
+            println!("\t{}", solution);
+        }
     }
 }
