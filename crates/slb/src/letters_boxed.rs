@@ -71,7 +71,7 @@ impl LettersBoxed {
             (self.letters[9], self.letters[11]),
         ];
 
-        tracing::info!("Generated {} invalid pairs", invalid_pairs.len());
+        tracing::debug!("Generated {} invalid pairs", invalid_pairs.len());
         tracing::trace!("Invalid pairs: {:#?}", invalid_pairs);
         self.invalid_pairs = invalid_pairs;
 
@@ -152,12 +152,12 @@ pub fn get_word(
     let initial_unused_letters = unused_letters.clone();
 
     let shuffle_count = shuffle.shuffles_value();
-    tracing::info!("Shuffle count: {}", shuffle_count);
+    tracing::debug!("Shuffle count: {}", shuffle_count);
 
     // Shuffle the starting words list to get a random starting word
     tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
     if shuffle.shuffle_words() {
-        tracing::info!("Shuffling words list.");
+        tracing::debug!("Shuffling words list.");
         words_list.shuffle(rng);
         tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
     }
@@ -201,7 +201,7 @@ pub fn get_word(
         &words_list[0..5]
     );
     let mut words = if shuffle.shuffle_weighted() {
-        tracing::info!("Shuffling top half of weighted words list.");
+        tracing::debug!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         tracing::trace!(
             "First words in the word list (top shuffled)): {:#?}",
