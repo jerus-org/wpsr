@@ -22,12 +22,22 @@ Options:
 
 ```console
 $ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
-Word chain: numeric -> couple -> explorer -> rfc
+? 2
+error: unexpected argument 'x' found
+
+Usage: slb solve [OPTIONS] <LETTERS>
+
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
-Word chain: numeric -> couple -> explorer -> rfc
+? 2
+error: unexpected argument 'x' found
+
+Usage: slb solve [OPTIONS] <LETTERS>
+
+For more information, try '--help'.
 
 ```
