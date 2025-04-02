@@ -1,0 +1,11 @@
+```console
+$ slb -V 
+slb-cli 0.1.8
+
+```
+
+```console
+$ slb --version 
+slb-cli 0.1.8
+
+```
