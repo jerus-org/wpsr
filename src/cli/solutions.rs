@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{Error, LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shape, Shuffle};
 use clap::Parser;
 
 const DEFAULT_SOURCE_DIR: &str = "words";
@@ -28,8 +28,12 @@ impl CmdSolutions {
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if !self.letters.len() == 12 {
-            return Err(Error::MustBe12Letters(self.letters.len()));
+        if self.letters.len() < 9 || self.letters.len() > 24 {
+            return Err(Error::TooFewOrManyLetters(self.letters.len()));
+        }
+
+        if !self.letters.len() % 3 == 0 {
+            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
         }
 
         let letters = self
@@ -131,7 +135,10 @@ impl CmdSolutions {
             }
         }
 
-        println!("Solutions:");
+        println!(
+            "Solutions for {}:",
+            Shape::from_edges((letters.len() / 3) as u8)?
+        );
         for solution in solutions {
             println!("\t{}", solution);
         }

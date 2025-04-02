@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use clap::Parser;
 
-use crate::{Error, LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shape, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
@@ -35,8 +35,12 @@ impl CmdSolve {
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if !self.letters.len() == 12 {
-            return Err(Error::MustBe12Letters(self.letters.len()));
+        if self.letters.len() < 9 || self.letters.len() > 24 {
+            return Err(Error::TooFewOrManyLetters(self.letters.len()));
+        }
+
+        if !(self.letters.len() % 3) == 0 {
+            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
         }
 
         let letters = self
@@ -93,7 +97,11 @@ impl CmdSolve {
             }
         };
 
-        println!("Word chain: {}", puzzle.solution_string());
+        println!(
+            "Word Chain for {}: {}",
+            Shape::from_edges((letters.len() / 3) as u8)?,
+            puzzle.solution_string()
+        );
         Ok(())
     }
 }
