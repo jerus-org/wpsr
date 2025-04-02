@@ -1,11 +1,11 @@
 [package]
 name = "slb"
 version = "0.1.8"
-edition = "2024"
-authors = ["jerusdp <jrussell@jerus.ie>"]
-description = "Solve the NYT Letters Boxed puzzle"
-license = "MIT"
-readme = "README.md"
+edition.workspace = true
+authors.workspace = true
+description = "Library to solve the NYT Letters Boxed puzzle"
+license.workspace = true
+readme.workspace = true
 repository = "https://github.com/jerus-org/slb"
 keywords = ["letters", "boxed", "nyt", "solver"]
 categories = ["puzzle-solver"]
