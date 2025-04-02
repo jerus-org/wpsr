@@ -10,6 +10,9 @@ const ALPHABET: &str = "abcdefghijklmnopqrstuvwxyz";
 #[derive(Parser, Debug, Clone)]
 pub struct Cmd {
     pub shape: Shape,
+    // Bare result listing the letters for the puzzle only
+    #[arg(short, long)]
+    pub bare: bool,
     // Testing
     #[arg(long, hide = true)]
     pub testing: bool,
@@ -27,7 +30,11 @@ impl Cmd {
             .collect::<String>();
 
         if !self.testing {
-            println!("Letters for edges of the {} are: `{}`", self.shape, letters);
+            if self.bare {
+                println!("{}", letters);
+            } else {
+                println!("Letters for edges of the {} are: `{}`", self.shape, letters);
+            }
         }
 
         Ok(())

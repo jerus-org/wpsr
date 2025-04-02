@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ✨ add generate command(pr [#43])
+- ✨ add bare option for letter output(pr [#44])
 
 ## [0.1.11] - 2025-04-02
 
@@ -162,6 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#41]: https://github.com/jerus-org/slb/pull/41
 [#42]: https://github.com/jerus-org/slb/pull/42
 [#43]: https://github.com/jerus-org/slb/pull/43
+[#44]: https://github.com/jerus-org/slb/pull/44
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.11...HEAD
 [0.1.11]: https://github.com/jerus-org/slb/compare/v0.1.10...v0.1.11
 [0.1.10]: https://github.com/jerus-org/slb/compare/v0.1.9...v0.1.10
