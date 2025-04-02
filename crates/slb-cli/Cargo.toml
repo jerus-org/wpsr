@@ -20,6 +20,10 @@ include = [
 
 rust-version = "1.85"
 
+[[bin]]
+name = "slb"
+path = "src/main.rs"
+
 [dependencies]
 slb = { path = "../slb" }
 clap.workspace = true
