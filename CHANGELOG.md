@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - restructure project into a workspace(pr [#33])
 
+### Security
+
+- Dependencies: update rust crate clap to v4.5.35(pr [#36])
+
 ## [0.1.8] - 2025-03-31
 
 ### Changed
@@ -128,6 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#32]: https://github.com/jerus-org/slb/pull/32
 [#33]: https://github.com/jerus-org/slb/pull/33
 [#35]: https://github.com/jerus-org/slb/pull/35
+[#36]: https://github.com/jerus-org/slb/pull/36
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.8...HEAD
 [0.1.8]: https://github.com/jerus-org/slb/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/jerus-org/slb/compare/v0.1.6...v0.1.7
