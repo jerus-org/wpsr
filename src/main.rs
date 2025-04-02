@@ -28,6 +28,7 @@ fn main() {
                 Commands::Solutions(solutions) => solutions.run(settings),
                 Commands::Solve(solve) => solve.run(settings),
                 Commands::List(list) => list.run(settings),
+                Commands::Generate(cmd) => cmd.run(settings),
             };
             match res {
                 Ok(_) => {
