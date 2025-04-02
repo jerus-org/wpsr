@@ -86,7 +86,7 @@ impl CmdSolve {
         }
 
         let mut shuffle = Shuffle::new(self.no_shuffle, self.shuffles, self.twice);
-        let mut puzzle = LettersBoxed::new(letters, words);
+        let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
