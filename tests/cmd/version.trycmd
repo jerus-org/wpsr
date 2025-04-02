@@ -1,11 +1,11 @@
 ```console
 $ slb -V 
-slb 0.1.9
+slb 0.1.10
 
 ```
 
 ```console
 $ slb --version 
-slb 0.1.9
+slb 0.1.10
 
 ```
