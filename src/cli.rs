@@ -3,6 +3,7 @@ use std::fmt::Display;
 use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
 
+mod generate;
 mod list;
 mod prepare;
 mod solutions;
@@ -26,23 +27,26 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand, Clone)]
 pub enum Commands {
-    /// Prepare word list
-    Prepare(CmdPrepare),
-    /// Solve word puzzle
-    Solve(CmdSolve),
+    /// Generate random letter string for puzzle
+    Generate(generate::Cmd),
     /// List available word lists
     List(CmdList),
+    /// Prepare word list
+    Prepare(CmdPrepare),
     /// Report multiple solutions for the puzzle
     Solutions(CmdSolutions),
+    /// Solve word puzzle
+    Solve(CmdSolve),
 }
 
 impl Display for Commands {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
+            Commands::Generate(_) => write!(f, "generate"),
+            Commands::List(_) => write!(f, "list"),
             Commands::Prepare(_) => write!(f, "prepare"),
             Commands::Solutions(_) => write!(f, "solutions"),
             Commands::Solve(_) => write!(f, "solve"),
-            Commands::List(_) => write!(f, "list"),
         }
     }
 }
