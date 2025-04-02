@@ -22,20 +22,12 @@ Options:
 
 ```console
 $ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
-? 101
-
-thread 'main' panicked at crates/slb-cli/src/cli/solve.rs:77:14:
-Failed to read words file: Os { code: 2, kind: NotFound, message: "No such file or directory" }
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Word chain: numeric -> couple -> explorer -> rfc
 
 ```
 
 ```console
 $ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
-? 101
-
-thread 'main' panicked at crates/slb-cli/src/cli/solve.rs:77:14:
-Failed to read words file: Os { code: 2, kind: NotFound, message: "No such file or directory" }
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Word chain: numeric -> couple -> explorer -> rfc
 
 ```
