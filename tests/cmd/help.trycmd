@@ -5,10 +5,11 @@ Command line program to solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  prepare    Prepare word list
-  solve      Solve word puzzle
+  generate   Generate random letter string for puzzle
   list       List available word lists
+  prepare    Prepare word list
   solutions  Report multiple solutions for the puzzle
+  solve      Solve word puzzle
   help       Print this message or the help of the given subcommand(s)
 
 Options:
@@ -26,10 +27,11 @@ Command line program to solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  prepare    Prepare word list
-  solve      Solve word puzzle
+  generate   Generate random letter string for puzzle
   list       List available word lists
+  prepare    Prepare word list
   solutions  Report multiple solutions for the puzzle
+  solve      Solve word puzzle
   help       Print this message or the help of the given subcommand(s)
 
 Options:
@@ -195,5 +197,37 @@ Options:
   -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
   -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
   -h, --help                                 Print help
+
+```
+
+```console
+$ slb generate --help
+Generate random letter string for puzzle
+
+Usage: slb generate [OPTIONS] <SHAPE>
+
+Arguments:
+  <SHAPE>  
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+
+```
+
+```console
+$ slb generate -h
+Generate random letter string for puzzle
+
+Usage: slb generate [OPTIONS] <SHAPE>
+
+Arguments:
+  <SHAPE>  
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
 
 ```

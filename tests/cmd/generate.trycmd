@@ -1,0 +1,65 @@
+```console
+$ slb generate --testing 1
+? 2
+error: invalid value '1' for '<SHAPE>': Unknown shape: 1
+
+For more information, try '--help'.
+
+```
+
+```console
+$ slb generate --testing 2
+? 2
+error: invalid value '2' for '<SHAPE>': Unknown shape: 2
+
+For more information, try '--help'.
+
+```
+
+```console
+$ slb generate --testing 3
+? 2
+error: invalid value '3' for '<SHAPE>': Unknown shape: 3
+
+For more information, try '--help'.
+
+```
+
+```console
+$ slb generate --testing 4
+? 2
+error: invalid value '4' for '<SHAPE>': Unknown shape: 4
+
+For more information, try '--help'.
+
+```
+
+```console
+$ slb generate --testing 7
+? 2
+error: invalid value '7' for '<SHAPE>': Unknown shape: 7
+
+For more information, try '--help'.
+
+```
+
+
+```console
+$ slb generate --testing 8
+? 2
+error: invalid value '8' for '<SHAPE>': Unknown shape: 8
+
+For more information, try '--help'.
+
+```
+
+
+```console
+$ slb generate --testing 9
+? 2
+error: invalid value '9' for '<SHAPE>': Unknown shape: 9
+
+For more information, try '--help'.
+
+```
+
