@@ -77,14 +77,19 @@ impl LettersBoxed {
     fn generate_edges(&mut self) -> &mut Self {
         let mut deque = VecDeque::from(self.letters.clone());
 
+        let mut edges = Vec::new();
+
         while !deque.is_empty() {
             let edge = Edge::new(
                 deque.pop_front().unwrap(),
                 deque.pop_front().unwrap(),
                 deque.pop_front().unwrap(),
             );
-            self.edges.push(edge);
+
+            edges.push(edge);
         }
+
+        self.edges = edges;
 
         self
     }
@@ -369,6 +374,8 @@ mod tests {
         ];
 
         let mut letters_boxed = LettersBoxed::new(&letters, &words);
+
+        println!("{:#?}", letters_boxed.edges);
 
         letters_boxed.filter_words_with_letters_only();
         println!("{:#?}", letters_boxed.words);
