@@ -69,9 +69,12 @@ pub fn get_logging(verbosity: log::LevelFilter) {
     tracing::info!("Initialised logging to console at {verbosity}");
 }
 
+#[tracing::instrument]
 pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {
     let path = PathBuf::from_str(&format!("{}.toml", base_name)).unwrap();
+    tracing::debug!("Loading settings from {}", path.display());
     if path.exists() {
+        tracing::debug!("Settings file exists");
         Config::builder()
             .set_default("source_dir", DEFAULT_SOURCE_DIR)?
             .set_default("source_file", DEFAULT_SOURCE_FILE)?
@@ -83,6 +86,7 @@ pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {
             .add_source(File::with_name(base_name))
             .build()
     } else {
+        tracing::debug!("Settings file does not exist");
         Config::builder()
             .set_default("source_dir", DEFAULT_SOURCE_DIR)?
             .set_default("source_file", DEFAULT_SOURCE_FILE)?
