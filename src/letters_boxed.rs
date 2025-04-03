@@ -170,7 +170,15 @@ impl LettersBoxed {
     }
 }
 
-#[tracing::instrument(skip(all_words, words_list, word_chain, unused_letters, rng, shuffle,))]
+#[tracing::instrument(skip(
+    all_words,
+    words_list,
+    word_chain,
+    unused_letters,
+    rng,
+    shuffle,
+    max_chain
+))]
 pub fn get_word(
     all_words: Vec<String>,
     mut words_list: Vec<String>,
@@ -181,12 +189,15 @@ pub fn get_word(
     max_chain: Option<usize>,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
-
-    let shuffle_count = shuffle.shuffles_value();
-    tracing::debug!("Shuffle count: {}", shuffle_count);
+    tracing::trace!("Starting word chain: {}", word_chain.join(" -> "));
+    tracing::trace!(
+        "Shuffle set to: {} and word list length: {}",
+        shuffle,
+        words_list.len()
+    );
 
     // Shuffle the starting words list to get a random starting word
-    if shuffle.shuffle_words() {
+    if shuffle == &Shuffle::Twice {
         tracing::debug!("Shuffling words list.");
         words_list.shuffle(rng);
     }
@@ -202,15 +213,13 @@ pub fn get_word(
         .collect::<Vec<String>>();
 
     // shuffle the top of to the words list to randomize the first word while keeping a good weight
-    let mut words = if shuffle.shuffle_weighted() {
+    let mut words = if shuffle != &Shuffle::None {
         tracing::debug!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         VecDeque::from(words_list)
     } else {
         VecDeque::from(words_list)
     };
-
-    shuffle.decrement_shuffles();
 
     // find a word that increases the letters used
 
@@ -277,7 +286,11 @@ pub fn get_word(
                     word_chain = chain;
                     break;
                 }
-                Err(_) => {
+                Err(e) => {
+                    tracing::debug!("No word found, resetting");
+                    if e == Error::ChainTooLong {
+                        return Err(e);
+                    }
                     unused_letters = initial_unused_letters.clone();
                     continue;
                 }
@@ -299,7 +312,7 @@ fn shuffle_top_half(mut words: Vec<String>, rng: &mut ChaCha20Rng) -> Vec<String
     top_half
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Error {
     NoWordFound,
     ChainTooLong,
