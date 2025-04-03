@@ -23,6 +23,7 @@ fn main() {
                 .try_deserialize::<HashMap<String, String>>()
                 .unwrap();
             tracing::debug!("Loaded settings: {:?}", settings);
+            tracing::debug!("Args: {args:#?}");
             let res = match args.cmd {
                 Commands::Prepare(prepare) => prepare.run(settings),
                 Commands::Solutions(solutions) => solutions.run(settings),
@@ -49,7 +50,12 @@ fn main() {
 
 pub fn get_logging(verbosity: log::LevelFilter) {
     let filter = EnvFilter::from(format!(
-        "slb={}",
+        "slb={},lib_slb={}",
+        if verbosity == log::LevelFilter::Trace {
+            log::LevelFilter::Debug
+        } else {
+            verbosity
+        },
         if verbosity == log::LevelFilter::Trace {
             log::LevelFilter::Debug
         } else {
