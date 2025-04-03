@@ -24,7 +24,7 @@ pub struct CmdSolutions {
 }
 
 impl CmdSolutions {
-    #[tracing::instrument(skip(self))]
+    #[tracing::instrument(skip(self, settings))]
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
@@ -77,7 +77,7 @@ impl CmdSolutions {
         }
 
         tracing::info!("Get un-shuffled word list");
-        let mut shuffle = Shuffle::new(true, None, false);
+        let mut shuffle = Shuffle::None;
         let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
@@ -96,7 +96,7 @@ impl CmdSolutions {
         let mut solutions = vec![puzzle.solution_string()];
         let mut solution_lengths = HashMap::new();
 
-        let mut shuffle = Shuffle::new(false, None, false);
+        let mut shuffle = Shuffle::Once;
         let mut max_clashes = 10;
         // let mut max_solutions = self.random_solutions;
         let mut max_solutions = 200;
@@ -120,7 +120,7 @@ impl CmdSolutions {
                 }
             };
 
-            if !solutions.contains(&puzzle.solution_string())
+            if !solutions.contains(&puzzle.solution_string()) && puzzle.chain_length() != 0
             // && puzzle.chain_length() <= self.max_chain
             {
                 solutions.push(puzzle.solution_string());
