@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{Error, LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shape, Shuffle};
 use clap::Parser;
 
 const DEFAULT_SOURCE_DIR: &str = "words";
@@ -16,20 +16,24 @@ pub struct CmdSolutions {
     #[arg(short, long)]
     pub file: Option<String>,
     /// number of random solutions to generate
-    #[arg(short, long, default_value_t = 50)]
+    #[arg(short, long, default_value_t = 100)]
     pub random_solutions: usize,
     /// maximum length of the word chain
-    #[arg(short, long, default_value_t = 6)]
+    #[arg(short, long, default_value_t = 10)]
     pub max_chain: usize,
 }
 
 impl CmdSolutions {
-    #[tracing::instrument(skip(self))]
+    #[tracing::instrument(skip(self, settings))]
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if !self.letters.len() == 12 {
-            return Err(Error::MustBe12Letters(self.letters.len()));
+        if self.letters.len() < 9 || self.letters.len() > 24 {
+            return Err(Error::TooFewOrManyLetters(self.letters.len()));
+        }
+
+        if !(self.letters.len() % 3) == 0 {
+            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
         }
 
         let letters = self
@@ -56,6 +60,7 @@ impl CmdSolutions {
         };
 
         let src = format!("{}/{}", src_directory.clone(), src_file.clone());
+        tracing::info!("Using word list: {}", src);
 
         let mut words = Vec::new();
 
@@ -71,12 +76,13 @@ impl CmdSolutions {
             }
         }
 
-        // Get un-shuffled word list
-        let mut shuffle = Shuffle::new(true, None, false);
+        tracing::info!("Get un-shuffled word list");
+        let mut shuffle = Shuffle::None;
         let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
             .filter_words_with_invalid_pairs()
+            .set_max_chain(self.max_chain)
             .build_word_chain(&mut shuffle)
         {
             Ok(_) => {
@@ -88,10 +94,12 @@ impl CmdSolutions {
         };
 
         let mut solutions = vec![puzzle.solution_string()];
+        let mut solution_lengths = HashMap::new();
 
-        let mut shuffle = Shuffle::new(false, None, false);
+        let mut shuffle = Shuffle::Once;
         let mut max_clashes = 10;
-        let mut max_solutions = self.random_solutions;
+        // let mut max_solutions = self.random_solutions;
+        let mut max_solutions = 200;
 
         while max_solutions > 0 && max_clashes > 0 {
             tracing::info!(
@@ -101,6 +109,7 @@ impl CmdSolutions {
             match puzzle
                 .filter_words_with_letters_only()
                 .filter_words_with_invalid_pairs()
+                .set_max_chain(self.max_chain)
                 .build_word_chain(&mut shuffle)
             {
                 Ok(_) => {
@@ -111,10 +120,16 @@ impl CmdSolutions {
                 }
             };
 
-            if !solutions.contains(&puzzle.solution_string())
-                && puzzle.chain_length() <= self.max_chain
+            if !solutions.contains(&puzzle.solution_string()) && puzzle.chain_length() != 0
+            // && puzzle.chain_length() <= self.max_chain
             {
                 solutions.push(puzzle.solution_string());
+                if let Some(count) = solution_lengths.get(&puzzle.chain_length()) {
+                    let v = count + 1;
+                    solution_lengths.insert(puzzle.chain_length(), v);
+                } else {
+                    solution_lengths.insert(puzzle.chain_length(), 1);
+                }
                 max_solutions -= 1;
                 tracing::debug!(
                     "New solution found: {}, total solutions {}",
@@ -131,7 +146,19 @@ impl CmdSolutions {
             }
         }
 
-        println!("Solutions:");
+        tracing::info!("Found {} solutions", solutions.len());
+
+        println!(
+            "Solutions for {}:",
+            Shape::from_edges((letters.len() / 3) as u8)?
+        );
+
+        let mut counts = solution_lengths.iter().collect::<Vec<(&usize, &usize)>>();
+        counts.sort_by(|a, b| a.0.cmp(b.0));
+
+        for item in counts {
+            println!("  - {:3.0} solutions with {:2.0} words", item.1, item.0);
+        }
         for solution in solutions {
             println!("\t{}", solution);
         }

@@ -2,6 +2,8 @@ use std::{fmt::Display, str::FromStr};
 
 use clap::Parser;
 
+use crate::Error;
+
 #[derive(Debug, Parser, Clone)]
 pub enum Shape {
     Triangle,
@@ -37,7 +39,7 @@ impl Shape {
         }
     }
 
-    pub fn parse(s: &str) -> Result<Self, String> {
+    pub fn parse(s: &str) -> Result<Self, Error> {
         match s.to_lowercase().as_str() {
             "triangle" => Ok(Shape::Triangle),
             "square" => Ok(Shape::Square),
@@ -45,13 +47,25 @@ impl Shape {
             "hexagon" => Ok(Shape::Hexagon),
             "heptagon" => Ok(Shape::Heptagon),
             "octagon" => Ok(Shape::Octagon),
-            _ => Err(format!("Unknown shape: {}", s)),
+            _ => Err(Error::UnknownShape(s.to_string())),
+        }
+    }
+
+    pub fn from_edges(edges: u8) -> Result<Self, Error> {
+        match edges {
+            3 => Ok(Shape::Triangle),
+            4 => Ok(Shape::Square),
+            5 => Ok(Shape::Pentagon),
+            6 => Ok(Shape::Hexagon),
+            7 => Ok(Shape::Heptagon),
+            8 => Ok(Shape::Octagon),
+            _ => Err(Error::UnknownShapeForEdges(edges)),
         }
     }
 }
 
 impl FromStr for Shape {
-    type Err = String;
+    type Err = Error;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Shape::parse(s)
     }

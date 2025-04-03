@@ -1,48 +1,39 @@
-#[derive(Clone, Debug, PartialEq, Eq)]
-pub struct Shuffle {
-    no_shuffle: bool,
-    shuffles: Option<usize>,
-    twice: bool,
+use std::{fmt::Display, str::FromStr};
+
+use clap::Parser;
+
+#[derive(Clone, Debug, Default, Parser, PartialEq, Eq)]
+pub enum Shuffle {
+    #[default]
+    None,
+    Once,
+    Twice,
 }
 
 impl Shuffle {
-    pub fn new(no_shuffle: bool, shuffles: Option<usize>, twice: bool) -> Self {
-        Self {
-            no_shuffle,
-            shuffles,
-            twice,
+    pub fn new() -> Self {
+        Self::default()
+    }
+}
+
+impl FromStr for Shuffle {
+    type Err = String;
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.to_lowercase().as_str() {
+            "none" => Ok(Self::None),
+            "once" => Ok(Self::Once),
+            "twice" => Ok(Self::Twice),
+            _ => Err(format!("Invalid shuffle strategy: {s}")),
         }
     }
+}
 
-    pub fn no_shuffle(&self) -> bool {
-        self.no_shuffle
-    }
-
-    pub fn twice(&self) -> bool {
-        self.twice
-    }
-
-    pub fn shuffles(&self) -> Option<usize> {
-        self.shuffles
-    }
-
-    pub fn shuffles_value(&self) -> usize {
-        self.shuffles.unwrap_or(1)
-    }
-
-    pub fn decrement_shuffles(&mut self) {
-        if let Some(s) = self.shuffles {
-            if s > 0 {
-                self.shuffles = Some(s - 1);
-            }
+impl Display for Shuffle {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::None => write!(f, "None"),
+            Self::Once => write!(f, "Once"),
+            Self::Twice => write!(f, "Twice"),
         }
-    }
-
-    pub fn shuffle_words(&self) -> bool {
-        !self.no_shuffle && self.shuffles_value() > 0 && self.twice
-    }
-
-    pub fn shuffle_weighted(&self) -> bool {
-        !self.no_shuffle && self.shuffles_value() > 0
     }
 }

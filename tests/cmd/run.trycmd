@@ -22,9 +22,11 @@ Options:
 ```
 
 ```console
-$ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
+$ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
 ? 2
-error: unexpected argument 'x' found
+error: unexpected argument '-n' found
+
+  tip: to pass '-n' as a value, use '-- -n'
 
 Usage: slb solve [OPTIONS] <LETTERS>
 
@@ -33,9 +35,11 @@ For more information, try '--help'.
 ```
 
 ```console
-$ slb -v solve -d words -f mit_words.slb -n c x n p m i l r u e o f
+$ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
 ? 2
-error: unexpected argument 'x' found
+error: unexpected argument '-n' found
+
+  tip: to pass '-n' as a value, use '-- -n'
 
 Usage: slb solve [OPTIONS] <LETTERS>
 

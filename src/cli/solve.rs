@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use clap::Parser;
 
-use crate::{Error, LettersBoxed, Shuffle};
+use crate::{Error, LettersBoxed, Shape, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
@@ -16,27 +16,36 @@ pub struct CmdSolve {
     /// word list source file
     #[arg(short, long)]
     pub file: Option<String>,
-    /// do not shuffle the words
-    #[arg(short, long)]
-    pub no_shuffle: bool,
-    /// number of iterations to shuffle
-    #[arg(short, long)]
-    pub shuffles: Option<usize>,
-    /// shuffle the whole word list and weighted list
+    /// Shuffle strategy
     #[arg(
         short,
         long,
-        long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
+        default_value_t = Shuffle::None,
+        long_help = "Shuffle strategy\n\nNone - No shuffling\nOnce - Shuffle the weighted list only\nTwice - Shuffle the whole word list and the weighted list"
     )]
-    pub twice: bool,
+    pub shuffle: Shuffle,
+    // /// number of iterations to shuffle
+    // #[arg(short, long)]
+    // pub shuffles: Option<usize>,
+    // /// shuffle the whole word list and weighted list
+    // #[arg(
+    //     short,
+    //     long,
+    //     long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
+    // )]
+    // pub twice: bool,
 }
 
 impl CmdSolve {
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if !self.letters.len() == 12 {
-            return Err(Error::MustBe12Letters(self.letters.len()));
+        if self.letters.len() < 9 || self.letters.len() > 24 {
+            return Err(Error::TooFewOrManyLetters(self.letters.len()));
+        }
+
+        if !(self.letters.len() % 3) == 0 {
+            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
         }
 
         let letters = self
@@ -78,7 +87,7 @@ impl CmdSolve {
             }
         }
 
-        let mut shuffle = Shuffle::new(self.no_shuffle, self.shuffles, self.twice);
+        let mut shuffle = self.shuffle;
         let mut puzzle = LettersBoxed::new(&letters, &words);
         match puzzle
             .filter_words_with_letters_only()
@@ -93,7 +102,11 @@ impl CmdSolve {
             }
         };
 
-        println!("Word chain: {}", puzzle.solution_string());
+        println!(
+            "Word Chain for {}: {}",
+            Shape::from_edges((letters.len() / 3) as u8)?,
+            puzzle.solution_string()
+        );
         Ok(())
     }
 }

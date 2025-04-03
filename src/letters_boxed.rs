@@ -1,7 +1,10 @@
 use std::{collections::VecDeque, fmt::Display};
 
+mod edge;
 mod shuffle;
 mod weighted_word;
+
+use edge::Edge;
 use rand::{SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 pub use shuffle::Shuffle;
@@ -13,16 +16,26 @@ pub struct LettersBoxed {
     words: Vec<String>,
     invalid_pairs: Vec<(char, char)>,
     word_chain: Vec<String>,
+    edges: Vec<Edge>,
+    max_chain: Option<usize>,
 }
 
 impl Default for LettersBoxed {
     fn default() -> Self {
         let letters = vec!['o', 'u', 'h', 'i', 'm', 'a', 'g', 'p', 'l', 'r', 'y', 'f'];
+        let edges = vec![
+            Edge::new('o', 'u', 'h'),
+            Edge::new('i', 'm', 'a'),
+            Edge::new('g', 'p', 'l'),
+            Edge::new('r', 'y', 'f'),
+        ];
         Self {
             letters,
             words: Vec::new(),
             invalid_pairs: Vec::new(),
             word_chain: Vec::new(),
+            edges,
+            max_chain: None,
         }
     }
 }
@@ -31,13 +44,19 @@ impl LettersBoxed {
     pub fn new(letters: &[char], words: &[String]) -> Self {
         let mut s = Self::default();
         if !letters.is_empty() {
-            s.letters = Vec::from(letters)
+            s.letters = Vec::from(letters);
+            s.generate_edges();
         }
         if !words.is_empty() {
             s.words = Vec::from(words);
         }
 
         s
+    }
+
+    pub fn set_max_chain(&mut self, max_chain: usize) -> &mut Self {
+        self.max_chain = Some(max_chain);
+        self
     }
 
     #[tracing::instrument(skip(self))]
@@ -55,21 +74,36 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
+    fn generate_edges(&mut self) -> &mut Self {
+        let mut deque = VecDeque::from(self.letters.clone());
+
+        let mut edges = Vec::new();
+
+        while !deque.is_empty() {
+            let edge = Edge::new(
+                deque.pop_front().unwrap(),
+                deque.pop_front().unwrap(),
+                deque.pop_front().unwrap(),
+            );
+
+            edges.push(edge);
+        }
+
+        self.edges = edges;
+
+        self
+    }
+
+    #[tracing::instrument(skip(self))]
     fn generate_invalid_pairs(&mut self) -> &mut Self {
-        let invalid_pairs = vec![
-            (self.letters[0], self.letters[1]),
-            (self.letters[1], self.letters[2]),
-            (self.letters[0], self.letters[2]),
-            (self.letters[3], self.letters[4]),
-            (self.letters[4], self.letters[5]),
-            (self.letters[3], self.letters[5]),
-            (self.letters[6], self.letters[7]),
-            (self.letters[7], self.letters[8]),
-            (self.letters[6], self.letters[8]),
-            (self.letters[9], self.letters[10]),
-            (self.letters[10], self.letters[11]),
-            (self.letters[9], self.letters[11]),
-        ];
+        let mut invalid_pairs = Vec::new();
+        for edge in self.edges.iter() {
+            for pair in edge.pairs() {
+                if !self.invalid_pairs.contains(&pair) {
+                    invalid_pairs.push(pair);
+                }
+            }
+        }
 
         tracing::debug!("Generated {} invalid pairs", invalid_pairs.len());
         tracing::trace!("Invalid pairs: {:#?}", invalid_pairs);
@@ -123,6 +157,7 @@ impl LettersBoxed {
             unused_letters,
             &mut rng,
             shuffle,
+            self.max_chain,
         )?;
 
         self.word_chain = word_chain;
@@ -140,7 +175,15 @@ impl LettersBoxed {
     }
 }
 
-#[tracing::instrument(skip(all_words, words_list, word_chain, unused_letters, rng, shuffle,))]
+#[tracing::instrument(skip(
+    all_words,
+    words_list,
+    word_chain,
+    unused_letters,
+    rng,
+    shuffle,
+    max_chain
+))]
 pub fn get_word(
     all_words: Vec<String>,
     mut words_list: Vec<String>,
@@ -148,71 +191,40 @@ pub fn get_word(
     mut unused_letters: String,
     rng: &mut ChaCha20Rng,
     shuffle: &mut Shuffle,
+    max_chain: Option<usize>,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
-
-    let shuffle_count = shuffle.shuffles_value();
-    tracing::debug!("Shuffle count: {}", shuffle_count);
+    tracing::trace!("Starting word chain: {}", word_chain.join(" -> "));
+    tracing::trace!(
+        "Shuffle set to: {} and word list length: {}",
+        shuffle,
+        words_list.len()
+    );
 
     // Shuffle the starting words list to get a random starting word
-    tracing::trace!("List before shuffle: {:#?}", &words_list[0..5]);
-    if shuffle.shuffle_words() {
+    if shuffle == &Shuffle::Twice {
         tracing::debug!("Shuffling words list.");
         words_list.shuffle(rng);
-        tracing::trace!("List after shuffle: {:#?}", &words_list[0..5]);
     }
     let mut words_list = words_list
         .iter()
         .map(|word| WeightedWord::new(word.clone(), unused_letters.clone()))
         .collect::<Vec<WeightedWord>>();
-    tracing::trace!(
-        "First words in the word list (not sorted): {:#?}",
-        &words_list[0..5]
-    );
-    tracing::trace!(
-        "Last word in the word list (not sorted): {:#?}",
-        &words_list.last()
-    );
     words_list.sort_by_key(|ww| ww.weight);
-    tracing::trace!(
-        "First words in the word list (sorted): {:#?}",
-        &words_list[0..5]
-    );
-    tracing::trace!(
-        "Last word in the word list (sorted): {:#?}",
-        &words_list.last()
-    );
     let words_list = words_list
         .iter()
         .rev()
         .map(|ww| ww.word.to_string())
         .collect::<Vec<String>>();
-    tracing::trace!(
-        "First word in the word list (reversed): {:#?}",
-        &words_list[0]
-    );
-    tracing::trace!(
-        "Last word in the word list (reversed): {:#?}",
-        &words_list.last()
-    );
+
     // shuffle the top of to the words list to randomize the first word while keeping a good weight
-    tracing::trace!(
-        "First words in the word list (reversed): {:#?}",
-        &words_list[0..5]
-    );
-    let mut words = if shuffle.shuffle_weighted() {
+    let mut words = if shuffle != &Shuffle::None {
         tracing::debug!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
-        tracing::trace!(
-            "First words in the word list (top shuffled)): {:#?}",
-            &words_list[0..5]
-        );
         VecDeque::from(words_list)
     } else {
         VecDeque::from(words_list)
     };
-
-    shuffle.decrement_shuffles();
 
     // find a word that increases the letters used
 
@@ -248,6 +260,11 @@ pub fn get_word(
 
         // if the word extends the chain add it to the chain and start again
         if unused_letters.len() < *letter_count {
+            if let Some(max_chain) = max_chain {
+                if word_chain.len() >= max_chain {
+                    return Err(Error::ChainTooLong);
+                }
+            }
             let mut next_word_chain = word_chain.clone();
             let next_unused_letters = unused_letters.clone();
             let next_all_words = all_words.clone();
@@ -268,12 +285,17 @@ pub fn get_word(
                 next_unused_letters,
                 rng,
                 shuffle,
+                max_chain,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
                     break;
                 }
-                Err(_) => {
+                Err(e) => {
+                    tracing::debug!("No word found, resetting");
+                    if e == Error::ChainTooLong {
+                        return Err(e);
+                    }
                     unused_letters = initial_unused_letters.clone();
                     continue;
                 }
@@ -295,15 +317,17 @@ fn shuffle_top_half(mut words: Vec<String>, rng: &mut ChaCha20Rng) -> Vec<String
     top_half
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Error {
     NoWordFound,
+    ChainTooLong,
 }
 
 impl Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Error::NoWordFound => write!(f, "No word found"),
+            Error::ChainTooLong => write!(f, "Chain too long"),
         }
     }
 }
@@ -350,6 +374,8 @@ mod tests {
         ];
 
         let mut letters_boxed = LettersBoxed::new(&letters, &words);
+
+        println!("{:#?}", letters_boxed.edges);
 
         letters_boxed.filter_words_with_letters_only();
         println!("{:#?}", letters_boxed.words);
