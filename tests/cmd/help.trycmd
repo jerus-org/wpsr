@@ -96,15 +96,14 @@ Options:
   -q, --quiet...
           Decrease logging verbosity
 
-  -n, --no-shuffle
-          do not shuffle the words
-
-  -s, --shuffles <SHUFFLES>
-          number of iterations to shuffle
-
-  -t, --twice
-          Shuffle the whole word list before calculating weightings
-          then shuffle the top half of the weighted word list.
+  -s, --shuffle <SHUFFLE>
+          Shuffle strategy
+          
+          None - No shuffling
+          Once - Shuffle the weighted list only
+          Twice - Shuffle the whole word list and the weighted list
+          
+          [default: None]
 
   -h, --help
           Print help (see a summary with '-h')
@@ -121,14 +120,12 @@ Arguments:
   <LETTERS>  
 
 Options:
-  -d, --dir <DIR>            word list source directory
-  -v, --verbose...           Increase logging verbosity
-  -f, --file <FILE>          word list source file
-  -q, --quiet...             Decrease logging verbosity
-  -n, --no-shuffle           do not shuffle the words
-  -s, --shuffles <SHUFFLES>  number of iterations to shuffle
-  -t, --twice                shuffle the whole word list and weighted list
-  -h, --help                 Print help (see more with '--help')
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -s, --shuffle <SHUFFLE>  Shuffle strategy [default: None]
+  -h, --help               Print help (see more with '--help')
 
 ```
 
@@ -174,8 +171,8 @@ Options:
   -v, --verbose...                           Increase logging verbosity
   -f, --file <FILE>                          word list source file
   -q, --quiet...                             Decrease logging verbosity
-  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
   -h, --help                                 Print help
 
 ```
@@ -194,8 +191,8 @@ Options:
   -v, --verbose...                           Increase logging verbosity
   -f, --file <FILE>                          word list source file
   -q, --quiet...                             Decrease logging verbosity
-  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 50]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 6]
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
   -h, --help                                 Print help
 
 ```
