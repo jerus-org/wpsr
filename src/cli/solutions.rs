@@ -32,7 +32,7 @@ impl CmdSolutions {
             return Err(Error::TooFewOrManyLetters(self.letters.len()));
         }
 
-        if !self.letters.len() % 3 == 0 {
+        if !(self.letters.len() % 3) == 0 {
             return Err(Error::MustBeDivisibleBy3(self.letters.len()));
         }
 
@@ -60,6 +60,7 @@ impl CmdSolutions {
         };
 
         let src = format!("{}/{}", src_directory.clone(), src_file.clone());
+        tracing::info!("Using word list: {}", src);
 
         let mut words = Vec::new();
 
