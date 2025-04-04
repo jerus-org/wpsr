@@ -173,6 +173,7 @@ Options:
   -q, --quiet...                             Decrease logging verbosity
   -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
   -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
+  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
   -h, --help                                 Print help
 
 ```
@@ -193,6 +194,7 @@ Options:
   -q, --quiet...                             Decrease logging verbosity
   -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
   -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
+  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
   -h, --help                                 Print help
 
 ```

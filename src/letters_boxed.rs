@@ -18,6 +18,7 @@ pub struct LettersBoxed {
     word_chain: Vec<String>,
     edges: Vec<Edge>,
     max_chain: Option<usize>,
+    shuffle_depth: Option<i8>,
 }
 
 impl Default for LettersBoxed {
@@ -36,6 +37,7 @@ impl Default for LettersBoxed {
             word_chain: Vec::new(),
             edges,
             max_chain: None,
+            shuffle_depth: None,
         }
     }
 }
@@ -54,8 +56,13 @@ impl LettersBoxed {
         s
     }
 
-    pub fn set_max_chain(&mut self, max_chain: usize) -> &mut Self {
-        self.max_chain = Some(max_chain);
+    pub fn set_max_chain(&mut self, value: usize) -> &mut Self {
+        self.max_chain = Some(value);
+        self
+    }
+
+    pub fn set_shuffle_depth(&mut self, value: i8) -> &mut Self {
+        self.shuffle_depth = Some(value);
         self
     }
 
@@ -145,19 +152,21 @@ impl LettersBoxed {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
         let mut rng = ChaCha20Rng::from_os_rng();
-        let words = self.words.clone();
-        let word_list = words.clone();
+        let all_words = self.words.clone();
+        let words_list = all_words.clone();
         let word_chain = Vec::new();
         let unused_letters = String::from_iter(self.letters.clone());
+        let shuffle_depth = self.shuffle_depth.unwrap_or(-1);
 
         let word_chain = get_word(
-            words,
-            word_list,
+            all_words,
+            words_list,
             word_chain,
             unused_letters,
             &mut rng,
             shuffle,
             self.max_chain,
+            shuffle_depth,
         )?;
 
         self.word_chain = word_chain;
@@ -175,6 +184,7 @@ impl LettersBoxed {
     }
 }
 
+#[allow(clippy::too_many_arguments)]
 #[tracing::instrument(skip(
     all_words,
     words_list,
@@ -182,7 +192,8 @@ impl LettersBoxed {
     unused_letters,
     rng,
     shuffle,
-    max_chain
+    max_chain,
+    shuffle_depth
 ))]
 pub fn get_word(
     all_words: Vec<String>,
@@ -192,6 +203,7 @@ pub fn get_word(
     rng: &mut ChaCha20Rng,
     shuffle: &mut Shuffle,
     max_chain: Option<usize>,
+    mut shuffle_depth: i8,
 ) -> Result<Vec<String>, Error> {
     let initial_unused_letters = unused_letters.clone();
     tracing::trace!("Starting word chain: {}", word_chain.join(" -> "));
@@ -218,7 +230,7 @@ pub fn get_word(
         .collect::<Vec<String>>();
 
     // shuffle the top of to the words list to randomize the first word while keeping a good weight
-    let mut words = if shuffle != &Shuffle::None {
+    let mut words = if shuffle != &Shuffle::None && shuffle_depth > 0 {
         tracing::debug!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         VecDeque::from(words_list)
@@ -278,6 +290,9 @@ pub fn get_word(
                 return Err(Error::NoWordFound);
             }
             next_word_chain.push(word);
+            if shuffle_depth > 0 {
+                shuffle_depth -= 1;
+            }
             match get_word(
                 next_all_words,
                 words_list,
@@ -286,6 +301,7 @@ pub fn get_word(
                 rng,
                 shuffle,
                 max_chain,
+                shuffle_depth,
             ) {
                 Ok(chain) => {
                     word_chain = chain;
