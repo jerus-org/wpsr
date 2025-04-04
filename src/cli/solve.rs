@@ -2,13 +2,10 @@ use std::collections::HashMap;
 
 use clap::Parser;
 
-use crate::{Error, LettersBoxed, Shape, Shuffle};
-
-const DEFAULT_SOURCE_DIR: &str = "words";
-const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
+use crate::{Error, Shuffle, Solution};
 
 #[derive(Parser, Debug, Clone)]
-pub struct CmdSolve {
+pub struct Cmd {
     pub letters: String,
     /// word list source directory
     #[arg(short, long)]
@@ -16,6 +13,9 @@ pub struct CmdSolve {
     /// word list source file
     #[arg(short, long)]
     pub file: Option<String>,
+    /// maximum length of the word chain
+    #[arg(short, long, default_value_t = 10)]
+    pub max_chain: usize,
     /// Shuffle strategy
     #[arg(
         short,
@@ -24,89 +24,24 @@ pub struct CmdSolve {
         long_help = "Shuffle strategy\n\nNone - No shuffling\nOnce - Shuffle the weighted list only\nTwice - Shuffle the whole word list and the weighted list"
     )]
     pub shuffle: Shuffle,
-    // /// number of iterations to shuffle
-    // #[arg(short, long)]
-    // pub shuffles: Option<usize>,
-    // /// shuffle the whole word list and weighted list
-    // #[arg(
-    //     short,
-    //     long,
-    //     long_help = "Shuffle the whole word list before calculating weightings\nthen shuffle the top half of the weighted word list."
-    // )]
-    // pub twice: bool,
+    /// Shuffle depth
+    #[arg(short, long, default_value_t = 3)]
+    pub layers: i8,
 }
 
-impl CmdSolve {
+impl Cmd {
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if self.letters.len() < 9 || self.letters.len() > 24 {
-            return Err(Error::TooFewOrManyLetters(self.letters.len()));
-        }
+        let mut solution = Solution::new(&self.letters, settings)?;
+        solution
+            .load_words(self.dir.clone(), self.file.clone())
+            .set_max_chain(self.max_chain)
+            .set_shuffle_depth(self.layers)
+            .find_random_solution(self.shuffle)?;
 
-        if !(self.letters.len() % 3) == 0 {
-            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
-        }
-
-        let letters = self
-            .letters
-            .chars()
-            .map(|l| l.to_ascii_lowercase())
-            .collect::<Vec<char>>();
-
-        // Setup settings
-        let mut src_directory = settings
-            .get("source_dir")
-            .map_or(DEFAULT_SOURCE_DIR, |v| v)
-            .to_string();
-        let mut src_file = settings
-            .get("source_file")
-            .map_or(DEFAULT_SOURCE_FILE, |v| v)
-            .to_string();
-
-        if let Some(sd) = self.dir {
-            src_directory = sd;
-        };
-        if let Some(sf) = self.file {
-            src_file = sf;
-        };
-
-        let src = format!("{}/{}", src_directory.clone(), src_file.clone());
-
-        let mut words = Vec::new();
-
-        for line in std::fs::read_to_string(&src)
-            .expect("Failed to read words file")
-            .lines()
-        {
-            if !line.is_empty() {
-                let ws = line.split_whitespace();
-                for w in ws {
-                    words.push(w.to_string());
-                }
-            }
-        }
-
-        let mut shuffle = self.shuffle;
-        let mut puzzle = LettersBoxed::new(&letters, &words);
-        match puzzle
-            .filter_words_with_letters_only()
-            .filter_words_with_invalid_pairs()
-            .build_word_chain(&mut shuffle)
-        {
-            Ok(_) => {
-                tracing::info!("Word chain built successfully");
-            }
-            Err(e) => {
-                tracing::error!("Failed to build word chain: {}", e);
-            }
-        };
-
-        println!(
-            "Word Chain for {}: {}",
-            Shape::from_edges((letters.len() / 3) as u8)?,
-            puzzle.solution_string()
-        );
+        println!("Word Chain for {}", solution.shape_string());
+        println!("{}", solution.solutions_string());
         Ok(())
     }
 }
