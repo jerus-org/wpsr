@@ -11,7 +11,6 @@ mod solve;
 
 use list::CmdList;
 use prepare::CmdPrepare;
-use solutions::CmdSolutions;
 use solve::CmdSolve;
 
 #[derive(Parser, Debug)]
@@ -34,7 +33,7 @@ pub enum Commands {
     /// Prepare word list
     Prepare(CmdPrepare),
     /// Report multiple solutions for the puzzle
-    Solutions(CmdSolutions),
+    Solutions(solutions::Cmd),
     /// Solve word puzzle
     Solve(CmdSolve),
 }
