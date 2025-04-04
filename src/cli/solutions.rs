@@ -46,6 +46,7 @@ impl Cmd {
         let mut max_clashes = 10;
         let mut max_solutions = self.random_solutions;
 
+        let bar = indicatif::ProgressBar::new(max_solutions as u64);
         while max_solutions > 0 && max_clashes > 0 {
             tracing::info!(
                 "Generating random solutions max_solutions={max_solutions} and max_clashes={max_clashes}"
@@ -53,13 +54,13 @@ impl Cmd {
             match solution.find_random_solution(Shuffle::Once) {
                 Ok(_) => {
                     max_solutions -= 1;
+                    bar.inc(1);
                 }
                 Err(Error::SolutionAlreadyFound) => {
                     max_clashes -= 1;
                 }
                 Err(e) => {
                     tracing::error!("Failed to build word chain: {}", e);
-                    max_solutions -= 1;
                 }
             };
         }
