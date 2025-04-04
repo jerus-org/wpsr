@@ -1,6 +1,6 @@
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+#[derive(Error, Debug, PartialEq)]
 pub enum Error {
     #[error("No word found")]
     NoWordFound,
@@ -14,4 +14,10 @@ pub enum Error {
     UnknownShape(String),
     #[error("Unknown shape for {} edges.", 0)]
     UnknownShapeForEdges(u8),
+    #[error("Solution already found.")]
+    SolutionAlreadyFound,
+    #[error("Failed to build word chain.")]
+    FailedToBuildWordChain,
+    #[error("Chain too long.")]
+    ChainTooLong,
 }

@@ -1,4 +1,4 @@
-use std::{collections::VecDeque, fmt::Display};
+use std::collections::VecDeque;
 
 mod edge;
 mod shuffle;
@@ -9,6 +9,8 @@ use rand::{SeedableRng, seq::SliceRandom};
 use rand_chacha::ChaCha20Rng;
 pub use shuffle::Shuffle;
 use weighted_word::WeightedWord;
+
+use crate::Error;
 
 #[derive(Debug)]
 pub struct LettersBoxed {
@@ -230,7 +232,7 @@ pub fn get_word(
         .collect::<Vec<String>>();
 
     // shuffle the top of to the words list to randomize the first word while keeping a good weight
-    let mut words = if shuffle != &Shuffle::None && shuffle_depth > 0 {
+    let mut words = if shuffle != &Shuffle::None && shuffle_depth != 0 {
         tracing::debug!("Shuffling top half of weighted words list.");
         let words_list = shuffle_top_half(words_list, rng);
         VecDeque::from(words_list)
@@ -331,21 +333,6 @@ fn shuffle_top_half(mut words: Vec<String>, rng: &mut ChaCha20Rng) -> Vec<String
     top_half.shuffle(rng);
     top_half.extend(bottom_half);
     top_half
-}
-
-#[derive(Debug, PartialEq)]
-pub enum Error {
-    NoWordFound,
-    ChainTooLong,
-}
-
-impl Display for Error {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Error::NoWordFound => write!(f, "No word found"),
-            Error::ChainTooLong => write!(f, "Chain too long"),
-        }
-    }
 }
 
 #[cfg(test)]
