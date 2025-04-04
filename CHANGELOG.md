@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✨ add shuffle depth option for word chain(pr [#46])
 - ✨ add solution module for word chain puzzle(pr [#47])
+- ✨ add progress bar to solution generation(pr [#48])
 
 ## [0.1.12] - 2025-04-03
 
@@ -175,6 +176,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#45]: https://github.com/jerus-org/slb/pull/45
 [#46]: https://github.com/jerus-org/slb/pull/46
 [#47]: https://github.com/jerus-org/slb/pull/47
+[#48]: https://github.com/jerus-org/slb/pull/48
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.12...HEAD
 [0.1.12]: https://github.com/jerus-org/slb/compare/v0.1.11...v0.1.12
 [0.1.11]: https://github.com/jerus-org/slb/compare/v0.1.10...v0.1.11
