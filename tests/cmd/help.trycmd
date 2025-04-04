@@ -96,6 +96,11 @@ Options:
   -q, --quiet...
           Decrease logging verbosity
 
+  -m, --max-chain <MAX_CHAIN>
+          maximum length of the word chain
+          
+          [default: 10]
+
   -s, --shuffle <SHUFFLE>
           Shuffle strategy
           
@@ -104,6 +109,11 @@ Options:
           Twice - Shuffle the whole word list and the weighted list
           
           [default: None]
+
+  -l, --layers <LAYERS>
+          Shuffle depth
+          
+          [default: 3]
 
   -h, --help
           Print help (see a summary with '-h')
@@ -120,12 +130,14 @@ Arguments:
   <LETTERS>  
 
 Options:
-  -d, --dir <DIR>          word list source directory
-  -v, --verbose...         Increase logging verbosity
-  -f, --file <FILE>        word list source file
-  -q, --quiet...           Decrease logging verbosity
-  -s, --shuffle <SHUFFLE>  Shuffle strategy [default: None]
-  -h, --help               Print help (see more with '--help')
+  -d, --dir <DIR>              word list source directory
+  -v, --verbose...             Increase logging verbosity
+  -f, --file <FILE>            word list source file
+  -q, --quiet...               Decrease logging verbosity
+  -m, --max-chain <MAX_CHAIN>  maximum length of the word chain [default: 10]
+  -s, --shuffle <SHUFFLE>      Shuffle strategy [default: None]
+  -l, --layers <LAYERS>        Shuffle depth [default: 3]
+  -h, --help                   Print help (see more with '--help')
 
 ```
 
