@@ -28,15 +28,7 @@ impl Cmd {
     pub fn run(&self, settings: HashMap<String, String>) -> Result<(), Error> {
         tracing::debug!("Args: {self:#?}");
 
-        if self.letters.len() < 9 || self.letters.len() > 24 {
-            return Err(Error::TooFewOrManyLetters(self.letters.len()));
-        }
-
-        if !(self.letters.len() % 3) == 0 {
-            return Err(Error::MustBeDivisibleBy3(self.letters.len()));
-        }
-
-        let mut solution = Solution::new(&self.letters, settings);
+        let mut solution = Solution::new(&self.letters, settings)?;
         solution
             .load_words(self.dir.clone(), self.file.clone())
             .set_max_chain(self.max_chain)
