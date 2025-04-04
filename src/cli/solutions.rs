@@ -21,6 +21,9 @@ pub struct CmdSolutions {
     /// maximum length of the word chain
     #[arg(short, long, default_value_t = 10)]
     pub max_chain: usize,
+    /// Shuffle depth
+    #[arg(short, long, default_value_t = 3)]
+    pub shuffle_depth: i8,
 }
 
 impl CmdSolutions {
@@ -98,8 +101,8 @@ impl CmdSolutions {
 
         let mut shuffle = Shuffle::Once;
         let mut max_clashes = 10;
-        // let mut max_solutions = self.random_solutions;
-        let mut max_solutions = 200;
+        let mut max_solutions = self.random_solutions;
+        // let mut max_solutions = 200;
 
         while max_solutions > 0 && max_clashes > 0 {
             tracing::info!(
@@ -110,6 +113,7 @@ impl CmdSolutions {
                 .filter_words_with_letters_only()
                 .filter_words_with_invalid_pairs()
                 .set_max_chain(self.max_chain)
+                .set_shuffle_depth(self.shuffle_depth)
                 .build_word_chain(&mut shuffle)
             {
                 Ok(_) => {
