@@ -11,7 +11,6 @@ mod solve;
 
 use list::CmdList;
 use prepare::CmdPrepare;
-use solve::CmdSolve;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -35,7 +34,7 @@ pub enum Commands {
     /// Report multiple solutions for the puzzle
     Solutions(solutions::Cmd),
     /// Solve word puzzle
-    Solve(CmdSolve),
+    Solve(solve::Cmd),
 }
 
 impl Display for Commands {

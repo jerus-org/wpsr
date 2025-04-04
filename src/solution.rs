@@ -17,19 +17,27 @@ pub struct Solution {
 }
 
 impl Solution {
-    pub fn new(letters: &str, settings: HashMap<String, String>) -> Self {
+    pub fn new(letters: &str, settings: HashMap<String, String>) -> Result<Self, Error> {
+        if letters.len() < 9 || letters.len() > 24 {
+            return Err(Error::TooFewOrManyLetters(letters.len()));
+        }
+
+        if !(letters.len() % 3) == 0 {
+            return Err(Error::MustBeDivisibleBy3(letters.len()));
+        }
+
         let letters = letters
             .chars()
             .map(|l| l.to_ascii_lowercase())
             .collect::<Vec<char>>();
 
-        Self {
+        Ok(Self {
             settings,
             letters,
             max_chain: 10,
             shuffle_depth: 3,
             ..Default::default()
-        }
+        })
     }
 
     pub fn load_words(&mut self, dir: Option<String>, file: Option<String>) -> &mut Self {
