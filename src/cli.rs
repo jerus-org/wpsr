@@ -9,8 +9,6 @@ mod prepare;
 mod solutions;
 mod solve;
 
-use prepare::CmdPrepare;
-
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 pub struct Cli {
@@ -29,7 +27,7 @@ pub enum Commands {
     /// List available word lists
     List(list::Cmd),
     /// Prepare word list
-    Prepare(CmdPrepare),
+    Prepare(prepare::Cmd),
     /// Report multiple solutions for the puzzle
     Solutions(solutions::Cmd),
     /// Solve word puzzle
