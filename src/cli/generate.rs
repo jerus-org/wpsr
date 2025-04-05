@@ -39,7 +39,10 @@ impl Cmd {
         }
 
         let mut solution = Solution::new(&letters, settings)?;
-        solution.load_words(None, None).find_best_solution()?;
+        solution
+            .set_word_source(None, None)
+            .load_words()
+            .find_best_solution()?;
 
         let mut max_clashes = 10;
         let mut max_solutions = 100;

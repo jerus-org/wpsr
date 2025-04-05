@@ -9,6 +9,7 @@ const DEFAULT_SOURCE_FILE: &str = "default.slb";
 pub struct Solution {
     settings: HashMap<String, String>,
     letters: Vec<char>,
+    word_source: String,
     words: Vec<String>,
     max_chain: usize,
     shuffle_depth: i8,
@@ -40,7 +41,7 @@ impl Solution {
         })
     }
 
-    pub fn load_words(&mut self, dir: Option<String>, file: Option<String>) -> &mut Self {
+    pub fn set_word_source(&mut self, dir: Option<String>, file: Option<String>) -> &mut Self {
         // Setup settings
         let mut src_directory = self
             .settings
@@ -63,9 +64,15 @@ impl Solution {
         let src = format!("{}/{}", src_directory.clone(), src_file.clone());
         tracing::info!("Using word list: {}", src);
 
+        self.word_source = src;
+
+        self
+    }
+
+    pub fn load_words(&mut self) -> &mut Self {
         let mut words = Vec::new();
 
-        for line in std::fs::read_to_string(&src)
+        for line in std::fs::read_to_string(&self.word_source)
             .expect("Failed to read words file")
             .lines()
         {
@@ -160,6 +167,10 @@ impl Solution {
             Ok(shape) => shape.to_string(),
             Err(_) => "Unknown shape".to_string(),
         }
+    }
+
+    pub fn word_source_string(&self) -> String {
+        format!("Using words sourced from {}.", self.word_source)
     }
 
     pub fn distribution_string(&self) -> String {

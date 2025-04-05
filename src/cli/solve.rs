@@ -35,7 +35,8 @@ impl Cmd {
 
         let mut solution = Solution::new(&self.letters, settings)?;
         solution
-            .load_words(self.dir.clone(), self.file.clone())
+            .set_word_source(self.dir.clone(), self.file.clone())
+            .load_words()
             .set_max_chain(self.max_chain)
             .set_shuffle_depth(self.layers)
             .find_random_solution(self.shuffle)?;
