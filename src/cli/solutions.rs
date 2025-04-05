@@ -30,7 +30,8 @@ impl Cmd {
 
         let mut solution = Solution::new(&self.letters, settings)?;
         solution
-            .load_words(self.dir.clone(), self.file.clone())
+            .set_word_source(self.dir.clone(), self.file.clone())
+            .load_words()
             .set_max_chain(self.max_chain)
             .set_shuffle_depth(self.shuffle_depth)
             .find_best_solution()?;
@@ -57,7 +58,11 @@ impl Cmd {
             };
         }
 
-        println!("Solutions for {}:", solution.shape_string());
+        println!(
+            "Solutions for {}.\n{}\n",
+            solution.shape_string(),
+            solution.word_source_string(),
+        );
         println!("{}", solution.distribution_string());
         println!("{}", solution.solutions_string());
 
