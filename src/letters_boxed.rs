@@ -122,7 +122,7 @@ impl LettersBoxed {
     }
 
     #[tracing::instrument(skip(self))]
-    pub fn filter_words_with_invalid_pairs(&mut self) -> &mut Self {
+    pub fn filter_exclude_invalid_pairs(&mut self) -> &mut Self {
         self.generate_invalid_pairs();
 
         let filtered = self
@@ -383,7 +383,7 @@ mod tests {
         letters_boxed.filter_words_with_letters_only();
         println!("{:#?}", letters_boxed.words);
 
-        letters_boxed.filter_words_with_invalid_pairs();
+        letters_boxed.filter_exclude_invalid_pairs();
         println!("{:#?}", letters_boxed.words);
 
         assert_eq!(letters_boxed.words.len(), 3);

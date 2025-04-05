@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use crate::{Error, LettersBoxed, Shape, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
-const DEFAULT_SOURCE_FILE: &str = "mit_words.slb";
+const DEFAULT_SOURCE_FILE: &str = "default.slb";
 
 #[derive(Debug, Default)]
 pub struct Solution {
@@ -98,7 +98,7 @@ impl Solution {
         let mut puzzle = LettersBoxed::new(&self.letters, &self.words);
         match puzzle
             .filter_words_with_letters_only()
-            .filter_words_with_invalid_pairs()
+            .filter_exclude_invalid_pairs()
             .set_max_chain(self.max_chain)
             .build_word_chain(&mut shuffle)
         {
@@ -121,7 +121,7 @@ impl Solution {
         let mut puzzle = LettersBoxed::new(&self.letters, &self.words);
         match puzzle
             .filter_words_with_letters_only()
-            .filter_words_with_invalid_pairs()
+            .filter_exclude_invalid_pairs()
             .set_max_chain(self.max_chain)
             .set_shuffle_depth(self.shuffle_depth)
             .build_word_chain(&mut shuffle)
