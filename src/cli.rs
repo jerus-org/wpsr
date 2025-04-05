@@ -9,7 +9,6 @@ mod prepare;
 mod solutions;
 mod solve;
 
-use list::CmdList;
 use prepare::CmdPrepare;
 
 #[derive(Parser, Debug)]
@@ -28,7 +27,7 @@ pub enum Commands {
     /// Generate random letter string for puzzle
     Generate(generate::Cmd),
     /// List available word lists
-    List(CmdList),
+    List(list::Cmd),
     /// Prepare word list
     Prepare(CmdPrepare),
     /// Report multiple solutions for the puzzle
