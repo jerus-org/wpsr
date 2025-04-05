@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ♻️ refactor(cli)-streamline command structure and logic(pr [#49])
 - ♻️ refactor(main)-update default source file name(pr [#50])
+- Add-word-count-sorting-to-solutions(pr [#51])
 
 ## [0.1.12] - 2025-04-03
 
@@ -184,6 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#48]: https://github.com/jerus-org/slb/pull/48
 [#49]: https://github.com/jerus-org/slb/pull/49
 [#50]: https://github.com/jerus-org/slb/pull/50
+[#51]: https://github.com/jerus-org/slb/pull/51
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.12...HEAD
 [0.1.12]: https://github.com/jerus-org/slb/compare/v0.1.11...v0.1.12
 [0.1.11]: https://github.com/jerus-org/slb/compare/v0.1.10...v0.1.11
