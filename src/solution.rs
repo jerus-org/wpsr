@@ -178,8 +178,34 @@ impl Solution {
 
     pub fn solutions_string(&self) -> String {
         let mut s = String::new();
-        for solution in &self.solutions {
-            s.push_str(&format!("    {}\n", solution));
+        let mut solutions = self
+            .solutions
+            .iter()
+            .map(|s| {
+                let words = s.chars().filter(|c| *c == '>').count() + 1;
+                (words, s)
+            })
+            .collect::<Vec<_>>();
+        solutions.sort_by(|a, b| a.0.cmp(&b.0));
+
+        let mut word_length = solutions.first().unwrap_or(&(0, &"".to_string())).0;
+
+        s.push_str(&format!(
+            "  {} Solutions with {} words.\n\n",
+            self.distribution.get(&word_length).unwrap_or(&0),
+            word_length
+        ));
+
+        for solution in solutions {
+            if solution.0 != word_length {
+                word_length = solution.0;
+                s.push_str(&format!(
+                    "\n  {} Solutions with {} words.\n\n",
+                    self.distribution.get(&word_length).unwrap_or(&0),
+                    word_length
+                ));
+            }
+            s.push_str(&format!("    {}\n", solution.1));
         }
         s
     }
