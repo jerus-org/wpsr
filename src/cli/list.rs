@@ -6,13 +6,13 @@ use crate::Error;
 const DEFAULT_SOURCE_DIR: &str = "words";
 
 #[derive(Parser, Debug, Clone)]
-pub struct CmdList {
+pub struct Cmd {
     /// word list source directory
     #[arg(short, long)]
     pub dir: Option<String>,
 }
 
-impl CmdList {
+impl Cmd {
     pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
         // Setup settings
         let mut src_directory = settings

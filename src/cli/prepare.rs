@@ -10,7 +10,7 @@ const DEFAULT_MINIMUM_WORD_LENGTH: &str = "3";
 const LINE_LENGTH: usize = 3010;
 
 #[derive(Parser, Debug, Clone)]
-pub struct CmdPrepare {
+pub struct Cmd {
     /// word list source directory
     #[arg(short, long)]
     pub dir: Option<String>,
@@ -22,7 +22,7 @@ pub struct CmdPrepare {
     pub minimum: Option<usize>,
 }
 
-impl CmdPrepare {
+impl Cmd {
     pub fn run(self, settings: std::collections::HashMap<String, String>) -> Result<(), Error> {
         // Setup settings
         let mut src_directory = settings
