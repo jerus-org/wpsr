@@ -1,9 +1,9 @@
 use std::{collections::HashMap, fs::read_dir};
 
 use clap::Parser;
+use colorful::Colorful;
 
-use crate::Error;
-const DEFAULT_SOURCE_DIR: &str = "words";
+use crate::{DEFAULT_SOURCE_DIR, Error};
 
 #[derive(Parser, Debug, Clone)]
 pub struct Cmd {
@@ -24,11 +24,30 @@ impl Cmd {
             src_directory = sd;
         };
 
-        for entry in read_dir(src_directory).unwrap().flatten() {
+        // List the word list files
+        let mut title = "Word lists:".yellow().bold().underlined().to_string();
+        println!("{}", title);
+        for entry in read_dir(&src_directory).unwrap().flatten() {
+            let path = entry.path();
+            if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "txt" {
+                let file_name = path.file_name().unwrap().to_str().unwrap();
+                println!("  {}", file_name);
+            }
+        }
+
+        // List the boxed puzzle word list files
+        title = "Word lists for boxed puzzles:"
+            .yellow()
+            .bold()
+            .underlined()
+            .to_string();
+        println!("\n{}", title);
+
+        for entry in read_dir(&src_directory).unwrap().flatten() {
             let path = entry.path();
             if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "slb" {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
-                println!("{}", file_name);
+                println!("  {}", file_name);
             }
         }
 

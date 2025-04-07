@@ -2,14 +2,17 @@ use std::{collections::HashMap, path::PathBuf, str::FromStr};
 
 use clap::Parser;
 use config::{Config, File};
-use lib_slb::{Cli, Commands};
+use lib_slb::{
+    Cli, Commands, DEFAULT_BOXED_SOURCE_FILE, DEFAULT_CONFIG_FILE_BASENAME, DEFAULT_LINE_LENGTH,
+    DEFAULT_MINIMUM_WORD_LENGTH, DEFAULT_SOURCE_DIR, DEFAULT_WORDS_SOURCE_FILE,
+};
 use tracing_subscriber::EnvFilter;
 
-const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
-const DEFAULT_SOURCE_FILE: &str = "default.slb";
-const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
-const DEFAULT_LINE_LENGTH: usize = 3010;
-const DEFAULT_CONFIG_FILE_BASENAME: &str = "slb";
+// const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
+// const DEFAULT_SOURCE_FILE: &str = "default.slb";
+// const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
+// const DEFAULT_LINE_LENGTH: usize = 3010;
+// const DEFAULT_CONFIG_FILE_BASENAME: &str = "slb";
 
 fn main() {
     let args = Cli::parse();
@@ -80,7 +83,8 @@ pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {
         tracing::debug!("Settings file exists");
         Config::builder()
             .set_default("source_dir", DEFAULT_SOURCE_DIR)?
-            .set_default("source_file", DEFAULT_SOURCE_FILE)?
+            .set_default("source_words_file", DEFAULT_WORDS_SOURCE_FILE)?
+            .set_default("source_boxed_file", DEFAULT_BOXED_SOURCE_FILE)?
             .set_default(
                 "minimum_word_length",
                 DEFAULT_MINIMUM_WORD_LENGTH.to_string(),
@@ -92,7 +96,8 @@ pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {
         tracing::debug!("Settings file does not exist");
         Config::builder()
             .set_default("source_dir", DEFAULT_SOURCE_DIR)?
-            .set_default("source_file", DEFAULT_SOURCE_FILE)?
+            .set_default("source_words_file", DEFAULT_WORDS_SOURCE_FILE)?
+            .set_default("source_boxed_file", DEFAULT_BOXED_SOURCE_FILE)?
             .set_default(
                 "minimum_word_length",
                 DEFAULT_MINIMUM_WORD_LENGTH.to_string(),

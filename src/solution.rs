@@ -2,13 +2,10 @@ use std::collections::HashMap;
 
 use colorful::Colorful;
 
-use crate::{Error, Shape};
+use crate::{DEFAULT_BOXED_SOURCE_FILE, DEFAULT_SOURCE_DIR, Error, Shape};
 pub use letters_boxed::{LettersBoxed, Shuffle};
 
 mod letters_boxed;
-
-const DEFAULT_SOURCE_DIR: &str = "words";
-const DEFAULT_SOURCE_FILE: &str = "default.slb";
 
 #[derive(Debug, Default)]
 pub struct Solution {
@@ -56,7 +53,7 @@ impl Solution {
         let mut src_file = self
             .settings
             .get("source_file")
-            .map_or(DEFAULT_SOURCE_FILE, |v| v)
+            .map_or(DEFAULT_BOXED_SOURCE_FILE, |v| v)
             .to_string();
 
         if let Some(sd) = dir {
