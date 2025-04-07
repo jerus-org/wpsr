@@ -1,5 +1,7 @@
 use std::collections::HashMap;
 
+use colorful::Colorful;
+
 use crate::{Error, LettersBoxed, Shape, Shuffle};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
@@ -162,15 +164,24 @@ impl Solution {
         self
     }
 
+    pub fn shape_len(&self) -> usize {
+        match Shape::from_edges((self.letters.len() / 3) as u8) {
+            Ok(shape) => shape.to_string().len(),
+            Err(_) => "Unknown shape".to_string().len(),
+        }
+    }
+
     pub fn shape_string(&self) -> String {
         match Shape::from_edges((self.letters.len() / 3) as u8) {
-            Ok(shape) => shape.to_string(),
+            Ok(shape) => shape.to_string().bold().light_blue().to_string(),
             Err(_) => "Unknown shape".to_string(),
         }
     }
 
     pub fn word_source_string(&self) -> String {
-        format!("Using words sourced from {}.", self.word_source)
+        let s1 = "Using words sourced from ".light_cyan().dim().to_string();
+        let s2 = self.word_source.clone().light_cyan().bold().to_string();
+        format!("{}{}", s1, s2)
     }
 
     pub fn distribution_string(&self) -> String {
@@ -187,6 +198,29 @@ impl Solution {
         s
     }
 
+    pub fn solutions_title(&self) -> String {
+        let intro = "Solutions for ";
+        let mut ul = String::new();
+        for _ in 0..(intro.len() + self.shape_len()) {
+            ul.push('‾');
+        }
+
+        let summary = format!("{}{}", intro.yellow().bold(), self.shape_string());
+        format!("{}\n{}", summary, ul.bold().yellow())
+    }
+
+    pub fn solve_title(&self) -> String {
+        let intro = "Solutions for ";
+        let mut ul = String::new();
+        for _ in 0..(intro.len() + self.shape_len()) {
+            ul.push('‾');
+        }
+
+        let summary = format!("{}{}", intro.yellow().bold(), self.shape_string(),);
+
+        format!("{}\n{}", summary, ul.bold().yellow())
+    }
+
     pub fn solutions_string(&self) -> String {
         let mut s = String::new();
         let mut solutions = self
@@ -201,20 +235,34 @@ impl Solution {
 
         let mut word_length = solutions.first().unwrap_or(&(0, &"".to_string())).0;
 
-        s.push_str(&format!(
-            "  {} Solutions with {} words.\n\n",
-            self.distribution.get(&word_length).unwrap_or(&0),
-            word_length
-        ));
+        s.push_str("  ");
+        s.push_str(
+            &format!(
+                "{} Solutions with {} words.",
+                self.distribution.get(&word_length).unwrap_or(&0),
+                word_length
+            )
+            .underlined()
+            .yellow()
+            .to_string(),
+        );
+        s.push_str("\n\n");
 
         for solution in solutions {
             if solution.0 != word_length {
                 word_length = solution.0;
-                s.push_str(&format!(
-                    "\n  {} Solutions with {} words.\n\n",
-                    self.distribution.get(&word_length).unwrap_or(&0),
-                    word_length
-                ));
+                s.push_str("\n  ");
+                s.push_str(
+                    &format!(
+                        "{} Solutions with {} words.",
+                        self.distribution.get(&word_length).unwrap_or(&0),
+                        word_length
+                    )
+                    .underlined()
+                    .yellow()
+                    .to_string(),
+                );
+                s.push_str("\n\n");
             }
             s.push_str(&format!("    {}\n", solution.1));
         }
