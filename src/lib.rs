@@ -1,14 +1,10 @@
+mod boxed;
 mod cli;
 mod error;
-mod prepare_words;
-mod shape;
-mod solution;
 
+pub use boxed::{LettersBoxed, PrepareWords, Shape, Shuffle, Solution};
 pub use cli::{Cli, Commands};
 pub use error::Error;
-pub use prepare_words::PrepareWords;
-pub use shape::Shape;
-pub use solution::Solution;
 
 pub const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
 pub const DEFAULT_WORDS_SOURCE_FILE: &str = "default.txt";

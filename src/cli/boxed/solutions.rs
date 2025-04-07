@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{Error, Solution, solution::Shuffle};
+use crate::{Error, Shuffle, Solution};
 use clap::Parser;
 
 #[derive(Parser, Debug, Clone)]
