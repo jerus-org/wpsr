@@ -41,7 +41,8 @@ impl Cmd {
             .set_shuffle_depth(self.layers)
             .find_random_solution(self.shuffle)?;
 
-        println!("Word Chain for {}", solution.shape_string());
+        println!("{}", solution.solve_title());
+        println!("{}\n", solution.word_source_string());
         println!("{}", solution.solutions_string());
         Ok(())
     }
