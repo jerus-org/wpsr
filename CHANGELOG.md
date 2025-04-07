@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- ✨ enhance file listing with colorful titles(pr [#56])
+
 ### Changed
 
 - ♻️ refactor(modules)-reorganize module structure(pr [#54])
@@ -204,6 +208,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#53]: https://github.com/jerus-org/slb/pull/53
 [#54]: https://github.com/jerus-org/slb/pull/54
 [#55]: https://github.com/jerus-org/slb/pull/55
+[#56]: https://github.com/jerus-org/slb/pull/56
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/slb/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/slb/compare/v0.1.12...v0.1.13
