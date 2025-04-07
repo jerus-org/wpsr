@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use clap::Parser;
 
-use crate::{Error, Shuffle, Solution};
+use crate::{Error, Solution, solution::Shuffle};
 
 #[derive(Parser, Debug, Clone)]
 pub struct Cmd {
