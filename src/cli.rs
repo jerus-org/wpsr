@@ -5,6 +5,7 @@ use clap_verbosity_flag::Verbosity;
 
 mod boxed;
 mod list;
+mod words;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -23,6 +24,8 @@ pub enum Commands {
     Boxed(boxed::Cmd),
     /// List available word lists
     List(list::Cmd),
+    /// List available word lists
+    Words(words::Cmd),
 }
 
 impl Display for Commands {
@@ -30,6 +33,7 @@ impl Display for Commands {
         match self {
             Commands::Boxed(_) => write!(f, "boxed"),
             Commands::List(_) => write!(f, "list"),
+            Commands::Words(_) => write!(f, "words"),
         }
     }
 }

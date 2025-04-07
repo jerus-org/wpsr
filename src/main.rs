@@ -30,6 +30,7 @@ fn main() {
             let res = match args.cmd {
                 Commands::Boxed(boxed) => boxed.run(settings),
                 Commands::List(list) => list.run(settings),
+                Commands::Words(words) => words.run(settings),
             };
             match res {
                 Ok(_) => {
