@@ -57,12 +57,10 @@ impl Cmd {
                 }
             };
         }
+        bar.finish();
 
-        println!(
-            "Solutions for {}.\n{}\n",
-            solution.shape_string(),
-            solution.word_source_string(),
-        );
+        println!("{}", solution.solutions_title());
+        println!("{}\n", solution.word_source_string());
         println!("{}", solution.distribution_string());
         println!("{}", solution.solutions_string());
 
