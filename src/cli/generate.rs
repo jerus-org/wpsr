@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
-use crate::{Error, Shape, Shuffle, Solution};
-// use crate::{LettersBoxed, Shuffle};
+use crate::{Error, Shape, Solution, solution::Shuffle};
 use clap::Parser;
 use indicatif::ProgressBar;
 use rand::seq::SliceRandom;

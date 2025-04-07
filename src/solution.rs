@@ -2,7 +2,10 @@ use std::collections::HashMap;
 
 use colorful::Colorful;
 
-use crate::{Error, LettersBoxed, Shape, Shuffle};
+use crate::{Error, Shape};
+pub use letters_boxed::{LettersBoxed, Shuffle};
+
+mod letters_boxed;
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "default.slb";
