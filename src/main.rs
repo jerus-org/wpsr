@@ -25,11 +25,8 @@ fn main() {
             tracing::debug!("Loaded settings: {:?}", settings);
             tracing::debug!("Args: {args:#?}");
             let res = match args.cmd {
-                Commands::Prepare(prepare) => prepare.run(settings),
-                Commands::Solutions(solutions) => solutions.run(settings),
-                Commands::Solve(solve) => solve.run(settings),
+                Commands::Boxed(boxed) => boxed.run(settings),
                 Commands::List(list) => list.run(settings),
-                Commands::Generate(cmd) => cmd.run(settings),
             };
             match res {
                 Ok(_) => {

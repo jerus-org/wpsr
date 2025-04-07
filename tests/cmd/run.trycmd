@@ -6,12 +6,9 @@ Command line program to solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  generate   Generate random letter string for puzzle
-  list       List available word lists
-  prepare    Prepare word list
-  solutions  Report multiple solutions for the puzzle
-  solve      Solve word puzzle
-  help       Print this message or the help of the given subcommand(s)
+  boxed  Boxed word puzzle tools
+  list   List available word lists
+  help   Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -24,11 +21,9 @@ Options:
 ```console
 $ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
 ? 2
-error: unexpected argument '-n' found
+error: unrecognized subcommand 'solve'
 
-  tip: to pass '-n' as a value, use '-- -n'
-
-Usage: slb solve [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
 For more information, try '--help'.
 
@@ -37,11 +32,9 @@ For more information, try '--help'.
 ```console
 $ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
 ? 2
-error: unexpected argument '-n' found
+error: unrecognized subcommand 'solve'
 
-  tip: to pass '-n' as a value, use '-- -n'
-
-Usage: slb solve [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
 For more information, try '--help'.
 

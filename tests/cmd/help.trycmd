@@ -5,12 +5,9 @@ Command line program to solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  generate   Generate random letter string for puzzle
-  list       List available word lists
-  prepare    Prepare word list
-  solutions  Report multiple solutions for the puzzle
-  solve      Solve word puzzle
-  help       Print this message or the help of the given subcommand(s)
+  boxed  Boxed word puzzle tools
+  list   List available word lists
+  help   Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -27,12 +24,9 @@ Command line program to solve the NYT Letters Boxed puzzle
 Usage: slb [OPTIONS] <COMMAND>
 
 Commands:
-  generate   Generate random letter string for puzzle
-  list       List available word lists
-  prepare    Prepare word list
-  solutions  Report multiple solutions for the puzzle
-  solve      Solve word puzzle
-  help       Print this message or the help of the given subcommand(s)
+  boxed  Boxed word puzzle tools
+  list   List available word lists
+  help   Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -43,101 +37,45 @@ Options:
 ```
 ```console
 $ slb prepare --help
-Prepare word list
+? 2
+error: unrecognized subcommand 'prepare'
 
-Usage: slb prepare [OPTIONS]
+Usage: slb [OPTIONS] <COMMAND>
 
-Options:
-  -d, --dir <DIR>          word list source directory
-  -v, --verbose...         Increase logging verbosity
-  -f, --file <FILE>        word list source file
-  -q, --quiet...           Decrease logging verbosity
-  -m, --minimum <MINIMUM>  minimum word length
-  -h, --help               Print help
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb prepare -h
-Prepare word list
+? 2
+error: unrecognized subcommand 'prepare'
 
-Usage: slb prepare [OPTIONS]
+Usage: slb [OPTIONS] <COMMAND>
 
-Options:
-  -d, --dir <DIR>          word list source directory
-  -v, --verbose...         Increase logging verbosity
-  -f, --file <FILE>        word list source file
-  -q, --quiet...           Decrease logging verbosity
-  -m, --minimum <MINIMUM>  minimum word length
-  -h, --help               Print help
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb solve --help
-Solve word puzzle
+? 2
+error: unrecognized subcommand 'solve'
 
-Usage: slb solve [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <LETTERS>
-          
-
-Options:
-  -d, --dir <DIR>
-          word list source directory
-
-  -v, --verbose...
-          Increase logging verbosity
-
-  -f, --file <FILE>
-          word list source file
-
-  -q, --quiet...
-          Decrease logging verbosity
-
-  -m, --max-chain <MAX_CHAIN>
-          maximum length of the word chain
-          
-          [default: 10]
-
-  -s, --shuffle <SHUFFLE>
-          Shuffle strategy
-          
-          None - No shuffling
-          Once - Shuffle the weighted list only
-          Twice - Shuffle the whole word list and the weighted list
-          
-          [default: None]
-
-  -l, --layers <LAYERS>
-          Shuffle depth
-          
-          [default: 3]
-
-  -h, --help
-          Print help (see a summary with '-h')
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb solve -h
-Solve word puzzle
+? 2
+error: unrecognized subcommand 'solve'
 
-Usage: slb solve [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <LETTERS>  
-
-Options:
-  -d, --dir <DIR>              word list source directory
-  -v, --verbose...             Increase logging verbosity
-  -f, --file <FILE>            word list source file
-  -q, --quiet...               Decrease logging verbosity
-  -m, --max-chain <MAX_CHAIN>  maximum length of the word chain [default: 10]
-  -s, --shuffle <SHUFFLE>      Shuffle strategy [default: None]
-  -l, --layers <LAYERS>        Shuffle depth [default: 3]
-  -h, --help                   Print help (see more with '--help')
+For more information, try '--help'.
 
 ```
 
@@ -171,76 +109,44 @@ Options:
 
 ```console
 $ slb solutions --help
-Report multiple solutions for the puzzle
+? 2
+error: unrecognized subcommand 'solutions'
 
-Usage: slb solutions [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <LETTERS>  
-
-Options:
-  -d, --dir <DIR>                            word list source directory
-  -v, --verbose...                           Increase logging verbosity
-  -f, --file <FILE>                          word list source file
-  -q, --quiet...                             Decrease logging verbosity
-  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
-  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
-  -h, --help                                 Print help
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb solutions -h
-Report multiple solutions for the puzzle
+? 2
+error: unrecognized subcommand 'solutions'
 
-Usage: slb solutions [OPTIONS] <LETTERS>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <LETTERS>  
-
-Options:
-  -d, --dir <DIR>                            word list source directory
-  -v, --verbose...                           Increase logging verbosity
-  -f, --file <FILE>                          word list source file
-  -q, --quiet...                             Decrease logging verbosity
-  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
-  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
-  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
-  -h, --help                                 Print help
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb generate --help
-Generate random letter string for puzzle
+? 2
+error: unrecognized subcommand 'generate'
 
-Usage: slb generate [OPTIONS] <SHAPE>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <SHAPE>  
-
-Options:
-  -b, --bare        
-  -v, --verbose...  Increase logging verbosity
-  -q, --quiet...    Decrease logging verbosity
-  -h, --help        Print help
+For more information, try '--help'.
 
 ```
 
 ```console
 $ slb generate -h
-Generate random letter string for puzzle
+? 2
+error: unrecognized subcommand 'generate'
 
-Usage: slb generate [OPTIONS] <SHAPE>
+Usage: slb [OPTIONS] <COMMAND>
 
-Arguments:
-  <SHAPE>  
-
-Options:
-  -b, --bare        
-  -v, --verbose...  Increase logging verbosity
-  -q, --quiet...    Decrease logging verbosity
-  -h, --help        Print help
+For more information, try '--help'.
 
 ```
