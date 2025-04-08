@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 📝 docs(cli)-update command descriptions(pr [#64])
 - 🔧 chore(Cargo)-update package description and resources(pr [#65])
 - 📝 docs(README)-enhance project documentation(pr [#66])
+- 🔧 chore(cargo)-update metadata for keywords and categories(pr [#67])
 
 ### Fixed
 
@@ -232,6 +233,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#64]: https://github.com/jerus-org/wpsr/pull/64
 [#65]: https://github.com/jerus-org/wpsr/pull/65
 [#66]: https://github.com/jerus-org/wpsr/pull/66
+[#67]: https://github.com/jerus-org/wpsr/pull/67
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/wpsr/compare/v0.1.12...v0.1.13
