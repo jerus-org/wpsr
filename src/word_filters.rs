@@ -1,13 +1,13 @@
 //! Prepares a list of words from a file for use in by the solver.
 
-pub trait PrepareWords {
+pub trait WordFilters {
     fn filter_to_minimum_length(self, length: usize) -> Self;
     fn filter_no_repeated_letters(self) -> Self;
     fn filter_excludes_letters(self, exclude: &str) -> Self;
     fn filter_includes_letters(self, exclude: &str) -> Self;
 }
 
-impl PrepareWords for Vec<String> {
+impl WordFilters for Vec<String> {
     #[tracing::instrument(skip(self))]
     fn filter_to_minimum_length(self, length: usize) -> Self {
         let filtered = self
@@ -128,7 +128,7 @@ mod tests {
         assert_eq!(failed, vec!["aa", "all", "success", "greatness"]);
     }
 
-    use super::PrepareWords;
+    use super::WordFilters;
 
     #[test]
     fn test_filter_exclude_letters() {

@@ -7,7 +7,7 @@ use std::{
 
 use clap::Parser;
 
-use crate::{Error, PrepareWords};
+use crate::{Error, WordFilters};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "wiki-100k.txt";

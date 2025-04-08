@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use colorful::Colorful;
 
-use crate::{DEFAULT_SOURCE_DIR, DEFAULT_WORDS_SOURCE_FILE, Error, PrepareWords};
+use crate::{DEFAULT_SOURCE_DIR, DEFAULT_WORDS_SOURCE_FILE, Error, WordFilters};
 
 #[derive(Debug, Default)]
 pub struct Words {

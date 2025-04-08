@@ -1,13 +1,13 @@
 mod boxed;
 mod cli;
 mod error;
-mod prepare_words;
+mod word_filters;
 mod words;
 
 pub use boxed::{LettersBoxed, Shape, Shuffle, Solution};
 pub use cli::{Cli, Commands};
 pub use error::Error;
-pub use prepare_words::PrepareWords;
+pub use word_filters::WordFilters;
 pub use words::Words;
 
 pub const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
