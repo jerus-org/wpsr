@@ -9,7 +9,7 @@ keywords = ["letters", "boxed", "nyt", "solver"]
 categories = ["puzzle-solver"]
 license = "MIT"
 readme = "README.md"
-description = "Command line program to solve the NYT Letters Boxed puzzle"
+description = "Command line program to help solve word puzzles"
 documentation = "https://github.com/jerus-org/wpsr"
 include = [
     "**/*.rs",
@@ -52,4 +52,4 @@ trycmd = "0.15.9"
 
 [package.metadata.bundle]
 identifier = "ie.jerus.wpsr"
-resources = ["words/*.slb"]
+resources = ["words/*.slb", "words/*.txt"]
