@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 🔧 chore(Cargo)-update package name and repository details(pr [#61])
 - 👷 ci(circleci)-publish crate to crates.io on release(pr [#62])
 
+### Fixed
+
+- :bug: lib: update file extension to slb(pr [#63])
+
 ## [0.1.14] - 2025-04-07
 
 ### Added
@@ -221,6 +225,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#60]: https://github.com/jerus-org/wpsr/pull/60
 [#61]: https://github.com/jerus-org/wpsr/pull/61
 [#62]: https://github.com/jerus-org/wpsr/pull/62
+[#63]: https://github.com/jerus-org/wpsr/pull/63
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/wpsr/compare/v0.1.12...v0.1.13
