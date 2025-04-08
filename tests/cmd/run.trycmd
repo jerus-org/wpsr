@@ -1,7 +1,7 @@
 ```console
 $ wpsr 
 ? 2
-Command line program to solve the NYT Letters Boxed puzzle
+Command line program to help solve word puzzles
 
 Usage: wpsr [OPTIONS] <COMMAND>
 
