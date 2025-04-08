@@ -1,18 +1,20 @@
 [package]
-name = "slb"
+name = "wpsr"
 version = "0.1.14"
 edition = "2024"
 authors = ["jerusdp <jrussell@jerus.ie>"]
 rust-version = "1.85"
-repository = "https://github.com/jerus-org/slb"
+repository = "https://github.com/jerus-org/wpsr"
 keywords = ["letters", "boxed", "nyt", "solver"]
 categories = ["puzzle-solver"]
 license = "MIT"
 readme = "README.md"
 description = "Command line program to solve the NYT Letters Boxed puzzle"
-documentation = "https://github.com/jerus-org/slb"
+documentation = "https://github.com/jerus-org/wpsr"
 include = [
     "**/*.rs",
+    "words/*.slb",
+    "words/*.txt",
     "Cargo.toml",
     "README.md",
     "LICENSE",
@@ -20,11 +22,11 @@ include = [
 ]
 
 [lib]
-name = "lib_slb"
+name = "lib_wpsr"
 path = "src/lib.rs"
 
 [[bin]]
-name = "slb"
+name = "wpsr"
 path = "src/main.rs"
 
 [dependencies]
@@ -49,5 +51,5 @@ tracing-subscriber = { version = "0.3.19", features = [
 trycmd = "0.15.9"
 
 [package.metadata.bundle]
-identifier = "ie.jerus.slb"
+identifier = "ie.jerus.wpsr"
 resources = ["words/*.slb"]
