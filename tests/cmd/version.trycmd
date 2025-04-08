@@ -1,11 +1,11 @@
 ```console
 $ wpsr -V 
-wpsr 0.1.14
+wpsr 0.2.0
 
 ```
 
 ```console
 $ wpsr --version 
-wpsr 0.1.14
+wpsr 0.2.0
 
 ```
