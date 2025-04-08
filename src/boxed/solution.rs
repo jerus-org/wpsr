@@ -2,8 +2,11 @@ use std::collections::HashMap;
 
 use colorful::Colorful;
 
-use crate::{DEFAULT_BOXED_SOURCE_FILE, DEFAULT_SOURCE_DIR, Error, Shape};
+use crate::{DEFAULT_BOXED_SOURCE_FILE, DEFAULT_SOURCE_DIR, Error};
+
 pub use letters_boxed::{LettersBoxed, Shuffle};
+
+use super::Shape;
 
 mod letters_boxed;
 

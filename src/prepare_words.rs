@@ -3,6 +3,8 @@
 pub trait PrepareWords {
     fn filter_to_minimum_length(self, length: usize) -> Self;
     fn filter_no_repeated_letters(self) -> Self;
+    fn filter_excludes_letters(self, exclude: &str) -> Self;
+    fn filter_includes_letters(self, exclude: &str) -> Self;
 }
 
 impl PrepareWords for Vec<String> {
@@ -42,6 +44,54 @@ impl PrepareWords for Vec<String> {
         );
         no_repeated_letters
     }
+
+    #[tracing::instrument(skip(self))]
+    fn filter_excludes_letters(self, exclude: &str) -> Self {
+        let excludes = self
+            .iter()
+            .filter(|word| {
+                let chars = word.chars();
+                for char in chars {
+                    if exclude.contains(char) {
+                        return false;
+                    }
+                }
+                true
+            })
+            .map(|word| word.to_string())
+            .collect::<Vec<String>>();
+
+        tracing::info!(
+            "With no letters from the exclusion list ({})there are {} words",
+            exclude,
+            excludes.len()
+        );
+        excludes
+    }
+
+    #[tracing::instrument(skip(self))]
+    fn filter_includes_letters(self, include: &str) -> Self {
+        let includes = self
+            .iter()
+            .filter(|word| {
+                let chars = word.chars();
+                for char in chars {
+                    if !include.contains(char) {
+                        return false;
+                    }
+                }
+                true
+            })
+            .map(|word| word.to_string())
+            .collect::<Vec<String>>();
+
+        tracing::info!(
+            "With no letters from the exclusion list ({})there are {} words",
+            include,
+            includes.len()
+        );
+        includes
+    }
 }
 
 #[allow(dead_code)]
@@ -76,5 +126,43 @@ mod tests {
         }
         assert_eq!(passed, vec!["ab", "fulfil"]);
         assert_eq!(failed, vec!["aa", "all", "success", "greatness"]);
+    }
+
+    use super::PrepareWords;
+
+    #[test]
+    fn test_filter_exclude_letters() {
+        let words = [
+            "ab",
+            "loser",
+            "all",
+            "success",
+            "fulfil",
+            "treat",
+            "greatness",
+        ];
+
+        let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+
+        let filtered = words.filter_excludes_letters("cl");
+        assert_eq!(filtered, vec!["ab", "treat", "greatness"]);
+    }
+
+    #[test]
+    fn test_filter_include_letters() {
+        let words = [
+            "ab",
+            "loser",
+            "all",
+            "success",
+            "fulfil",
+            "treat",
+            "greatness",
+        ];
+
+        let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+
+        let filtered = words.filter_includes_letters("acubsel");
+        assert_eq!(filtered, vec!["ab", "all", "success"]);
     }
 }

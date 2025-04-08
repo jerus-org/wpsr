@@ -7,6 +7,8 @@ Usage: slb [OPTIONS] <COMMAND>
 Commands:
   boxed  Boxed word puzzle tools
   list   List available word lists
+  words  List available word lists
+  alpha  Parse file to words of letters only
   help   Print this message or the help of the given subcommand(s)
 
 Options:
@@ -26,6 +28,8 @@ Usage: slb [OPTIONS] <COMMAND>
 Commands:
   boxed  Boxed word puzzle tools
   list   List available word lists
+  words  List available word lists
+  alpha  Parse file to words of letters only
   help   Print this message or the help of the given subcommand(s)
 
 Options:
@@ -36,46 +40,102 @@ Options:
 
 ```
 ```console
-$ slb prepare --help
-? 2
-error: unrecognized subcommand 'prepare'
+$ slb boxed prepare --help
+Prepare word list
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb boxed prepare [OPTIONS]
 
-For more information, try '--help'.
-
-```
-
-```console
-$ slb prepare -h
-? 2
-error: unrecognized subcommand 'prepare'
-
-Usage: slb [OPTIONS] <COMMAND>
-
-For more information, try '--help'.
+Options:
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
 
 ```
 
 ```console
-$ slb solve --help
-? 2
-error: unrecognized subcommand 'solve'
+$ slb boxed prepare -h
+Prepare word list
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb boxed prepare [OPTIONS]
 
-For more information, try '--help'.
+Options:
+  -d, --dir <DIR>          word list source directory
+  -v, --verbose...         Increase logging verbosity
+  -f, --file <FILE>        word list source file
+  -q, --quiet...           Decrease logging verbosity
+  -m, --minimum <MINIMUM>  minimum word length
+  -h, --help               Print help
 
 ```
 
 ```console
-$ slb solve -h
-? 2
-error: unrecognized subcommand 'solve'
+$ slb boxed solve --help
+Solve word puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb boxed solve [OPTIONS] <LETTERS>
 
-For more information, try '--help'.
+Arguments:
+  <LETTERS>
+          
+
+Options:
+  -d, --dir <DIR>
+          word list source directory
+
+  -v, --verbose...
+          Increase logging verbosity
+
+  -f, --file <FILE>
+          word list source file
+
+  -q, --quiet...
+          Decrease logging verbosity
+
+  -m, --max-chain <MAX_CHAIN>
+          maximum length of the word chain
+          
+          [default: 10]
+
+  -s, --shuffle <SHUFFLE>
+          Shuffle strategy
+          
+          None - No shuffling
+          Once - Shuffle the weighted list only
+          Twice - Shuffle the whole word list and the weighted list
+          
+          [default: None]
+
+  -l, --layers <LAYERS>
+          Shuffle depth
+          
+          [default: 3]
+
+  -h, --help
+          Print help (see a summary with '-h')
+
+```
+
+```console
+$ slb boxed solve -h
+Solve word puzzle
+
+Usage: slb boxed solve [OPTIONS] <LETTERS>
+
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>              word list source directory
+  -v, --verbose...             Increase logging verbosity
+  -f, --file <FILE>            word list source file
+  -q, --quiet...               Decrease logging verbosity
+  -m, --max-chain <MAX_CHAIN>  maximum length of the word chain [default: 10]
+  -s, --shuffle <SHUFFLE>      Shuffle strategy [default: None]
+  -l, --layers <LAYERS>        Shuffle depth [default: 3]
+  -h, --help                   Print help (see more with '--help')
 
 ```
 
@@ -108,45 +168,189 @@ Options:
 ```
 
 ```console
-$ slb solutions --help
-? 2
-error: unrecognized subcommand 'solutions'
+$ slb boxed solutions --help
+Report multiple solutions for the puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb boxed solutions [OPTIONS] <LETTERS>
 
-For more information, try '--help'.
+Arguments:
+  <LETTERS>  
 
-```
-
-```console
-$ slb solutions -h
-? 2
-error: unrecognized subcommand 'solutions'
-
-Usage: slb [OPTIONS] <COMMAND>
-
-For more information, try '--help'.
-
-```
-
-```console
-$ slb generate --help
-? 2
-error: unrecognized subcommand 'generate'
-
-Usage: slb [OPTIONS] <COMMAND>
-
-For more information, try '--help'.
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
+  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
+  -h, --help                                 Print help
 
 ```
 
 ```console
-$ slb generate -h
-? 2
-error: unrecognized subcommand 'generate'
+$ slb boxed solutions -h
+Report multiple solutions for the puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: slb boxed solutions [OPTIONS] <LETTERS>
 
-For more information, try '--help'.
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>                            word list source directory
+  -v, --verbose...                           Increase logging verbosity
+  -f, --file <FILE>                          word list source file
+  -q, --quiet...                             Decrease logging verbosity
+  -r, --random-solutions <RANDOM_SOLUTIONS>  number of random solutions to generate [default: 100]
+  -m, --max-chain <MAX_CHAIN>                maximum length of the word chain [default: 10]
+  -s, --shuffle-depth <SHUFFLE_DEPTH>        Shuffle depth [default: 3]
+  -h, --help                                 Print help
+
+```
+
+```console
+$ slb boxed generate --help
+Generate random letter string for puzzle
+
+Usage: slb boxed generate [OPTIONS] <SHAPE>
+
+Arguments:
+  <SHAPE>  
+
+Options:
+  -b, --bare        
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+
+```
+
+```console
+$ slb boxed generate -h
+Generate random letter string for puzzle
+
+Usage: slb boxed generate [OPTIONS] <SHAPE>
+
+Arguments:
+  <SHAPE>  
+
+Options:
+  -b, --bare        
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+
+```
+
+```console
+$ slb boxed --help
+Boxed word puzzle tools
+
+Usage: slb boxed [OPTIONS] <COMMAND>
+
+Commands:
+  generate   Generate random letter string for puzzle
+  prepare    Prepare word list
+  solutions  Report multiple solutions for the puzzle
+  solve      Solve word puzzle
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+
+```console
+$ slb boxed -h
+Boxed word puzzle tools
+
+Usage: slb boxed [OPTIONS] <COMMAND>
+
+Commands:
+  generate   Generate random letter string for puzzle
+  prepare    Prepare word list
+  solutions  Report multiple solutions for the puzzle
+  solve      Solve word puzzle
+  help       Print this message or the help of the given subcommand(s)
+
+Options:
+  -v, --verbose...  Increase logging verbosity
+  -q, --quiet...    Decrease logging verbosity
+  -h, --help        Print help
+  -V, --version     Print version
+
+```
+
+```console
+$ slb words --help
+List available word lists
+
+Usage: slb words [OPTIONS] <LETTERS>
+
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -m, --max <MAX>    maximum number of solutions to print [default: 100]
+  -h, --help         Print help
+
+```
+
+```console
+$ slb words -h
+List available word lists
+
+Usage: slb words [OPTIONS] <LETTERS>
+
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -m, --max <MAX>    maximum number of solutions to print [default: 100]
+  -h, --help         Print help
+
+```
+
+```console
+$ slb alpha --help
+Parse file to words of letters only
+
+Usage: slb alpha [OPTIONS]
+
+Options:
+  -d, --dir <DIR>        word list source directory
+  -v, --verbose...       Increase logging verbosity
+  -f, --file <FILE>      word list source file
+  -q, --quiet...         Decrease logging verbosity
+  -o, --output <OUTPUT>  word list output file name
+  -h, --help             Print help
+
+```
+
+```console
+$ slb alpha -h
+Parse file to words of letters only
+
+Usage: slb alpha [OPTIONS]
+
+Options:
+  -d, --dir <DIR>        word list source directory
+  -v, --verbose...       Increase logging verbosity
+  -f, --file <FILE>      word list source file
+  -q, --quiet...         Decrease logging verbosity
+  -o, --output <OUTPUT>  word list output file name
+  -h, --help             Print help
 
 ```
