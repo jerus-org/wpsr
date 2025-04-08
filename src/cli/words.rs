@@ -1,55 +1,38 @@
-use std::{collections::HashMap, fs::read_dir};
+use std::collections::HashMap;
 
+use crate::{Error, Words};
 use clap::Parser;
-use colorful::Colorful;
-
-use crate::{DEFAULT_SOURCE_DIR, Error};
 
 #[derive(Parser, Debug, Clone)]
 pub struct Cmd {
+    pub letters: String,
     /// word list source directory
     #[arg(short, long)]
     pub dir: Option<String>,
+    /// word list source file
+    #[arg(short, long)]
+    pub file: Option<String>,
+    /// maximum number of solutions to print
+    #[arg(short, long, default_value_t = 100)]
+    pub max: usize,
 }
 
 impl Cmd {
-    pub fn run(self, settings: HashMap<String, String>) -> Result<(), Error> {
-        // Setup settings
-        let mut src_directory = settings
-            .get("source_dir")
-            .map_or(DEFAULT_SOURCE_DIR, |v| v)
-            .to_string();
+    #[tracing::instrument(skip(self, settings))]
+    pub fn run(&self, settings: HashMap<String, String>) -> Result<(), Error> {
+        tracing::debug!("Args: {self:#?}");
 
-        if let Some(sd) = self.dir {
-            src_directory = sd;
-        };
+        let mut solution = Words::new(&self.letters, settings)?;
+        solution
+            .set_word_source(self.dir.clone(), self.file.clone())
+            .load_words()
+            .set_max_solutions(self.max)
+            .find_solutions()?;
 
-        // List the word list files
-        let mut title = "Word lists:".yellow().bold().underlined().to_string();
-        println!("{}", title);
-        for entry in read_dir(&src_directory).unwrap().flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "txt" {
-                let file_name = path.file_name().unwrap().to_str().unwrap();
-                println!("  {}", file_name);
-            }
-        }
-
-        // List the boxed puzzle word list files
-        title = "Word lists for boxed puzzles:"
-            .yellow()
-            .bold()
-            .underlined()
-            .to_string();
-        println!("\n{}", title);
-
-        for entry in read_dir(&src_directory).unwrap().flatten() {
-            let path = entry.path();
-            if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "slb" {
-                let file_name = path.file_name().unwrap().to_str().unwrap();
-                println!("  {}", file_name);
-            }
-        }
+        println!("{}", solution.solutions_title());
+        println!("{}\n", solution.word_source_string());
+        println!("{}", solution.distribution_string());
+        println!("{}", solution.solutions_string());
 
         Ok(())
     }
