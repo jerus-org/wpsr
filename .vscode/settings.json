@@ -50,7 +50,8 @@
         "theaters",
         "traveler",
         "traveling",
-        "tumor"
+        "tumor",
+        "wpsr"
     ],
     "editor.formatOnSave": true,
     "notebook.defaultFormatter": null,
