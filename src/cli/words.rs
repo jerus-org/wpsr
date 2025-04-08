@@ -15,6 +15,9 @@ pub struct Cmd {
     /// maximum number of solutions to print
     #[arg(short, long, default_value_t = 100)]
     pub max: usize,
+    /// required letters
+    #[arg(short, long)]
+    pub required: Option<String>,
 }
 
 impl Cmd {
@@ -27,6 +30,7 @@ impl Cmd {
             .set_word_source(self.dir.clone(), self.file.clone())
             .load_words()
             .set_max_solutions(self.max)
+            .set_required(self.required.clone())
             .find_solutions()?;
 
         println!("{}", solution.solutions_title());
