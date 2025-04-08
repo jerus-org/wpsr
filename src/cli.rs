@@ -3,6 +3,7 @@ use std::fmt::Display;
 use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
 
+mod alpha;
 mod boxed;
 mod list;
 mod words;
@@ -26,6 +27,8 @@ pub enum Commands {
     List(list::Cmd),
     /// List available word lists
     Words(words::Cmd),
+    /// Parse file to words of letters only
+    Alpha(alpha::Cmd),
 }
 
 impl Display for Commands {
@@ -34,6 +37,7 @@ impl Display for Commands {
             Commands::Boxed(_) => write!(f, "boxed"),
             Commands::List(_) => write!(f, "list"),
             Commands::Words(_) => write!(f, "words"),
+            Commands::Alpha(_) => write!(f, "alpha"),
         }
     }
 }
