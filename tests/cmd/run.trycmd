@@ -8,6 +8,8 @@ Usage: slb [OPTIONS] <COMMAND>
 Commands:
   boxed  Boxed word puzzle tools
   list   List available word lists
+  words  List available word lists
+  alpha  Parse file to words of letters only
   help   Print this message or the help of the given subcommand(s)
 
 Options:
