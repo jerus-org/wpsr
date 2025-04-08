@@ -25,9 +25,9 @@ pub enum Commands {
     Boxed(boxed::Cmd),
     /// List available word lists
     List(list::Cmd),
-    /// List available word lists
+    /// Generate words from a string of letters
     Words(words::Cmd),
-    /// Parse file to words of letters only
+    /// Parse list of words to exclude duplicates and non-alphabetic characters
     Alpha(alpha::Cmd),
 }
 
