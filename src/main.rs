@@ -2,17 +2,17 @@ use std::{collections::HashMap, path::PathBuf, str::FromStr};
 
 use clap::Parser;
 use config::{Config, File};
-use lib_slb::{
+use lib_wpsr::{
     Cli, Commands, DEFAULT_BOXED_SOURCE_FILE, DEFAULT_CONFIG_FILE_BASENAME, DEFAULT_LINE_LENGTH,
     DEFAULT_MINIMUM_WORD_LENGTH, DEFAULT_SOURCE_DIR, DEFAULT_WORDS_SOURCE_FILE,
 };
 use tracing_subscriber::EnvFilter;
 
-// const DEFAULT_SOURCE_DIR: &str = "/usr/lib/slb/words";
+// const DEFAULT_SOURCE_DIR: &str = "/usr/lib/wpsr/words";
 // const DEFAULT_SOURCE_FILE: &str = "default.slb";
 // const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
 // const DEFAULT_LINE_LENGTH: usize = 3010;
-// const DEFAULT_CONFIG_FILE_BASENAME: &str = "slb";
+// const DEFAULT_CONFIG_FILE_BASENAME: &str = "wpsr";
 
 fn main() {
     let args = Cli::parse();
@@ -52,7 +52,7 @@ fn main() {
 
 pub fn get_logging(verbosity: log::LevelFilter) {
     let filter = EnvFilter::from(format!(
-        "slb={},lib_slb={}",
+        "wpsr={},lib_wpsr={}",
         if verbosity == log::LevelFilter::Trace {
             log::LevelFilter::Debug
         } else {
