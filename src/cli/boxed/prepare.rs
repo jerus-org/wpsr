@@ -2,7 +2,7 @@ use std::{collections::VecDeque, io::Write, path::PathBuf, str::FromStr};
 
 use clap::Parser;
 
-use crate::{Error, PrepareWords};
+use crate::{Error, WordFilters};
 
 const DEFAULT_SOURCE_DIR: &str = "words";
 const DEFAULT_SOURCE_FILE: &str = "mit_words.txt";

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ♻️ refactor(modules)-reorganize module structure(pr [#54])
 - ♻️ BREAKING: refactor(cli)-consolidate puzzle commands under boxed module(pr [#55])
+- ♻️ refactor(project)-rename PrepareWords to WordFilters(pr [#58])
 
 ## [0.1.14] - 2025-04-07
 
@@ -211,6 +212,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#55]: https://github.com/jerus-org/slb/pull/55
 [#56]: https://github.com/jerus-org/slb/pull/56
 [#57]: https://github.com/jerus-org/slb/pull/57
+[#58]: https://github.com/jerus-org/slb/pull/58
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/slb/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/slb/compare/v0.1.12...v0.1.13
