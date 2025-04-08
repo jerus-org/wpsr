@@ -1,8 +1,8 @@
 ```console
-$ slb --help
+$ wpsr --help
 Command line program to solve the NYT Letters Boxed puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
   boxed  Boxed word puzzle tools
@@ -20,10 +20,10 @@ Options:
 ```
 
 ```console
-$ slb -h
+$ wpsr -h
 Command line program to solve the NYT Letters Boxed puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
   boxed  Boxed word puzzle tools
@@ -40,10 +40,10 @@ Options:
 
 ```
 ```console
-$ slb boxed prepare --help
+$ wpsr boxed prepare --help
 Prepare word list
 
-Usage: slb boxed prepare [OPTIONS]
+Usage: wpsr boxed prepare [OPTIONS]
 
 Options:
   -d, --dir <DIR>          word list source directory
@@ -56,10 +56,10 @@ Options:
 ```
 
 ```console
-$ slb boxed prepare -h
+$ wpsr boxed prepare -h
 Prepare word list
 
-Usage: slb boxed prepare [OPTIONS]
+Usage: wpsr boxed prepare [OPTIONS]
 
 Options:
   -d, --dir <DIR>          word list source directory
@@ -72,10 +72,10 @@ Options:
 ```
 
 ```console
-$ slb boxed solve --help
+$ wpsr boxed solve --help
 Solve word puzzle
 
-Usage: slb boxed solve [OPTIONS] <LETTERS>
+Usage: wpsr boxed solve [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>
@@ -119,10 +119,10 @@ Options:
 ```
 
 ```console
-$ slb boxed solve -h
+$ wpsr boxed solve -h
 Solve word puzzle
 
-Usage: slb boxed solve [OPTIONS] <LETTERS>
+Usage: wpsr boxed solve [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>  
@@ -140,10 +140,10 @@ Options:
 ```
 
 ```console
-$ slb list --help
+$ wpsr list --help
 List available word lists
 
-Usage: slb list [OPTIONS]
+Usage: wpsr list [OPTIONS]
 
 Options:
   -d, --dir <DIR>   word list source directory
@@ -154,10 +154,10 @@ Options:
 ```
 
 ```console
-$ slb list -h
+$ wpsr list -h
 List available word lists
 
-Usage: slb list [OPTIONS]
+Usage: wpsr list [OPTIONS]
 
 Options:
   -d, --dir <DIR>   word list source directory
@@ -168,10 +168,10 @@ Options:
 ```
 
 ```console
-$ slb boxed solutions --help
+$ wpsr boxed solutions --help
 Report multiple solutions for the puzzle
 
-Usage: slb boxed solutions [OPTIONS] <LETTERS>
+Usage: wpsr boxed solutions [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>  
@@ -189,10 +189,10 @@ Options:
 ```
 
 ```console
-$ slb boxed solutions -h
+$ wpsr boxed solutions -h
 Report multiple solutions for the puzzle
 
-Usage: slb boxed solutions [OPTIONS] <LETTERS>
+Usage: wpsr boxed solutions [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>  
@@ -210,10 +210,10 @@ Options:
 ```
 
 ```console
-$ slb boxed generate --help
+$ wpsr boxed generate --help
 Generate random letter string for puzzle
 
-Usage: slb boxed generate [OPTIONS] <SHAPE>
+Usage: wpsr boxed generate [OPTIONS] <SHAPE>
 
 Arguments:
   <SHAPE>  
@@ -227,10 +227,10 @@ Options:
 ```
 
 ```console
-$ slb boxed generate -h
+$ wpsr boxed generate -h
 Generate random letter string for puzzle
 
-Usage: slb boxed generate [OPTIONS] <SHAPE>
+Usage: wpsr boxed generate [OPTIONS] <SHAPE>
 
 Arguments:
   <SHAPE>  
@@ -244,10 +244,10 @@ Options:
 ```
 
 ```console
-$ slb boxed --help
+$ wpsr boxed --help
 Boxed word puzzle tools
 
-Usage: slb boxed [OPTIONS] <COMMAND>
+Usage: wpsr boxed [OPTIONS] <COMMAND>
 
 Commands:
   generate   Generate random letter string for puzzle
@@ -265,10 +265,10 @@ Options:
 ```
 
 ```console
-$ slb boxed -h
+$ wpsr boxed -h
 Boxed word puzzle tools
 
-Usage: slb boxed [OPTIONS] <COMMAND>
+Usage: wpsr boxed [OPTIONS] <COMMAND>
 
 Commands:
   generate   Generate random letter string for puzzle
@@ -286,10 +286,10 @@ Options:
 ```
 
 ```console
-$ slb words --help
+$ wpsr words --help
 List available word lists
 
-Usage: slb words [OPTIONS] <LETTERS>
+Usage: wpsr words [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>  
@@ -306,10 +306,10 @@ Options:
 ```
 
 ```console
-$ slb words -h
+$ wpsr words -h
 List available word lists
 
-Usage: slb words [OPTIONS] <LETTERS>
+Usage: wpsr words [OPTIONS] <LETTERS>
 
 Arguments:
   <LETTERS>  
@@ -326,10 +326,10 @@ Options:
 ```
 
 ```console
-$ slb alpha --help
+$ wpsr alpha --help
 Parse file to words of letters only
 
-Usage: slb alpha [OPTIONS]
+Usage: wpsr alpha [OPTIONS]
 
 Options:
   -d, --dir <DIR>        word list source directory
@@ -342,10 +342,10 @@ Options:
 ```
 
 ```console
-$ slb alpha -h
+$ wpsr alpha -h
 Parse file to words of letters only
 
-Usage: slb alpha [OPTIONS]
+Usage: wpsr alpha [OPTIONS]
 
 Options:
   -d, --dir <DIR>        word list source directory
