@@ -1,2 +1,2 @@
-# slb
+# wpsr
 Solve Letters Boxed

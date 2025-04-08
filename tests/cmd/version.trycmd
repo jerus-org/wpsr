@@ -1,11 +1,11 @@
 ```console
-$ slb -V 
-slb 0.1.14
+$ wpsr -V 
+wpsr 0.1.14
 
 ```
 
 ```console
-$ slb --version 
-slb 0.1.14
+$ wpsr --version 
+wpsr 0.1.14
 
 ```

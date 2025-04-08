@@ -1,9 +1,9 @@
 ```console
-$ slb 
+$ wpsr 
 ? 2
 Command line program to solve the NYT Letters Boxed puzzle
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
   boxed  Boxed word puzzle tools
@@ -21,22 +21,22 @@ Options:
 ```
 
 ```console
-$ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
+$ wpsr -v solve -d words -f mit_words.wpsr -n cxnpmilrueof
 ? 2
 error: unrecognized subcommand 'solve'
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: wpsr [OPTIONS] <COMMAND>
 
 For more information, try '--help'.
 
 ```
 
 ```console
-$ slb -v solve -d words -f mit_words.slb -n cxnpmilrueof
+$ wpsr -v solve -d words -f mit_words.wpsr -n cxnpmilrueof
 ? 2
 error: unrecognized subcommand 'solve'
 
-Usage: slb [OPTIONS] <COMMAND>
+Usage: wpsr [OPTIONS] <COMMAND>
 
 For more information, try '--help'.
 
