@@ -83,7 +83,7 @@ impl Cmd {
         const ALPHABET: &str = "abcdefghijklmnopqrstuvwxyz";
         let words = words
             .filter_to_minimum_length(2)
-            .filter_includes_letters(ALPHABET);
+            .filter_includes_only_letters(ALPHABET);
 
         tracing::info!("Filtered words includes {} words", words.len());
 
