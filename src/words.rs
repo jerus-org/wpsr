@@ -12,6 +12,7 @@ pub struct Words {
     words: Vec<String>,
     solutions: Vec<String>,
     max: usize,
+    required: Option<String>,
     distribution: HashMap<usize, i32>,
 }
 
@@ -87,6 +88,11 @@ impl Words {
         self
     }
 
+    pub fn set_required(&mut self, required: Option<String>) -> &mut Self {
+        self.required = required;
+        self
+    }
+
     #[tracing::instrument(skip(self))]
     pub fn find_solutions(&mut self) -> Result<&mut Self, Error> {
         tracing::info!("Get un-shuffled word list");
@@ -99,6 +105,9 @@ impl Words {
         let words = self.words.clone();
         println!("{} words found", words.len());
         let mut filtered = words.filter_excludes_letters(&excluded_letters);
+        if let Some(required) = &self.required {
+            filtered = filtered.filter_includes_any_letters(required);
+        }
         println!("{} words found", filtered.len());
 
         filtered.sort_by(|a, b| {
