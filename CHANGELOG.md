@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - ✨ enhance file listing with colorful titles(pr [#56])
 - ✨ add words command for listing word files(pr [#57])
+- ✨ add new letter filtering methods(pr [#59])
 
 ### Changed
 
@@ -213,6 +214,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#56]: https://github.com/jerus-org/slb/pull/56
 [#57]: https://github.com/jerus-org/slb/pull/57
 [#58]: https://github.com/jerus-org/slb/pull/58
+[#59]: https://github.com/jerus-org/slb/pull/59
 [Unreleased]: https://github.com/jerus-org/slb/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/slb/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/slb/compare/v0.1.12...v0.1.13
