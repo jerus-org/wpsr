@@ -134,7 +134,6 @@ workflows:
                   echo "export SEMVER=$SEMVER" >> "$BASH_ENV"
           ssh_fingerprint: << pipeline.parameters.fingerprint >>
           min_rust_version: << pipeline.parameters.min-rust-version >>
-          publish: false
 
       - toolkit/no_release:
           min_rust_version: << pipeline.parameters.min-rust-version >>
