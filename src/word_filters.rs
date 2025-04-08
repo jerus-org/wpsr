@@ -4,7 +4,9 @@ pub trait WordFilters {
     fn filter_to_minimum_length(self, length: usize) -> Self;
     fn filter_no_repeated_letters(self) -> Self;
     fn filter_excludes_letters(self, exclude: &str) -> Self;
-    fn filter_includes_letters(self, exclude: &str) -> Self;
+    fn filter_includes_only_letters(self, include: &str) -> Self;
+    fn filter_includes_any_letters(self, include: &str) -> Self;
+    fn filter_includes_all_letters(self, include: &str) -> Self;
 }
 
 impl WordFilters for Vec<String> {
@@ -70,7 +72,7 @@ impl WordFilters for Vec<String> {
     }
 
     #[tracing::instrument(skip(self))]
-    fn filter_includes_letters(self, include: &str) -> Self {
+    fn filter_includes_only_letters(self, include: &str) -> Self {
         let includes = self
             .iter()
             .filter(|word| {
@@ -81,6 +83,54 @@ impl WordFilters for Vec<String> {
                     }
                 }
                 true
+            })
+            .map(|word| word.to_string())
+            .collect::<Vec<String>>();
+
+        tracing::info!(
+            "With no letters from the exclusion list ({})there are {} words",
+            include,
+            includes.len()
+        );
+        includes
+    }
+
+    #[tracing::instrument(skip(self, include))]
+    fn filter_includes_all_letters(self, include: &str) -> Self {
+        let includes = self
+            .iter()
+            .filter(|word| {
+                let chars = include.chars();
+                for char in chars {
+                    if !word.contains(char) {
+                        return false;
+                    }
+                }
+                true
+            })
+            .map(|word| word.to_string())
+            .collect::<Vec<String>>();
+
+        tracing::info!(
+            "With no letters from the exclusion list ({})there are {} words",
+            include,
+            includes.len()
+        );
+        includes
+    }
+
+    #[tracing::instrument(skip(self, include))]
+    fn filter_includes_any_letters(self, include: &str) -> Self {
+        let includes = self
+            .iter()
+            .filter(|word| {
+                let chars = word.chars();
+                for char in chars {
+                    if include.contains(char) {
+                        return true;
+                    }
+                }
+                false
             })
             .map(|word| word.to_string())
             .collect::<Vec<String>>();
@@ -149,7 +199,49 @@ mod tests {
     }
 
     #[test]
-    fn test_filter_include_letters() {
+    fn test_filter_include_all_letters() {
+        let words = [
+            "ab",
+            "loser",
+            "all",
+            "alternate",
+            "grown",
+            "success",
+            "fulfil",
+            "treat",
+            "greatness",
+        ];
+
+        let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+
+        let filtered = words.filter_includes_all_letters("al");
+        assert_eq!(filtered, vec!["all", "alternate"]);
+    }
+
+    #[test]
+    fn test_filter_include_any_letters() {
+        let words = [
+            "ab",
+            "loser",
+            "all",
+            "grown",
+            "success",
+            "fulfil",
+            "treat",
+            "greatness",
+        ];
+
+        let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+
+        let filtered = words.filter_includes_any_letters("al");
+        assert_eq!(
+            filtered,
+            vec!["ab", "loser", "all", "fulfil", "treat", "greatness",]
+        );
+    }
+
+    #[test]
+    fn test_filter_include_only_letters() {
         let words = [
             "ab",
             "loser",
@@ -162,7 +254,7 @@ mod tests {
 
         let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
 
-        let filtered = words.filter_includes_letters("acubsel");
+        let filtered = words.filter_includes_only_letters("acubsel");
         assert_eq!(filtered, vec!["ab", "all", "success"]);
     }
 }
