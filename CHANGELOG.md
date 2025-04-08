@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ♻️ BREAKING: refactor(cli)-consolidate puzzle commands under boxed module(pr [#55])
 - ♻️ refactor(project)-rename PrepareWords to WordFilters(pr [#58])
 - 🔧 chore(Cargo)-update package name and repository details(pr [#61])
+- 👷 ci(circleci)-publish crate to crates.io on release(pr [#62])
 
 ## [0.1.14] - 2025-04-07
 
@@ -219,6 +220,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#59]: https://github.com/jerus-org/wpsr/pull/59
 [#60]: https://github.com/jerus-org/wpsr/pull/60
 [#61]: https://github.com/jerus-org/wpsr/pull/61
+[#62]: https://github.com/jerus-org/wpsr/pull/62
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/wpsr/compare/v0.1.12...v0.1.13
