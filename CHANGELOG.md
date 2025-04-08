@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ♻️ refactor(project)-rename PrepareWords to WordFilters(pr [#58])
 - 🔧 chore(Cargo)-update package name and repository details(pr [#61])
 - 👷 ci(circleci)-publish crate to crates.io on release(pr [#62])
+- 📝 docs(cli)-update command descriptions(pr [#64])
 
 ### Fixed
 
@@ -226,6 +227,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#61]: https://github.com/jerus-org/wpsr/pull/61
 [#62]: https://github.com/jerus-org/wpsr/pull/62
 [#63]: https://github.com/jerus-org/wpsr/pull/63
+[#64]: https://github.com/jerus-org/wpsr/pull/64
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.1.14...HEAD
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
 [0.1.13]: https://github.com/jerus-org/wpsr/compare/v0.1.12...v0.1.13
