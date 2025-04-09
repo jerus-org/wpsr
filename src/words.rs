@@ -44,7 +44,7 @@ impl Words {
             .to_string();
         let mut src_file = self
             .settings
-            .get("source_file")
+            .get("source_words_file")
             .map_or(DEFAULT_WORDS_SOURCE_FILE, |v| v)
             .to_string();
 
