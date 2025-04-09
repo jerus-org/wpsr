@@ -86,7 +86,7 @@ impl Anagram {
         let words = self.words.clone();
         tracing::debug!("{} words found", words.len());
         let mut filtered =
-            words.filter_includes_only_letters(&self.letters.iter().collect::<String>());
+            words.filter_includes_same_letters(&self.letters.iter().collect::<String>());
         tracing::debug!("{} words found", filtered.len());
 
         filtered.sort_by(|a, b| {
