@@ -21,14 +21,14 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand, Clone)]
 pub enum Commands {
-    /// Boxed word puzzle tools
-    Boxed(boxed::Cmd),
-    /// List available word lists
-    List(list::Cmd),
-    /// Generate words from a string of letters
-    Words(words::Cmd),
     /// Parse list of words to exclude duplicates and non-alphabetic characters
     Alpha(alpha::Cmd),
+    /// List available word lists
+    List(list::Cmd),
+    /// Boxed word puzzle tools
+    Boxed(boxed::Cmd),
+    /// Generate words from a string of letters
+    Words(words::Cmd),
 }
 
 impl Display for Commands {
