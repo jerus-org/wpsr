@@ -8,12 +8,6 @@ use lib_wpsr::{
 };
 use tracing_subscriber::EnvFilter;
 
-// const DEFAULT_SOURCE_DIR: &str = "/usr/lib/wpsr/words";
-// const DEFAULT_SOURCE_FILE: &str = "default.slb";
-// const DEFAULT_MINIMUM_WORD_LENGTH: usize = 3;
-// const DEFAULT_LINE_LENGTH: usize = 3010;
-// const DEFAULT_CONFIG_FILE_BASENAME: &str = "wpsr";
-
 fn main() {
     let args = Cli::parse();
     get_logging(args.logging.log_level_filter());
@@ -28,10 +22,11 @@ fn main() {
             tracing::debug!("Loaded settings: {:?}", settings);
             tracing::debug!("Args: {args:#?}");
             let res = match args.cmd {
-                Commands::Boxed(boxed) => boxed.run(settings),
-                Commands::List(list) => list.run(settings),
-                Commands::Words(words) => words.run(settings),
                 Commands::Alpha(alpha) => alpha.run(settings),
+                Commands::List(list) => list.run(settings),
+                Commands::Anagram(anagram) => anagram.run(settings),
+                Commands::Boxed(boxed) => boxed.run(settings),
+                Commands::Words(words) => words.run(settings),
             };
             match res {
                 Ok(_) => {
