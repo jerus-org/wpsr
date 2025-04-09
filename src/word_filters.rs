@@ -1,5 +1,7 @@
 //! Prepares a list of words from a file for use in by the solver.
 
+use std::collections::HashMap;
+
 pub trait WordFilters {
     fn filter_to_minimum_length(self, length: usize) -> Self;
     fn filter_no_repeated_letters(self) -> Self;
@@ -7,6 +9,7 @@ pub trait WordFilters {
     fn filter_includes_only_letters(self, include: &str) -> Self;
     fn filter_includes_any_letters(self, include: &str) -> Self;
     fn filter_includes_all_letters(self, include: &str) -> Self;
+    fn filter_includes_same_letters(self, include: &str) -> Self;
 }
 
 impl WordFilters for Vec<String> {
@@ -142,6 +145,32 @@ impl WordFilters for Vec<String> {
         );
         includes
     }
+
+    #[tracing::instrument(skip(self, anagram))]
+    fn filter_includes_same_letters(self, anagram: &str) -> Self {
+        let anagram_dist = anagram
+            .chars()
+            .map(|c| (c, 1))
+            .collect::<HashMap<char, usize>>();
+
+        tracing::debug!("Letter distribution: {:?}", anagram_dist);
+
+        let includes = self
+            .iter()
+            .filter(|word| {
+                let word_dist = word
+                    .chars()
+                    .map(|c| (c, 1))
+                    .collect::<HashMap<char, usize>>();
+
+                word_dist == anagram_dist && word.len() == anagram.len() && word.as_str() != anagram
+            })
+            .map(|word| word.to_string())
+            .collect::<Vec<String>>();
+
+        tracing::info!("There are {} anagrams of {}", includes.len(), anagram);
+        includes
+    }
 }
 
 #[allow(dead_code)]
@@ -256,5 +285,25 @@ mod tests {
 
         let filtered = words.filter_includes_only_letters("acubsel");
         assert_eq!(filtered, vec!["ab", "all", "success"]);
+    }
+
+    #[test]
+    fn test_filter_include_same_letters() {
+        let words = [
+            "ab",
+            "loser",
+            "all",
+            "simper",
+            "spirem",
+            "success",
+            "fulfil",
+            "treat",
+            "greatness",
+        ];
+
+        let words = words.iter().map(|w| w.to_string()).collect::<Vec<String>>();
+
+        let filtered = words.filter_includes_same_letters("primes");
+        assert_eq!(filtered, vec!["simper", "spirem"]);
     }
 }

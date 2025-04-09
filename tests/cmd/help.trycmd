@@ -5,11 +5,12 @@ Command line program to help solve word puzzles
 Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
-  alpha  Parse list of words to exclude duplicates and non-alphabetic characters
-  list   List available word lists
-  boxed  Boxed word puzzle tools
-  words  Generate words from a string of letters
-  help   Print this message or the help of the given subcommand(s)
+  alpha    Parse list of words to exclude duplicates and non-alphabetic characters
+  list     List available word lists
+  anagram  Find words that are anagrams of a given letter string
+  boxed    Boxed word puzzle tools
+  words    Generate words from a string of letters
+  help     Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -26,11 +27,12 @@ Command line program to help solve word puzzles
 Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
-  alpha  Parse list of words to exclude duplicates and non-alphabetic characters
-  list   List available word lists
-  boxed  Boxed word puzzle tools
-  words  Generate words from a string of letters
-  help   Print this message or the help of the given subcommand(s)
+  alpha    Parse list of words to exclude duplicates and non-alphabetic characters
+  list     List available word lists
+  anagram  Find words that are anagrams of a given letter string
+  boxed    Boxed word puzzle tools
+  words    Generate words from a string of letters
+  help     Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
@@ -356,5 +358,41 @@ Options:
   -q, --quiet...         Decrease logging verbosity
   -o, --output <OUTPUT>  word list output file name
   -h, --help             Print help
+
+```
+
+```console
+$ wpsr anagram --help
+Find words that are anagrams of a given letter string
+
+Usage: wpsr anagram [OPTIONS] <LETTERS>
+
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -h, --help         Print help
+
+```
+
+```console
+$ wpsr anagram -h
+Find words that are anagrams of a given letter string
+
+Usage: wpsr anagram [OPTIONS] <LETTERS>
+
+Arguments:
+  <LETTERS>  
+
+Options:
+  -d, --dir <DIR>    word list source directory
+  -v, --verbose...   Increase logging verbosity
+  -f, --file <FILE>  word list source file
+  -q, --quiet...     Decrease logging verbosity
+  -h, --help         Print help
 
 ```
