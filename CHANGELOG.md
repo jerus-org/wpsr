@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ✨ add pangram support to word filtering(pr [#68])
+- ✨ add anagram command(pr [#71])
 
 ### Fixed
 
@@ -248,6 +249,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#68]: https://github.com/jerus-org/wpsr/pull/68
 [#69]: https://github.com/jerus-org/wpsr/pull/69
 [#70]: https://github.com/jerus-org/wpsr/pull/70
+[#71]: https://github.com/jerus-org/wpsr/pull/71
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
