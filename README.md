@@ -50,10 +50,13 @@ $ cargo bundle --release
 There are four subcommands:
 * `alpha` - Parse list of words to exclude duplicates and non-alphabetic characters
 * `list` - List available word lists
+* `anagram` - Find words that are anagrams of a given letter string
 * `boxed` - Boxed word puzzle tools
 * `words` - Generate words from a string of letters
 
 `alpha` is a utility to parse a list of words to exclude duplicates and non-alphabetic characters to create a word list file for use in solving word puzzles.
+
+`anagram` - Find words that are anagrams of a given letter string. This tool finds single words that can be made using all of the letters contained in the given string (presumed to be a word). 
 
 `list` lists the available word lists default or specified directory.
 
@@ -68,11 +71,12 @@ Command line program to help solve word puzzles
 Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
-  boxed  Boxed word puzzle tools
-  list   List available word lists
-  words  Generate words from a string of letters
-  alpha  Parse list of words to exclude duplicates and non-alphabetic characters
-  help   Print this message or the help of the given subcommand(s)
+  alpha    Parse list of words to exclude duplicates and non-alphabetic characters
+  list     List available word lists
+  anagram  Find words that are anagrams of a given letter string
+  boxed    Boxed word puzzle tools
+  words    Generate words from a string of letters
+  help     Print this message or the help of the given subcommand(s)
 
 Options:
   -v, --verbose...  Increase logging verbosity
