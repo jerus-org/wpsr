@@ -5,10 +5,10 @@ Command line program to help solve word puzzles
 Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
-  boxed  Boxed word puzzle tools
-  list   List available word lists
-  words  Generate words from a string of letters
   alpha  Parse list of words to exclude duplicates and non-alphabetic characters
+  list   List available word lists
+  boxed  Boxed word puzzle tools
+  words  Generate words from a string of letters
   help   Print this message or the help of the given subcommand(s)
 
 Options:
@@ -26,10 +26,10 @@ Command line program to help solve word puzzles
 Usage: wpsr [OPTIONS] <COMMAND>
 
 Commands:
-  boxed  Boxed word puzzle tools
-  list   List available word lists
-  words  Generate words from a string of letters
   alpha  Parse list of words to exclude duplicates and non-alphabetic characters
+  list   List available word lists
+  boxed  Boxed word puzzle tools
+  words  Generate words from a string of letters
   help   Print this message or the help of the given subcommand(s)
 
 Options:
@@ -301,6 +301,7 @@ Options:
   -q, --quiet...             Decrease logging verbosity
   -m, --max <MAX>            maximum number of solutions to print [default: 100]
   -r, --required <REQUIRED>  required letters
+  -p, --pangram              pangram - using all of the letters supplied
   -h, --help                 Print help
 
 ```
@@ -321,6 +322,7 @@ Options:
   -q, --quiet...             Decrease logging verbosity
   -m, --max <MAX>            maximum number of solutions to print [default: 100]
   -r, --required <REQUIRED>  required letters
+  -p, --pangram              pangram - using all of the letters supplied
   -h, --help                 Print help
 
 ```

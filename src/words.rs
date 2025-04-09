@@ -13,6 +13,7 @@ pub struct Words {
     solutions: Vec<String>,
     max: usize,
     required: Option<String>,
+    pangram: bool,
     distribution: HashMap<usize, i32>,
 }
 
@@ -83,13 +84,18 @@ impl Words {
         self
     }
 
-    pub fn set_max_solutions(&mut self, max: usize) -> &mut Self {
-        self.max = max;
+    pub fn set_max_solutions(&mut self, value: usize) -> &mut Self {
+        self.max = value;
         self
     }
 
-    pub fn set_required(&mut self, required: Option<String>) -> &mut Self {
-        self.required = required;
+    pub fn set_required(&mut self, value: Option<String>) -> &mut Self {
+        self.required = value;
+        self
+    }
+
+    pub fn set_pangram(&mut self, value: bool) -> &mut Self {
+        self.pangram = value;
         self
     }
 
@@ -108,6 +114,10 @@ impl Words {
         if let Some(required) = &self.required {
             filtered = filtered.filter_includes_any_letters(required);
         }
+        if self.pangram {
+            filtered =
+                filtered.filter_includes_all_letters(&self.letters.iter().collect::<String>());
+        }
         println!("{} words found", filtered.len());
 
         filtered.sort_by(|a, b| {
@@ -115,17 +125,6 @@ impl Words {
             let b_len = b.len();
             b_len.cmp(&a_len)
         });
-
-        // let mut final_list = Vec::new();
-
-        // for (i, word) in filtered.iter().enumerate() {
-        //     if i >= self.max {
-        //         break;
-        //     }
-
-        //     self.count_solution(word.len());
-        //     final_list.push(word.clone());
-        // }
 
         let final_list = filtered
             .iter()

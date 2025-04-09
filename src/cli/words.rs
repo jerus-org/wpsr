@@ -18,6 +18,9 @@ pub struct Cmd {
     /// required letters
     #[arg(short, long)]
     pub required: Option<String>,
+    /// pangram - using all of the letters supplied
+    #[arg(short, long)]
+    pub pangram: bool,
 }
 
 impl Cmd {
@@ -31,6 +34,7 @@ impl Cmd {
             .load_words()
             .set_max_solutions(self.max)
             .set_required(self.required.clone())
+            .set_pangram(self.pangram)
             .find_solutions()?;
 
         println!("{}", solution.solutions_title());
