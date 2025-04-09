@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - 🐛 words: update source file key naming(pr [#69])
+- 🐛 solution: correct source file configuration key(pr [#70])
 
 ## [0.2.0] - 2025-04-08
 
@@ -246,6 +247,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#67]: https://github.com/jerus-org/wpsr/pull/67
 [#68]: https://github.com/jerus-org/wpsr/pull/68
 [#69]: https://github.com/jerus-org/wpsr/pull/69
+[#70]: https://github.com/jerus-org/wpsr/pull/70
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
 [0.1.14]: https://github.com/jerus-org/wpsr/compare/v0.1.13...v0.1.14
