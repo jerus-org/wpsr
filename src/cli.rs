@@ -4,6 +4,7 @@ use clap::{Parser, Subcommand};
 use clap_verbosity_flag::Verbosity;
 
 mod alpha;
+mod anagram;
 mod boxed;
 mod list;
 mod words;
@@ -25,6 +26,8 @@ pub enum Commands {
     Alpha(alpha::Cmd),
     /// List available word lists
     List(list::Cmd),
+    /// Find words that are anagrams of a given letter string
+    Anagram(anagram::Cmd),
     /// Boxed word puzzle tools
     Boxed(boxed::Cmd),
     /// Generate words from a string of letters
@@ -34,10 +37,11 @@ pub enum Commands {
 impl Display for Commands {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Commands::Boxed(_) => write!(f, "boxed"),
-            Commands::List(_) => write!(f, "list"),
-            Commands::Words(_) => write!(f, "words"),
             Commands::Alpha(_) => write!(f, "alpha"),
+            Commands::List(_) => write!(f, "list"),
+            Commands::Anagram(_) => write!(f, "anagram"),
+            Commands::Boxed(_) => write!(f, "boxed"),
+            Commands::Words(_) => write!(f, "words"),
         }
     }
 }
