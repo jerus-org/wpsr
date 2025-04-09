@@ -1,9 +1,11 @@
+mod anagram;
 mod boxed;
 mod cli;
 mod error;
 mod word_filters;
 mod words;
 
+pub use anagram::Anagram;
 pub use boxed::{LettersBoxed, Shape, Shuffle, Solution};
 pub use cli::{Cli, Commands};
 pub use error::Error;
