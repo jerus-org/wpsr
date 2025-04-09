@@ -55,7 +55,7 @@ impl Solution {
             .to_string();
         let mut src_file = self
             .settings
-            .get("source_file")
+            .get("source_boxed_file")
             .map_or(DEFAULT_BOXED_SOURCE_FILE, |v| v)
             .to_string();
 
