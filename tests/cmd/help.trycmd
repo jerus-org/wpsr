@@ -358,3 +358,35 @@ Options:
   -h, --help             Print help
 
 ```
+
+```console
+$ wpsr anagram --help
+Parse list of words to exclude duplicates and non-alphabetic characters
+
+Usage: wpsr alpha [OPTIONS]
+
+Options:
+  -d, --dir <DIR>        word list source directory
+  -v, --verbose...       Increase logging verbosity
+  -f, --file <FILE>      word list source file
+  -q, --quiet...         Decrease logging verbosity
+  -o, --output <OUTPUT>  word list output file name
+  -h, --help             Print help
+
+```
+
+```console
+$ wpsr anagram -h
+Parse list of words to exclude duplicates and non-alphabetic characters
+
+Usage: wpsr alpha [OPTIONS]
+
+Options:
+  -d, --dir <DIR>        word list source directory
+  -v, --verbose...       Increase logging verbosity
+  -f, --file <FILE>      word list source file
+  -q, --quiet...         Decrease logging verbosity
+  -o, --output <OUTPUT>  word list output file name
+  -h, --help             Print help
+
+```
