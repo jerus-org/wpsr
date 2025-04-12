@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - 💄 style(cli)-reorder print statements in anagram command(pr [#73])
 
+### Fixed
+
+- deps: update rust crate clap to v4.5.36(pr [#75])
+
 ## [0.2.1] - 2025-04-09
 
 ### Added
@@ -267,6 +271,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#72]: https://github.com/jerus-org/wpsr/pull/72
 [#73]: https://github.com/jerus-org/wpsr/pull/73
 [#74]: https://github.com/jerus-org/wpsr/pull/74
+[#75]: https://github.com/jerus-org/wpsr/pull/75
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.1...HEAD
 [0.2.1]: https://github.com/jerus-org/wpsr/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
