@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Dependencies: update dependency toolkit to v2.6.0(pr [#76])
 - Dependencies: update dependency toolkit to v2.8.1(pr [#77])
+- Dependencies: update dependency toolkit to v2.9.1(pr [#79])
 
 ## [0.2.1] - 2025-04-09
 
@@ -281,6 +282,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#76]: https://github.com/jerus-org/wpsr/pull/76
 [#78]: https://github.com/jerus-org/wpsr/pull/78
 [#77]: https://github.com/jerus-org/wpsr/pull/77
+[#79]: https://github.com/jerus-org/wpsr/pull/79
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.1...HEAD
 [0.2.1]: https://github.com/jerus-org/wpsr/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
