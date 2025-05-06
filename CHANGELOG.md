@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - 💄 style(cli)-reorder print statements in anagram command(pr [#73])
+- 🔧 chore(config)-update renovate configuration(pr [#87])
 
 ### Fixed
 
@@ -293,6 +294,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#83]: https://github.com/jerus-org/wpsr/pull/83
 [#84]: https://github.com/jerus-org/wpsr/pull/84
 [#85]: https://github.com/jerus-org/wpsr/pull/85
+[#87]: https://github.com/jerus-org/wpsr/pull/87
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.1...HEAD
 [0.2.1]: https://github.com/jerus-org/wpsr/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
