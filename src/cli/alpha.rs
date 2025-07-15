@@ -53,7 +53,7 @@ impl Cmd {
             self.output.unwrap_or(DEFAULT_OUTPUT_FILE.to_string())
         );
 
-        println!("Files: {} and {}", src, dest);
+        println!("Files: {src} and {dest}");
 
         let mut words = HashSet::new();
         let mut count_duplicates = 0;

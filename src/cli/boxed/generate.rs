@@ -31,7 +31,7 @@ impl Cmd {
 
         if !self.testing {
             if self.bare {
-                println!("{}", letters);
+                println!("{letters}");
             } else {
                 println!("Letters for edges of the {} are: `{}`", self.shape, letters);
             }

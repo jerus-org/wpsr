@@ -26,12 +26,12 @@ impl Cmd {
 
         // List the word list files
         let mut title = "Word lists:".yellow().bold().underlined().to_string();
-        println!("{}", title);
+        println!("{title}");
         for entry in read_dir(&src_directory).unwrap().flatten() {
             let path = entry.path();
             if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "txt" {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
-                println!("  {}", file_name);
+                println!("  {file_name}");
             }
         }
 
@@ -41,13 +41,13 @@ impl Cmd {
             .bold()
             .underlined()
             .to_string();
-        println!("\n{}", title);
+        println!("\n{title}");
 
         for entry in read_dir(&src_directory).unwrap().flatten() {
             let path = entry.path();
             if path.is_file() && path.extension().is_some() && path.extension().unwrap() == "slb" {
                 let file_name = path.file_name().unwrap().to_str().unwrap();
-                println!("  {}", file_name);
+                println!("  {file_name}");
             }
         }
 

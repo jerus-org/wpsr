@@ -184,7 +184,7 @@ impl Solution {
     pub fn word_source_string(&self) -> String {
         let s1 = "Using words sourced from ".light_cyan().dim().to_string();
         let s2 = self.word_source.clone().light_cyan().bold().to_string();
-        format!("{}{}", s1, s2)
+        format!("{s1}{s2}")
     }
 
     pub fn distribution_string(&self) -> String {

@@ -74,7 +74,7 @@ pub fn get_logging(verbosity: log::LevelFilter) {
 
 #[tracing::instrument]
 pub fn get_settings(base_name: &str) -> Result<Config, config::ConfigError> {
-    let path = PathBuf::from_str(&format!("{}.toml", base_name)).unwrap();
+    let path = PathBuf::from_str(&format!("{base_name}.toml")).unwrap();
     tracing::debug!("Loading settings from {}", path.display());
     if path.exists() {
         tracing::debug!("Settings file exists");
