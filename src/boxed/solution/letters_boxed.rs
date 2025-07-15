@@ -371,7 +371,7 @@ mod tests {
             "quux".to_string(),
             "corse".to_string(),
             "gaunt".to_string(),
-            "grapey".to_string(),
+            "grape".to_string(),
             "waldo".to_string(),
             "fred".to_string(),
         ];
@@ -401,10 +401,10 @@ mod tests {
             "bar".to_string(),
             "baz".to_string(),
         ];
-        println!("before: {:?}", words);
+        println!("before: {words:?}");
         let mut rng = ChaCha20Rng::seed_from_u64(1);
         let shuffled = shuffle_top_half(words, &mut rng);
-        println!("after: {:?}", shuffled);
+        println!("after: {shuffled:?}");
         assert_eq!(shuffled.len(), 5);
         assert_eq!(shuffled[0], "world".to_string());
         assert_eq!(shuffled[1], "hello".to_string());
