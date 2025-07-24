@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate rand to 0.9.2(pr [#97])
 - deps: update rust crate trycmd to 0.15.10(pr [#98])
 - deps: update dependency toolkit to v2.12.1(pr [#99])
+- deps: update rust crate indicatif to 0.18.0(pr [#100])
 
 ### Security
 
@@ -317,6 +318,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#97]: https://github.com/jerus-org/wpsr/pull/97
 [#98]: https://github.com/jerus-org/wpsr/pull/98
 [#99]: https://github.com/jerus-org/wpsr/pull/99
+[#100]: https://github.com/jerus-org/wpsr/pull/100
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.1...HEAD
 [0.2.1]: https://github.com/jerus-org/wpsr/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/jerus-org/wpsr/compare/v0.1.14...v0.2.0
