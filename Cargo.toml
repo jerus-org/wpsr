@@ -30,7 +30,7 @@ name = "wpsr"
 path = "src/main.rs"
 
 [dependencies]
-clap = { version = "4.5.41", features = ["derive"] }
+clap = { version = "4.5.45", features = ["derive"] }
 clap-verbosity-flag = "3.0.3"
 colorful = "0.3.2"
 config = { version = "0.15.13", default-features = false, features = [
