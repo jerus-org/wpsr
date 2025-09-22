@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - chore-rename CHANGELOG.md to PRLOG.md(pr [#106])
+- chore-update release.toml to reference PRLOG.md instead of CHANGELOG.md(pr [#107])
 
 ### Fixed
 
@@ -344,6 +345,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#104]: https://github.com/jerus-org/wpsr/pull/104
 [#105]: https://github.com/jerus-org/wpsr/pull/105
 [#106]: https://github.com/jerus-org/wpsr/pull/106
+[#107]: https://github.com/jerus-org/wpsr/pull/107
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.3...HEAD
 [0.2.3]: https://github.com/jerus-org/wpsr/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/wpsr/compare/v0.2.1...v0.2.2
