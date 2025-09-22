@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- chore-rename CHANGELOG.md to PRLOG.md(pr [#106])
+
 ### Fixed
 
 - deps: update rust crate tracing-subscriber to v0.3.20 [security](pr [#105])
@@ -339,6 +343,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#103]: https://github.com/jerus-org/wpsr/pull/103
 [#104]: https://github.com/jerus-org/wpsr/pull/104
 [#105]: https://github.com/jerus-org/wpsr/pull/105
+[#106]: https://github.com/jerus-org/wpsr/pull/106
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.3...HEAD
 [0.2.3]: https://github.com/jerus-org/wpsr/compare/v0.2.2...v0.2.3
 [0.2.2]: https://github.com/jerus-org/wpsr/compare/v0.2.1...v0.2.2
