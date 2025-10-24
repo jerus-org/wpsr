@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate clap to 4.5.50(pr [#115])
 - deps: update rust crate config to 0.15.18(pr [#116])
 - deps: update rust crate indicatif to 0.18.1(pr [#117])
+- deps: update rust crate thiserror to 2.0.17(pr [#118])
 
 ## [0.2.4] - 2025-09-28
 
@@ -374,6 +375,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#115]: https://github.com/jerus-org/wpsr/pull/115
 [#116]: https://github.com/jerus-org/wpsr/pull/116
 [#117]: https://github.com/jerus-org/wpsr/pull/117
+[#118]: https://github.com/jerus-org/wpsr/pull/118
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.4...HEAD
 [0.2.4]: https://github.com/jerus-org/wpsr/compare/v0.2.3...v0.2.4
 [0.2.3]: https://github.com/jerus-org/wpsr/compare/v0.2.2...v0.2.3
