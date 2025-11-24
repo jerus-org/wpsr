@@ -48,7 +48,7 @@ tracing-subscriber = { version = "0.3.20", features = [
 ] }
 
 [dev-dependencies]
-trycmd = "0.15.10"
+trycmd = "0.15.11"
 
 [package.metadata.bundle]
 identifier = "ie.jerus.wpsr"
