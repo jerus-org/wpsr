@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - BREAKING: migrate to circleci-toolkit v4.2.1(pr [#128])
 
+### Changed
+
+- chore-add standard config files(pr [#129])
+
 ### Fixed
 
 - deps: update dependency toolkit to v3(pr [#127])
@@ -407,6 +411,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#124]: https://github.com/jerus-org/wpsr/pull/124
 [#125]: https://github.com/jerus-org/wpsr/pull/125
 [#128]: https://github.com/jerus-org/wpsr/pull/128
+[#129]: https://github.com/jerus-org/wpsr/pull/129
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.6...HEAD
 [0.2.6]: https://github.com/jerus-org/wpsr/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/jerus-org/wpsr/compare/v0.2.4...v0.2.5
