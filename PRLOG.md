@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - chore-add standard config files(pr [#129])
+- refactor-convert to workspace structure(pr [#130])
 
 ### Fixed
 
@@ -412,6 +413,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#125]: https://github.com/jerus-org/wpsr/pull/125
 [#128]: https://github.com/jerus-org/wpsr/pull/128
 [#129]: https://github.com/jerus-org/wpsr/pull/129
+[#130]: https://github.com/jerus-org/wpsr/pull/130
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.6...HEAD
 [0.2.6]: https://github.com/jerus-org/wpsr/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/jerus-org/wpsr/compare/v0.2.4...v0.2.5
