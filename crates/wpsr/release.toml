@@ -1,0 +1,7 @@
+pre-release-commit-message = "chore: Release wpsr v{{version}}"
+tag-message = "{{tag_name}}"
+tag-name = "wpsr-v{{version}}"
+pre-release-hook = ["./release-hook.sh"]
+pre-release-replacements = [
+    { file = "tests/cmd/version.trycmd", search = "wpsr \\d+.\\d+.\\d+", replace = "wpsr {{version}}", exactly = 2 },
+]
