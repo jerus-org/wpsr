@@ -1,0 +1,53 @@
+[package]
+name = "wpsr"
+description = "Command line program to help solve word puzzles"
+version = "0.2.6"
+license = "MIT"
+readme = "README.md"
+documentation = "https://github.com/jerus-org/wpsr"
+keywords = ["letters", "boxed", "word-puzzle", "solver"]
+categories = ["command-line-utilities"]
+include = [
+    "**/*.rs",
+    "words/*.slb",
+    "words/*.txt",
+    "Cargo.toml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+]
+edition.workspace = true
+authors.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[lib]
+name = "lib_wpsr"
+path = "src/lib.rs"
+
+[[bin]]
+name = "wpsr"
+path = "src/main.rs"
+
+[dependencies]
+clap.workspace = true
+clap-verbosity-flag.workspace = true
+colorful.workspace = true
+config.workspace = true
+indicatif.workspace = true
+log.workspace = true
+rand.workspace = true
+rand_chacha.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+trycmd.workspace = true
+
+[package.metadata.bundle]
+identifier = "ie.jerus.wpsr"
+resources = ["words/*.slb", "words/*.txt"]
+
+[lints]
+workspace = true

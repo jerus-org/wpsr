@@ -1,55 +1,26 @@
-[package]
-name = "wpsr"
-version = "0.2.6"
+[workspace]
+members = ["crates/wpsr"]
+resolver = "2"
+
+[workspace.package]
 edition = "2024"
 authors = ["jerusdp <jrussell@jerus.ie>"]
 rust-version = "1.85"
 repository = "https://github.com/jerus-org/wpsr"
-keywords = ["letters", "boxed", "word-puzzle", "solver"]
-categories = ["command-line-utilities"]
-license = "MIT"
-readme = "README.md"
-description = "Command line program to help solve word puzzles"
-documentation = "https://github.com/jerus-org/wpsr"
-include = [
-    "**/*.rs",
-    "words/*.slb",
-    "words/*.txt",
-    "Cargo.toml",
-    "README.md",
-    "LICENSE",
-    "CHANGELOG.md",
-]
 
-[lib]
-name = "lib_wpsr"
-path = "src/lib.rs"
-
-[[bin]]
-name = "wpsr"
-path = "src/main.rs"
-
-[dependencies]
+[workspace.dependencies]
 clap = { version = "4.5.53", features = ["derive"] }
 clap-verbosity-flag = "3.0.4"
 colorful = "0.3.2"
-config = { version = "0.15.19", default-features = false, features = [
-    "toml",
-] }
+config = { version = "0.15.19", default-features = false, features = ["toml"] }
 indicatif = "0.18.3"
 log = "0.4.29"
 rand = "0.9.2"
 rand_chacha = { version = "0.9.0", features = ["os_rng"] }
 thiserror = "2.0.17"
 tracing = "0.1.44"
-tracing-subscriber = { version = "0.3.22", features = [
-    "env-filter",
-    "std",
-] }
-
-[dev-dependencies]
+tracing-subscriber = { version = "0.3.22", features = ["env-filter", "std"] }
 trycmd = "0.15.11"
 
-[package.metadata.bundle]
-identifier = "ie.jerus.wpsr"
-resources = ["words/*.slb", "words/*.txt"]
+[workspace.lints.clippy]
+uninlined-format-args = "warn"
