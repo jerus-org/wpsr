@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - BREAKING: migrate to circleci-toolkit v4.2.1(pr [#128])
+- add security improvements to CI(pr [#133])
 
 ### Changed
 
@@ -418,6 +419,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#130]: https://github.com/jerus-org/wpsr/pull/130
 [#131]: https://github.com/jerus-org/wpsr/pull/131
 [#132]: https://github.com/jerus-org/wpsr/pull/132
+[#133]: https://github.com/jerus-org/wpsr/pull/133
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.2.6...HEAD
 [0.2.6]: https://github.com/jerus-org/wpsr/compare/v0.2.5...v0.2.6
 [0.2.5]: https://github.com/jerus-org/wpsr/compare/v0.2.4...v0.2.5
