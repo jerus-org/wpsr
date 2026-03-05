@@ -153,7 +153,7 @@ impl LettersBoxed {
     pub fn build_word_chain(&mut self, shuffle: &mut Shuffle) -> Result<(), Error> {
         tracing::info!("Building word chain");
         // Get the first word from the list of words
-        let mut rng = ChaCha20Rng::from_os_rng();
+        let mut rng = ChaCha20Rng::from_rng(&mut rand::rng());
         let all_words = self.words.clone();
         let words_list = all_words.clone();
         let word_chain = Vec::new();
