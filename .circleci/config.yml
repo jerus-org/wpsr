@@ -37,6 +37,11 @@ workflows:
           filters:
             branches:
               ignore: main
+      - toolkit/test_doc_build:
+          min_rust_version: << pipeline.parameters.min_rust_version >>
+          filters:
+            branches:
+              ignore: main
       - toolkit/common_tests_rolling:
           min_rust_version: << pipeline.parameters.min_rust_version >>
       - toolkit/idiomatic_rust:
