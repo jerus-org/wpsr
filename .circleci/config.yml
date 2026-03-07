@@ -57,3 +57,21 @@ workflows:
               only:
                 - main
                 - /pull\/[0-9]+/
+      - toolkit/security:
+          name: security with sonarcloud
+          context: SonarCloud
+          filters:
+            branches:
+              ignore:
+                - /pull\/[0-9]+/
+                - main
+      - toolkit/code_coverage:
+          min_rust_version: << pipeline.parameters.min_rust_version >>
+          package: wpsr
+          filters:
+            branches:
+              ignore:
+                - /pull\/[0-9]+/
+                - main
+          requires:
+            - security with sonarcloud
