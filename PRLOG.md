@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update rust crate config to 0.15.22(pr [#143])
 - deps: update rust crate tracing-subscriber to 0.3.23(pr [#144])
 - deps: update rust crate clap to 4.6.0(pr [#145])
+- deps: update rust crate trycmd to 1.2.0(pr [#146])
 
 ## [0.3.0] - 2026-03-05
 
@@ -446,6 +447,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#143]: https://github.com/jerus-org/wpsr/pull/143
 [#144]: https://github.com/jerus-org/wpsr/pull/144
 [#145]: https://github.com/jerus-org/wpsr/pull/145
+[#146]: https://github.com/jerus-org/wpsr/pull/146
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/jerus-org/wpsr/compare/v0.2.6...v0.3.0
 [0.2.6]: https://github.com/jerus-org/wpsr/compare/v0.2.5...v0.2.6
