@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ci-add sonarcloud security, code_coverage; drop jq from tools(pr [#142])
 - chore-migrate CI to circleci-toolkit 6.0.0(pr [#148])
 
+### Fixed
+
+- deps: update rust crate config to 0.15.22(pr [#143])
+
 ## [0.3.0] - 2026-03-05
 
 ### Added
@@ -437,6 +441,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#139]: https://github.com/jerus-org/wpsr/pull/139
 [#142]: https://github.com/jerus-org/wpsr/pull/142
 [#148]: https://github.com/jerus-org/wpsr/pull/148
+[#143]: https://github.com/jerus-org/wpsr/pull/143
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/jerus-org/wpsr/compare/v0.2.6...v0.3.0
 [0.2.6]: https://github.com/jerus-org/wpsr/compare/v0.2.5...v0.2.6
