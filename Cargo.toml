@@ -12,7 +12,7 @@ repository = "https://github.com/jerus-org/wpsr"
 clap = { version = "4.5.60", features = ["derive"] }
 clap-verbosity-flag = "3.0.4"
 colorful = "0.3.2"
-config = { version = "0.15.19", default-features = false, features = ["toml"] }
+config = { version = "0.15.22", default-features = false, features = ["toml"] }
 indicatif = "0.18.4"
 log = "0.4.29"
 rand = "0.10.0"
