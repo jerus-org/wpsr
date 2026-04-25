@@ -193,7 +193,7 @@ impl Words {
             .iter()
             .map(|s| (s.len(), s))
             .collect::<Vec<_>>();
-        solutions.sort_by(|a, b| a.0.cmp(&b.0));
+        solutions.sort_by_key(|a| a.0);
 
         let mut word_length = solutions.first().unwrap_or(&(0, &"".to_string())).0;
 
