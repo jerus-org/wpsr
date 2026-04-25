@@ -147,7 +147,7 @@ impl Anagram {
     pub fn distribution_string(&self) -> String {
         let mut s = String::new();
         let mut distributions = self.distribution.iter().collect::<Vec<_>>();
-        distributions.sort_by(|a, b| a.0.cmp(b.0));
+        distributions.sort_by_key(|a| a.0);
 
         for d in distributions {
             s.push_str(&format!(
@@ -180,7 +180,7 @@ impl Anagram {
             .iter()
             .map(|s| (s.len(), s))
             .collect::<Vec<_>>();
-        solutions.sort_by(|a, b| a.0.cmp(&b.0));
+        solutions.sort_by_key(|a| a.0);
 
         let mut word_length = solutions.first().unwrap_or(&(0, &"".to_string())).0;
 
