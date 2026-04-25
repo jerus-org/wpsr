@@ -15,7 +15,7 @@ colorful = "0.3.2"
 config = { version = "0.15.22", default-features = false, features = ["toml"] }
 indicatif = "0.18.4"
 log = "0.4.29"
-rand = "0.10.0"
+rand = "0.10.1"
 rand_chacha = "0.10.0"
 thiserror = "2.0.18"
 tracing = "0.1.44"
