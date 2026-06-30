@@ -7,9 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- ci-run sonarcloud security on main(pr [#154])
+
 ### Fixed
 
 - deps: update rust crate rand to v0.10.1 [security](pr [#149])
+- deps: update dependency toolkit to v6.2.0(pr [#152])
+- deps: update rust crate clap to 4.6.1(pr [#150])
+- deps: update rust crate rand to 0.10.1(pr [#151])
+- deps: update rust crate config to 0.15.23(pr [#153])
+- deps: update dependency toolkit to v6.4.2(pr [#155])
+- deps: update rust crate config to 0.15.24(pr [#156])
+- deps: update rust crate log to 0.4.33(pr [#157])
 
 ## [0.3.1] - 2026-03-27
 
@@ -455,6 +466,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#145]: https://github.com/jerus-org/wpsr/pull/145
 [#146]: https://github.com/jerus-org/wpsr/pull/146
 [#149]: https://github.com/jerus-org/wpsr/pull/149
+[#152]: https://github.com/jerus-org/wpsr/pull/152
+[#150]: https://github.com/jerus-org/wpsr/pull/150
+[#151]: https://github.com/jerus-org/wpsr/pull/151
+[#153]: https://github.com/jerus-org/wpsr/pull/153
+[#155]: https://github.com/jerus-org/wpsr/pull/155
+[#154]: https://github.com/jerus-org/wpsr/pull/154
+[#156]: https://github.com/jerus-org/wpsr/pull/156
+[#157]: https://github.com/jerus-org/wpsr/pull/157
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.1...HEAD
 [0.3.1]: https://github.com/jerus-org/wpsr/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/jerus-org/wpsr/compare/v0.2.6...v0.3.0

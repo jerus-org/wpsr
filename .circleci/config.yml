@@ -6,7 +6,7 @@ parameters:
     default: "1.85"
 
 orbs:
-  toolkit: jerus-org/circleci-toolkit@6.2.0
+  toolkit: jerus-org/circleci-toolkit@6.5.0
 
 workflows:
   validation:
@@ -52,7 +52,6 @@ workflows:
           filters:
             branches:
               only:
-                - main
                 - /pull\/[0-9]+/
       - toolkit/security:
           name: security with sonarcloud
@@ -61,7 +60,6 @@ workflows:
             branches:
               ignore:
                 - /pull\/[0-9]+/
-                - main
       - toolkit/code_coverage:
           package: wpsr
           filters:
