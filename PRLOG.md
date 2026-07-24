@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- chore-remove redundant toolkit/label job(pr [#168])
+
 ### Fixed
 
 - deps: update dependency toolkit to v6.6.2(pr [#167])
@@ -487,6 +491,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#158]: https://github.com/jerus-org/wpsr/pull/158
 [#159]: https://github.com/jerus-org/wpsr/pull/159
 [#167]: https://github.com/jerus-org/wpsr/pull/167
+[#168]: https://github.com/jerus-org/wpsr/pull/168
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.2...HEAD
 [0.3.2]: https://github.com/jerus-org/wpsr/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/jerus-org/wpsr/compare/v0.3.0...v0.3.1
