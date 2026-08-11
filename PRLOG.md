@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: lock file maintenance(pr [#169])
 - deps: update rust crate rand to 0.10.2(pr [#164])
 - deps: update rust crate thiserror to 2.0.20(pr [#165])
+- deps: update rust crate trycmd to 1.2.1(pr [#166])
 
 ## [0.3.2] - 2026-06-30
 
@@ -504,6 +505,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#169]: https://github.com/jerus-org/wpsr/pull/169
 [#164]: https://github.com/jerus-org/wpsr/pull/164
 [#165]: https://github.com/jerus-org/wpsr/pull/165
+[#166]: https://github.com/jerus-org/wpsr/pull/166
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.2...HEAD
 [0.3.2]: https://github.com/jerus-org/wpsr/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/jerus-org/wpsr/compare/v0.3.0...v0.3.1
