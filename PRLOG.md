@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update dependency toolkit to v7(pr [#172])
 - deps: lock file maintenance(pr [#170])
 - deps: update rust crate log to 0.4.34(pr [#171])
+- deps: lock file maintenance(pr [#173])
 
 ## [0.3.3] - 2026-08-11
 
@@ -517,6 +518,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#172]: https://github.com/jerus-org/wpsr/pull/172
 [#170]: https://github.com/jerus-org/wpsr/pull/170
 [#171]: https://github.com/jerus-org/wpsr/pull/171
+[#173]: https://github.com/jerus-org/wpsr/pull/173
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.3...HEAD
 [0.3.3]: https://github.com/jerus-org/wpsr/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/jerus-org/wpsr/compare/v0.3.1...v0.3.2
