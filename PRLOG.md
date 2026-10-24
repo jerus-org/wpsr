@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - deps: update dependency toolkit to v8(pr [#179])
 - deps: lock file maintenance(pr [#180])
 - deps: lock file maintenance(pr [#181])
+- deps: update dependency toolkit to v8.0.3(pr [#182])
 
 ## [0.3.3] - 2026-08-11
 
@@ -533,6 +534,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [#179]: https://github.com/jerus-org/wpsr/pull/179
 [#180]: https://github.com/jerus-org/wpsr/pull/180
 [#181]: https://github.com/jerus-org/wpsr/pull/181
+[#182]: https://github.com/jerus-org/wpsr/pull/182
 [Unreleased]: https://github.com/jerus-org/wpsr/compare/v0.3.3...HEAD
 [0.3.3]: https://github.com/jerus-org/wpsr/compare/v0.3.2...v0.3.3
 [0.3.2]: https://github.com/jerus-org/wpsr/compare/v0.3.1...v0.3.2
